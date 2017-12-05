@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {createStructuredSelector} from 'reselect';
 import {Link} from 'react-router-dom';
+import Modal from 'react-modal';
 import loadIndicatorByCountryDataIfNeeded from 'shared/logic/loadIfNeeded/indicatorByCountryData';
 import loadIndicatorIfNeeded from 'shared/logic/loadIfNeeded/indicator';
 
@@ -84,17 +85,19 @@ export class IndicatorByCountry extends React.Component {
 		const nonEmptyValues = (data || []).filter(x => x.value);
 
 		return (
-			<div className='indicator-chart'>
-				{country && <Link className='indicator-chart__back' to={`/countries/${country.iso2Code}`}>Close</Link>}
-				{this.renderIndicatorInfo()}
-				{nonEmptyValues.length ? this.renderChart(nonEmptyValues) : <h3 className='no-data'>No data for this country</h3> }
-			</div>
+			<Modal isOpen={Boolean(true)} ariaHideApp={false}>
+				<div className='indicator-chart'>
+					{country && <Link className='indicator-chart__back' to={`/countries/${country.iso2Code}`}>Close</Link>}
+					{this.renderIndicatorInfo()}
+					{nonEmptyValues.length ? this.renderChart(nonEmptyValues) : <h3 className='no-data'>No data for this country</h3> }
+				</div>
+			</Modal>
 		);
 	}
 
 	render() {
 		return (
-			<div className='indicator'>
+			<div className='indicator-by-country'>
 				<Country match={this.props.match}/>
 				{this.renderData()}
 			</div>

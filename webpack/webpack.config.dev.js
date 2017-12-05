@@ -36,7 +36,10 @@ const developmentConfig = merge(
 			new webpack.DllReferencePlugin({
 				context: config.sourceDir,
 				manifest: require(path.join(config.dllDir, `styles-${process.env.NODE_ENV}-manifest.json`))
-			})
+			}),
+			new webpack.NormalModuleReplacementPlugin(
+				/\/iconv-loader$/, 'node-noop'
+			)
 			// htmlPlugin
 		]
 	}
