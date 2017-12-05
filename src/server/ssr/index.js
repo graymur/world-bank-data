@@ -1,4 +1,4 @@
-import React from 'React';
+import React from 'react';
 import {renderToString} from 'react-dom/server';
 import {Switch} from 'react-router-dom';
 import {Provider} from 'react-redux';
