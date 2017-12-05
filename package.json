@@ -1,8 +1,8 @@
 {
-  "name": "react-ssr",
+  "name": "world-bank-data",
   "version": "1.0.0",
-  "description": "react-ssr",
-  "main": "./src/index.js",
+  "description": "world-bank-data",
+  "main": "./src/server/serverProd.js",
   "scripts": {
     "lint": "eslint src/client/**/*.js src/shared/**/*.js webpack/**/*.js --ignore-pattern *.test.js",
     "test:watch": "npm run test -- --watch",
@@ -50,32 +50,35 @@
     "build": {
       "command": "npm run webpack -- --optimize-minimize --color --progress --config=webpack/webpack.config.prod.js",
       "env": {
-        "NODE_ENV": "production"
+        "NODE_ENV": "production",
+        "NODE_PATH": "./src"
       }
     },
     "dll:prod": {
       "command": "npm run webpack -- --color --progress --config=webpack/webpack.config.dll.js",
       "env": {
-        "NODE_ENV": "production"
+        "NODE_ENV": "production",
+        "NODE_PATH": "./src"
       }
     },
     "dll:dev": {
       "command": "npm run webpack -- --color --progress --config=webpack/webpack.config.dll.js",
       "env": {
-        "NODE_ENV": "development"
+        "NODE_ENV": "development",
+        "NODE_PATH": "./src"
       }
     }
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/hildebert/react-ssr"
+    "url": "https://github.com/graymur/world-bank-data"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/hildebert/react-ssr/issues"
+    "url": "https://github.com/graymur/world-bank-data/issues"
   },
-  "homepage": "https://github.com/hildebert/react-ssr#readme",
+  "homepage": "https://github.com/graymur/world-bank-data#readme",
   "dependencies": {
     "babel-preset-env": "^1.6.0",
     "better-npm-run": "^0.1.0",
