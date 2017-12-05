@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {createStructuredSelector} from 'reselect';
 import {Link} from 'react-router-dom';
-import loadIndicatorIfNeeded from 'shared/logic/loadIfNeeded/indicator';
-import loadCountryIfNeeded from 'shared/logic/loadIfNeeded/country';
 import loadIndicatorByCountryDataIfNeeded from 'shared/logic/loadIfNeeded/indicatorByCountryData';
+import loadIndicatorIfNeeded from 'shared/logic/loadIfNeeded/indicator';
 
 import {loadIndicatorByCountryData as loadDataSaga} from 'shared/logic/indicatorByCountryData/sagas/loadindicatorByCountryData';
 import {selectIndicatorByCountryData as selectData} from 'shared/logic/indicatorByCountryData/selectors';
@@ -15,37 +14,36 @@ import {loadIndicator as loadIndicatorSaga} from 'shared/logic/indicator/sagas/l
 import {selectIndicator} from 'shared/logic/indicator/selectors';
 import {loadIndicator as loadIndicatorAction} from 'shared/logic/indicator/actions';
 
-import {loadCountry as loadCountrySaga} from 'shared/logic/country/sagas/loadCountry';
 import {selectCountry} from 'shared/logic/country/selectors';
-import {loadCountry as loadCountryAction} from 'shared/logic/country/actions';
 
 import {LineChart, Line, CartesianGrid, XAxis, YAxis, ResponsiveContainer} from 'recharts';
+import Country from 'shared/views/Country';
+import Loader from 'shared/components/Loader';
 
 import './indicatorByCountry.scss';
 
 export class IndicatorByCountry extends React.Component {
 	static propTypes = {
-		indicator: PropTypes.object,
+		match: PropTypes.object,
 		country: PropTypes.object,
+		indicator: PropTypes.object,
 		data: PropTypes.any,
-		loadCountryAction: PropTypes.func,
-		loadIndicatorAction: PropTypes.func,
-		loadDataAction: PropTypes.func
+		loadDataAction: PropTypes.func,
+		loadIndicatorAction: PropTypes.func
 	};
 
 	static preload = match => [
+		[loadDataSaga, loadDataAction(match)],
 		[loadIndicatorSaga, loadIndicatorAction(match)],
-		[loadCountrySaga, loadCountryAction(match)],
-		[loadDataSaga, loadDataAction(match)]
+		...Country.preload(match)
 	];
 
 	componentDidMount() {
-		loadIndicatorIfNeeded(this.props, this.props.loadIndicatorAction);
-		loadCountryIfNeeded(this.props, this.props.loadCountryAction);
 		loadIndicatorByCountryDataIfNeeded(this.props, this.props.loadDataAction);
+		loadIndicatorIfNeeded(this.props, this.props.loadIndicatorAction);
 	}
 
-	renderIndicator() {
+	renderIndicatorInfo() {
 		const {indicator} = this.props;
 
 		if (!indicator) {
@@ -53,69 +51,51 @@ export class IndicatorByCountry extends React.Component {
 		}
 
 		return (
-			<div className='indicator'>
-				<h1>{indicator.name}</h1>
+			<div className='indicator-chart__info'>
+				<h2>{indicator.name}</h2>
 				<p>{indicator.sourceNote}</p>
 				<p>Source: {indicator.sourceOrganization}</p>
 			</div>
 		);
 	}
 
-	renderCountry() {
-		const {country} = this.props;
-
-		if (!country) {
-			return null;
-		}
-
+	renderChart(data) {
 		return (
-			<div className='country'>
-				<h1>{country.name}</h1>
-				<p>Region: {country.region.value}</p>
-				<p>Income level: {country.incomeLevel.value}</p>
-				<p>Capital city: {country.capitalCity}</p>
+			<div className='indicator-chart__wr'>
+				<ResponsiveContainer>
+					<LineChart height={300} data={data.reverse()}>
+						<Line type='monotone' dataKey='value' stroke='#8884d8'/>
+						<CartesianGrid stroke='#ccc'/>
+						<XAxis dataKey='date'/>
+						<YAxis />
+					</LineChart>
+				</ResponsiveContainer>
 			</div>
 		);
 	}
 
 	renderData() {
-		const {data} = this.props;
+		const {data, country} = this.props;
 
 		if (typeof data === 'undefined') {
-			return null;
+			return <div className='indicator-chart _loading'><Loader/></div>;
 		}
 
 		const nonEmptyValues = (data || []).filter(x => x.value);
 
-		if (!nonEmptyValues.length) {
-			return <h3>No data for this country</h3>;
-		}
-
 		return (
-			<div className='country'>
-				<h1>Data</h1>
-
-				<div style={{height: '300px', maxWidth: '700px', margin: '0 auto'}}>
-					<ResponsiveContainer>
-						<LineChart height={300} data={nonEmptyValues.reverse()}>
-							<Line type='monotone' dataKey='value' stroke='#8884d8'/>
-							<CartesianGrid stroke='#ccc'/>
-							<XAxis dataKey='date'/>
-							<YAxis />
-						</LineChart>
-					</ResponsiveContainer>
-				</div>
+			<div className='indicator-chart'>
+				{country && <Link className='indicator-chart__back' to={`/countries/${country.iso2Code}`}>Close</Link>}
+				{this.renderIndicatorInfo()}
+				{nonEmptyValues.length ? this.renderChart(nonEmptyValues) : <h3 className='no-data'>No data for this country</h3> }
 			</div>
 		);
 	}
 
 	render() {
-		const {country} = this.props;
 		return (
 			<div className='indicator'>
-				{country && <Link to={`/countries/${country.iso2Code}`}>Back</Link>}
-				{this.renderIndicator()}
-				{this.renderCountry()}
+				<Country match={this.props.match}/>
 				{this.renderData()}
 			</div>
 		);
@@ -129,7 +109,6 @@ const mapStateToProps = createStructuredSelector({
 });
 
 export default connect(mapStateToProps, {
-	loadIndicatorAction,
-	loadCountryAction,
-	loadDataAction
+	loadDataAction,
+	loadIndicatorAction
 })(IndicatorByCountry);

@@ -15,6 +15,7 @@ import './country.scss';
 
 export class Country extends React.Component {
 	static propTypes = {
+		backLink: PropTypes.string,
 		loading: PropTypes.bool,
 		country: PropTypes.object,
 		indicators: PropTypes.array,
@@ -62,11 +63,11 @@ export class Country extends React.Component {
 	}
 
 	render() {
-		const {loading} = this.props;
+		const {loading, backLink} = this.props;
 
 		return (
 			<div className='country'>
-				<Link to='/countries'>Back</Link>
+				<Link to={backLink || '/countries'}>Back</Link>
 				{loading ? this.renderLoading() : this.renderCountry()}
 			</div>
 		);
