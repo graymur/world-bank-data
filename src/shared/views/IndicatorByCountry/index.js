@@ -7,7 +7,7 @@ import Modal from 'react-modal';
 import loadIndicatorByCountryDataIfNeeded from 'shared/logic/loadIfNeeded/indicatorByCountryData';
 import loadIndicatorIfNeeded from 'shared/logic/loadIfNeeded/indicator';
 
-import {loadIndicatorByCountryData as loadDataSaga} from 'shared/logic/indicatorByCountryData/sagas/loadindicatorByCountryData';
+import {loadIndicatorByCountryData as loadDataSaga} from 'shared/logic/indicatorByCountryData/sagas/loadIndicatorByCountryData';
 import {selectIndicatorByCountryData as selectData} from 'shared/logic/indicatorByCountryData/selectors';
 import {loadIndicatorByCountryData as loadDataAction} from 'shared/logic/indicatorByCountryData/actions';
 

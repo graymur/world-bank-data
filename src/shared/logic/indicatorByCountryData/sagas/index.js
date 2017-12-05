@@ -1,4 +1,4 @@
-import loadindicatorByCountryDataSaga from './loadindicatorByCountryData';
+import loadindicatorByCountryDataSaga from './loadIndicatorByCountryData';
 
 export default [
 	loadindicatorByCountryDataSaga()
