@@ -1,4 +1,4 @@
-import bundleAnalyzerPlugin from './util/bundleAnalyzerPlugin';
+// import bundleAnalyzerPlugin from './util/bundleAnalyzerPlugin';
 import path from 'path';
 import config from '../config/config';
 import merge from 'merge-deep';
@@ -23,7 +23,7 @@ const productionConfig = merge(
 			new ExtractTextPlugin('styles.css'),
 			htmlPlugin,
 			uglifyPlugin,
-			bundleAnalyzerPlugin,
+			// bundleAnalyzerPlugin,
 			new webpack.optimize.ModuleConcatenationPlugin()
 		],
 		resolve: {
