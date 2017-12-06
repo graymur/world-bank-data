@@ -75,9 +75,9 @@ export class Country extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-	loading: selectors.selectLoading(),
-	indicators: selectIndicators(),
-	country: selectors.selectCountry()
+	loading: selectors.selectLoading,
+	indicators: selectIndicators,
+	country: selectors.selectCountry
 });
 
 export default connect(mapStateToProps, {...actions, loadIndicators})(Country);

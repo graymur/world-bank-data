@@ -55,8 +55,8 @@ export class Indicator extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-	loading: selectors.selectLoading(),
-	indicator: selectors.selectIndicator()
+	loading: selectors.selectLoading,
+	indicator: selectors.selectIndicator
 });
 
 export default connect(mapStateToProps, actions)(Indicator);

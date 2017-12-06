@@ -106,9 +106,9 @@ export class IndicatorByCountry extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-	country: selectCountry(),
-	indicator: selectIndicator(),
-	data: selectData()
+	country: selectCountry,
+	indicator: selectIndicator,
+	data: selectData
 });
 
 export default connect(mapStateToProps, {

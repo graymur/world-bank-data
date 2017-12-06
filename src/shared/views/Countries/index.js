@@ -28,8 +28,8 @@ export class Countries extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-	loading: selectors.selectLoading(),
-	countries: selectors.selectCountries()
+	loading: selectors.selectLoading,
+	countries: selectors.selectCountries
 });
 
 export default connect(mapStateToProps, actions)(Countries);
