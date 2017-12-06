@@ -4,7 +4,9 @@ export default {
 	fetchCountries: async () => {
 		const response = await fetch('http://api.worldbank.org/v2/countries?per_page=1000&format=json');
 		const result = await response.json();
-		return result[1].sort((a, b) => a.name > b.name ? 1 : -1);
+		return result[1]
+			.filter(x => x.region.iso2code !== 'NA')
+			.sort((a, b) => a.name > b.name ? 1 : -1);
 	},
 	fetchCountry: async (id) => {
 		const response = await fetch(`http://api.worldbank.org/v2/countries/${id}?format=json`);
