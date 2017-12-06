@@ -1,9 +1,9 @@
 import {createAction} from 'redux-actions';
 
 export const loadIndicatorByCountryData = createAction(
-	'IndicatorByCountry.loadIndicatorByCountryData',
+	'IBCD.loadIBCD',
 	(iso2Code, indicatorId) => iso2Code.params ? iso2Code.params : {iso2Code, indicatorId}
 );
-export const setIndicatorByCountryDataLoading = createAction('IndicatorByCountry.setIndicatorByCountryDataLoading', (value = true) => value);
-export const setIndicatorByCountryDataLoadingError = createAction('IndicatorByCountry.setIndicatorByCountryDataLoadingError', error => error);
-export const setIndicatorByCountryData = createAction('IndicatorByCountry.setIndicatorByCountryData', data => data);
+export const setIndicatorByCountryDataLoading = createAction('IBCD.setIBCDLoading', (value = true) => value);
+export const setIndicatorByCountryDataLoadingError = createAction('IBCD.setIBCDLoadingError', error => error);
+export const setIndicatorByCountryData = createAction('IBCD.setIBCD', data => data);

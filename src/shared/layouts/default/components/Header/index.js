@@ -10,4 +10,4 @@ export const Header = () => (
 	</header>
 );
 
-export default pure(Header);
+export default Header;

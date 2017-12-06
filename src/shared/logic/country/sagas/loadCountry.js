@@ -15,7 +15,6 @@ export function * loadCountry(action) {
 		yield put(actions.setCountryLoadingError(false));
 		yield put(actions.setCountry(result));
 	} catch (e) {
-		console.log('fetchFeeds ERROR', e);
 		yield put(actions.setCountryLoadingError(e));
 	} finally {
 		yield put(actions.setCountryLoading(false));

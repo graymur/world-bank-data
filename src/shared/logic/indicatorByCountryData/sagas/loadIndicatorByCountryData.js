@@ -15,7 +15,6 @@ export function * loadIndicatorByCountryData({payload: {iso2Code, indicatorId}})
 		yield put(actions.setIndicatorByCountryDataLoadingError(false));
 		yield put(actions.setIndicatorByCountryData(result));
 	} catch (e) {
-		console.log('loadindicatorByCountryData ERROR', e);
 		yield put(actions.setIndicatorByCountryDataLoadingError(e));
 	} finally {
 		yield put(actions.setIndicatorByCountryDataLoading(false));

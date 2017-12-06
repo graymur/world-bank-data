@@ -8,14 +8,13 @@ export function * loadIndicator(action) {
 
 		const result = yield call(dataSource.fetchIndicator, action.payload);
 
-		if (result.error) {
+		if (result && result.error) {
 			throw new Error(result.error);
 		}
 
 		yield put(actions.setIndicatorLoadingError(false));
 		yield put(actions.setIndicator(result));
 	} catch (e) {
-		console.log('loadIndicator ERROR', e);
 		yield put(actions.setIndicatorLoadingError(e));
 	} finally {
 		yield put(actions.setIndicatorLoading(false));
