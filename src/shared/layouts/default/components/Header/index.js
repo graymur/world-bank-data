@@ -1,8 +1,7 @@
 import React from 'react';
 import MainNav from '../MainNav';
-import {pure} from 'recompose';
 
-export const Header = () => (
+const Header = () => (
 	<header className='header'>
 		<div className='container'>
 			<MainNav/>
