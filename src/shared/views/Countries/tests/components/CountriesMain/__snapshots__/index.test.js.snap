@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Shows countries list 1`] = `
+<div
+  className="countries"
+>
+  <h1
+    className="countries__title"
+  >
+    Countries List
+  </h1>
+  <ul
+    className="countries__list"
+  >
+    <li
+      className="countries__list__item"
+    >
+      <a
+        href="/countries/AA"
+        onClick={[Function]}
+      >
+        Country AA
+      </a>
+    </li>
+    <li
+      className="countries__list__item"
+    >
+      <a
+        href="/countries/BB"
+        onClick={[Function]}
+      >
+        Country BB
+      </a>
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`Shows loading sign 1`] = `
+<div
+  className="countries"
+>
+  <h1
+    className="countries__title"
+  >
+    Countries List
+  </h1>
+  <div
+    className="loader"
+  >
+    Loading...
+  </div>
+</div>
+`;
