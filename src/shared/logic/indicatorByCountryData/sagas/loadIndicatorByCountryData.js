@@ -1,6 +1,6 @@
-import {call, put, takeLatest} from 'redux-saga/effects'; // eslint-disable-line
+import {call, put, takeLatest} from 'redux-saga/effects';
 import * as actions from '../actions.js';
-import dataSource from 'shared/dataSource'; // eslint-disable-line
+import dataSource from 'shared/dataSource';
 
 export function * loadIndicatorByCountryData({payload: {iso2Code, indicatorId}}) {
 	try {

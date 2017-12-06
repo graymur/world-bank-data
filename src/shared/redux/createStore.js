@@ -3,7 +3,7 @@ import {routerMiddleware} from 'react-router-redux';
 import createSagaMiddleware from 'redux-saga';
 import reducer from './reducer';
 import saga from './saga.js';
-import isSSR from 'shared/utils/isSSR'; // eslint-disable-line
+import isSSR from 'shared/utils/isSSR';
 
 export const sagaMiddleware = createSagaMiddleware();
 
