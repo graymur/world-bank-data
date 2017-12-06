@@ -8,14 +8,13 @@ export function * loadIndicators() {
 
 		const result = yield call(dataSource.fetchIndicators);
 
-		if (result.error) {
+		if (result && result.error) {
 			throw new Error(result.error);
 		}
 
 		yield put(actions.setIndicatorsLoadingError(false));
 		yield put(actions.setIndicators(result));
 	} catch (e) {
-		console.log('fetchFeeds ERROR', e);
 		yield put(actions.setIndicatorsLoadingError(e));
 	} finally {
 		yield put(actions.setIndicatorsLoading(false));
