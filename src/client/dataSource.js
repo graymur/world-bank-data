@@ -12,9 +12,10 @@ export default {
 		return result[1][0];
 	}),
 	fetchIndicators: memoize(async () => {
-		const response = await fetch('https://api.worldbank.org/v2/indicators?per_page=200&format=json');
-		const result = await response.json();
-		return result[1].sort((a, b) => a.name > b.name ? 1 : -1);
+		return Promise.resolve(require('shared/data/mainIndicators.json'));
+		// const response = await fetch('https://api.worldbank.org/v2/indicators?per_page=200&format=json');
+		// const result = await response.json();
+		// return result[1].sort((a, b) => a.name > b.name ? 1 : -1);
 	}),
 	fetchIndicator: memoize(async (indicatorId) => {
 		const response = await fetch(`https://api.worldbank.org/v2/indicators/${indicatorId}?format=json`);
