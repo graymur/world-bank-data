@@ -31,7 +31,7 @@ export default {
 		return result[1];
 	}, (iso2Code, indicatorId) => `${iso2Code}-${indicatorId}`),
 	fetchIndicatorDataByYear: memoize(async (indicatorId, year) => {
-		const response = await fetch(`http://api.worldbank.org/v2/countries/all/indicators/${indicatorId}?date=${year}:${year}&per_page=1000&format=json`);
+		const response = await fetch(`https://api.worldbank.org/v2/countries/all/indicators/${indicatorId}?date=${year}:${year}&per_page=1000&format=json`);
 		const result = await response.json();
 		return (result[1] || [])
 			.filter(x => !aggregatedRegionsISOCodes.includes(x.country.id) && x.value !== null)
