@@ -12,3 +12,18 @@ export const selectIndicator = createSelector(
 	selectState,
 	main => main.indicator
 );
+
+export const selectCurrentYear = createSelector(
+	selectState,
+	main => main.currentYear
+);
+
+export const selectIndicatorDataLoading = createSelector(
+	selectState,
+	main => main.dataLoading
+);
+
+export const selectIndicatorData = createSelector(
+	selectState,
+	main => main.data
+);

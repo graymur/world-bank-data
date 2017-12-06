@@ -1,0 +1,22 @@
+@import "~style/lib";
+
+.indicator {
+    position: relative;
+
+    &__years {
+        display: block;
+        margin-top: 2rem;
+        font-size: 1.8rem;
+
+        &__item {
+            display: inline-block;
+            margin-right: 2rem;
+
+            &._active {
+                color: black;
+                text-decoration: none;
+                pointer-events: none;
+            }
+        }
+    }
+}

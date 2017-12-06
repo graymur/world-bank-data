@@ -2,18 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {createStructuredSelector} from 'reselect';
-import {Link} from 'react-router-dom';
 import loadIndicatorIfNeeded from 'shared/logic/loadIfNeeded/indicator';
 import {loadIndicator} from 'shared/logic/indicator/sagas/loadIndicator';
 import * as actions from 'shared/logic/indicator/actions';
 import * as selectors from 'shared/logic/indicator/selectors';
-import './indicator.scss';
+import IndicatorMain from './components/IndicatorMain';
 
 export class Indicator extends React.Component {
 	static propTypes = {
 		loading: PropTypes.bool,
 		indicator: PropTypes.object,
-		loadIndicator: PropTypes.func
+		currentYear: PropTypes.number,
+		data: PropTypes.array,
+		loadIndicator: PropTypes.func,
+		loadIndicatorData: PropTypes.func
 	};
 
 	static preload = match => [[loadIndicator, actions.loadIndicator(match)]];
@@ -22,41 +24,19 @@ export class Indicator extends React.Component {
 		loadIndicatorIfNeeded(this.props, this.props.loadIndicator);
 	}
 
-	renderLoading() {
-		return 'Loading';
-	}
-
-	renderIndicator() {
-		const {indicator} = this.props;
-
-		if (!indicator) {
-			return null;
-		}
-
-		return (
-			<div className='indicator'>
-				<h1>{indicator.name}</h1>
-				<p>{indicator.sourceNote}</p>
-				<p>Source: {indicator.sourceOrganization}</p>
-			</div>
-		);
-	}
-
 	render() {
-		const {loading} = this.props;
-
-		return (
-			<div className='indicator'>
-				<Link to='/indicators'>Back</Link>
-				{loading ? this.renderLoading() : this.renderIndicator()}
-			</div>
-		);
+		// const {loading, indicator, loadIndicatorData, currentYear, data} = this.props;
+		const years = [2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010];
+		return <IndicatorMain {...this.props} years={years}/>;
 	}
 }
 
 const mapStateToProps = createStructuredSelector({
 	loading: selectors.selectLoading,
-	indicator: selectors.selectIndicator
+	indicator: selectors.selectIndicator,
+	currentYear: selectors.selectCurrentYear,
+	data: selectors.selectIndicatorData,
+	dataLoading: selectors.selectIndicatorDataLoading
 });
 
 export default connect(mapStateToProps, actions)(Indicator);
