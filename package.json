@@ -5,6 +5,7 @@
   "main": "./src/server/serverProd.js",
   "scripts": {
     "lint": "eslint src/client/**/*.js src/shared/**/*.js webpack/**/*.js --ignore-pattern *.test.js",
+    "test": "better-npm-run test",
     "test:watch": "npm run test -- --watch",
     "start": "better-npm-run start",
     "mon": "nodemon --ignore ./src/shared --ignore ./src/client --exec better-npm-run start",
@@ -45,6 +46,13 @@
         "NODE_ENV": "development",
         "NODE_PATH": "./src",
         "SSR": true
+      }
+    },
+    "test": {
+      "command": "jest",
+      "env": {
+        "NODE_ENV": "test",
+        "NODE_PATH": "./src"
       }
     },
     "build": {
@@ -149,5 +157,25 @@
     "webpack-hot-middleware": "^2.20.0",
     "webpack-node-externals": "^1.6.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "jest": "^21.2.1"
+  },
+  "jest": {
+    "roots": [
+      "./src",
+      "./tests"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "./src"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/tests/mocks/file.js",
+      "\\.(css|scss|sass)$": "<rootDir>/tests/mocks/style.js"
+    }
+  }
 }
