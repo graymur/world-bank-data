@@ -9,6 +9,6 @@ const filenameToRelativeURL = (module, filename) => {
 /**
  * TODO: require.extentions is deprecated, replace it
  */
-require.extensions['.jpg'] = filenameToRelativeURL;
-require.extensions['.png'] = filenameToRelativeURL;
-require.extensions['.scss'] = () => {};
+require.extensions['.jpg'] = filenameToRelativeURL; // eslint-disable-line
+require.extensions['.png'] = filenameToRelativeURL; // eslint-disable-line
+require.extensions['.scss'] = () => {}; // eslint-disable-line
