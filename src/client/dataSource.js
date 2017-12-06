@@ -5,7 +5,6 @@ export default {
 	fetchCountries: memoize(async () => {
 		const response = await fetch('https://api.worldbank.org/v2/countries?per_page=1000&format=json');
 		const result = await response.json();
-		console.log(JSON.stringify(result[1], null, 4));
 		return result[1]
 			.filter(x => x.region.iso2code !== 'NA')
 			.sort((a, b) => a.name > b.name ? 1 : -1);
@@ -36,8 +35,8 @@ export default {
 		const result = await response.json();
 		return (result[1] || [])
 			.filter(x => !aggregatedRegionsISOCodes.includes(x.country.id) && x.value !== null)
-			.sort((a, b) => a.name > b.name ? -1 : 1)
+			.sort((a, b) => a.country.value > b.country.value ? -1 : 1)
 			.sort((a, b) => a.value > b.value ? -1 : 1)
-			.map(x => ({title: x.country.value, value: x.value}));
+			.map(x => ({name: x.country.value, value: x.value}));
 	}, (indicatorId, year) => `${indicatorId}-${year}`)
 };

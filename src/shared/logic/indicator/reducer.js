@@ -16,7 +16,9 @@ export const initialState = {
 export default handleActions({
 	[actions.loadIndicator]: state => ({
 		...state,
-		indicator: undefined
+		indicator: undefined,
+		data: undefined,
+		currentYear: undefined
 	}),
 	[actions.setIndicatorLoading]: (state, {payload: loading}) => ({
 		...state,

@@ -25,7 +25,6 @@ export default {
 		return result[1][0];
 	},
 	fetchIndicatorByCountryData: async (iso2Code, indicatorId) => {
-		console.log(`http://api.worldbank.org/v2/countries/${iso2Code}/indicators/${indicatorId}?format=json`);
 		const response = await fetch(`http://api.worldbank.org/v2/countries/${iso2Code}/indicators/${indicatorId}?format=json`);
 		const result = await response.json();
 		return (result[1] || []).map(x => ({date: x.date, value: x.value}));
