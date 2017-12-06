@@ -1,5 +1,5 @@
 /* eslint-disable */
-const countries = require('../countries').default;
+import countries from '../countries';
 
 test('Calls action creator if countries are undefined', async () => {
 	const actionCreator = jest.fn();
