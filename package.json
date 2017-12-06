@@ -7,7 +7,7 @@
     "lint": "eslint src/client/**/*.js src/shared/**/*.js webpack/**/*.js --ignore-pattern *.test.js",
     "test": "better-npm-run test",
     "test:watch": "npm run test -- --watch",
-    "start": "npm run build && better-npm-run start",
+    "start": "better-npm-run start",
     "mon": "nodemon --ignore ./src/shared --ignore ./src/client --exec better-npm-run start",
     "dev": "better-npm-run dev",
     "dev:ssr": "better-npm-run dev:ssr",
@@ -16,6 +16,7 @@
     "dll:dev": "better-npm-run dll:dev",
     "dll:prod": "better-npm-run dll:prod",
     "dll": "npm run dll:dev && npm run dll:prod",
+    "postinstall": "npm run build",
     "webpack": "babel-node node_modules/webpack/bin/webpack.js"
   },
   "engines": {
