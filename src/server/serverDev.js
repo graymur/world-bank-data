@@ -1,3 +1,4 @@
+import config from '../../config/config';
 import opener from 'opener';
 import express from 'express';
 import path from 'path';
@@ -6,7 +7,6 @@ import ejs from 'ejs';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpack from 'webpack';
-import config from '../../config/config';
 import webpackConfig from '../../webpack/webpack.config.dev';
 import './ssr/stubAssetsRequires';
 
@@ -56,7 +56,7 @@ app.use(async (req, res) => {
 	}
 });
 
-app.listen(config.devPort, () => {
-	console.log(`Listening at ${config.host}:${config.devPort}`);
-	opener(`http://${config.host}:${config.devPort}`);
+app.listen(config.port, () => {
+	console.log(`Listening at ${config.host}:${config.port}`);
+	opener(`http://${config.host}:${config.port}`);
 });

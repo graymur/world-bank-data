@@ -1,8 +1,8 @@
-import path from 'path';
+import config from '../../config/config';
 import express from 'express';
 import opener from 'opener';
 import fs from 'fs';
-import config from '../../config/config.js';
+import path from 'path';
 import './ssr/stubAssetsRequires';
 import compression from 'compression';
 
@@ -24,7 +24,7 @@ app.use('*', async (req, res) => {
 	res.send(html);
 });
 
-app.listen(config.prodPort, () => {
-	console.log(`Listening at ${config.host}:${config.prodPort}`);
-	opener(`http://${config.host}:${config.prodPort}`);
+app.listen(config.port, () => {
+	console.log(`Listening at ${config.host}:${config.port}`);
+	opener(`http://${config.host}:${config.port}`);
 });

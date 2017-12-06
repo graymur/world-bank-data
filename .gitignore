@@ -42,3 +42,4 @@ jspm_packages
 # Original files bakckups after merge
 *.orig
 /indicators.json
+/.env
