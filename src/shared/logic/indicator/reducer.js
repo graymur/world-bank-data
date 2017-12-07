@@ -37,6 +37,10 @@ export default handleActions({
 		data: undefined,
 		currentYear
 	}),
+	[actions.setCurrentYear]: (state, {payload: currentYear}) => ({
+		...state,
+		currentYear
+	}),
 	[actions.setIndicatorDataLoading]: (state, {payload: dataLoading}) => ({
 		...state,
 		dataLoading

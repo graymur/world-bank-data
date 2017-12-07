@@ -29,6 +29,10 @@ export default [{
 	exact: true,
 	component: Indicator
 }, {
+	path: '/indicators/:indicatorId/:year',
+	exact: true,
+	component: Indicator
+}, {
 	path: '/countries/:iso2Code/indicator/:indicatorId',
 	exact: true,
 	component: IndicatorByCountry

@@ -5,6 +5,7 @@ export const setIndicatorLoading = createAction('Indicator.setIndicatorLoading',
 export const setIndicatorLoadingError = createAction('Indicator.setIndicatorLoadingError', error => error);
 export const setIndicator = createAction('Indicator.setIndicator', indicator => indicator);
 
+export const setCurrentYear = createAction('Indicator.setCurrentYear', currentYear => currentYear);
 export const loadIndicatorData = createAction('Indicator.loadIndicatorData', (indicatorId, year) => indicatorId.params ? indicatorId.params : {indicatorId, year});
 export const setIndicatorDataLoading = createAction('Indicator.setIndicatorDataLoading', (value = true) => value);
 export const setIndicatorDataLoadingError = createAction('Indicator.setIndicatorDataLoadingError', error => error);

@@ -13,7 +13,7 @@ export class Indicator extends React.Component {
 		indicator: PropTypes.object,
 		data: PropTypes.array,
 		loadIndicatorData: PropTypes.func,
-		currentYear: PropTypes.number
+		currentYear: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
 	};
 
 	handleYearClick(year) {
@@ -37,7 +37,7 @@ export class Indicator extends React.Component {
 				{indicator.sourceOrganization && <p>Source: {indicator.sourceOrganization}</p>}
 				<nav className='indicator__years'>
 					{years.map(year => (
-						<a key={year} data-year={year} className={'indicator__years__item' + (year === currentYear ? ' _active' : '')} href='' onClick={this.handleYearClick(year)}>{year}</a>
+						<a key={year} data-year={year} className={'indicator__years__item' + (year === Number(currentYear) ? ' _active' : '')} href='' onClick={this.handleYearClick(year)}>{year}</a>
 					))}
 				</nav>
 				<IndicatorData loading={dataLoading} data={data}/>

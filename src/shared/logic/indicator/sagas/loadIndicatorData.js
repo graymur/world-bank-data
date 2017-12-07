@@ -4,6 +4,7 @@ import dataSource from 'shared/dataSource';
 
 export function * loadIndicatorData({payload: {indicatorId, year}}) {
 	try {
+		yield put(actions.setCurrentYear(year));
 		yield put(actions.setIndicatorDataLoading());
 
 		const result = yield call(dataSource.fetchIndicatorDataByYear, indicatorId, year);
