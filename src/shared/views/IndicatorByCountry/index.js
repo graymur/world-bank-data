@@ -46,7 +46,7 @@ export class IndicatorByCountry extends React.Component {
 	}
 
 	renderIndicatorInfo() {
-		const {country, indicator} = this.props;
+		const {indicator} = this.props;
 
 		if (!indicator) {
 			return null;

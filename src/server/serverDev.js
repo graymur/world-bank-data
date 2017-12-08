@@ -56,5 +56,5 @@ app.use(async (req, res) => {
 
 app.listen(config.port, () => {
 	console.log(`Listening at ${config.host}:${config.port}`);
-	// opener(`http://${config.host}:${config.port}`);
+	opener(`http://${config.host}:${config.port}`);
 });
