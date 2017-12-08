@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
+import Helmet from 'react-helmet';
 import Loader from 'shared/components/Loader';
 import IndicatorData from '../IndicatorData';
 import './indicator.scss';
@@ -32,6 +33,10 @@ export class Indicator extends React.Component {
 
 		return (
 			<div className='indicator'>
+				<Helmet>
+					<title>{indicator.name} {currentYear ? `- ${currentYear}` : ''}</title>
+				</Helmet>
+
 				<h1>{indicator.name}</h1>
 				<p>{indicator.sourceNote}</p>
 				{indicator.sourceOrganization && <p>Source: {indicator.sourceOrganization}</p>}

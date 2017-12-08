@@ -44,9 +44,7 @@ app.use(async (req, res) => {
 		});
 
 		if (process.env.SSR) {
-			const [content, state] = await require('./ssr').default(req);
-			html = html.replace('<div id="react-root"></div>', `<div id="react-root">${content}</div>`);
-			html = html.replace('window.__INITIAL_STATE__ = {}', `window.__INITIAL_STATE__ = ${JSON.stringify(state)}`);
+			html = await require('./ssr').default(req, html);
 		}
 
 		res.send(html);
@@ -58,5 +56,5 @@ app.use(async (req, res) => {
 
 app.listen(config.port, () => {
 	console.log(`Listening at ${config.host}:${config.port}`);
-	opener(`http://${config.host}:${config.port}`);
+	// opener(`http://${config.host}:${config.port}`);
 });

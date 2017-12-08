@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {createStructuredSelector} from 'reselect';
 import {Link} from 'react-router-dom';
+import Helmet from 'react-helmet';
 import loadCountryIfNeeded from 'shared/logic/loadIfNeeded/country';
 import loadIndicatorsIfNeeded from 'shared/logic/loadIfNeeded/indicators';
 import {loadCountry} from 'shared/logic/country/sagas/loadCountry';
@@ -16,11 +17,16 @@ import './country.scss';
 export class Country extends React.Component {
 	static propTypes = {
 		backLink: PropTypes.string,
+		setTitle: PropTypes.bool,
 		loading: PropTypes.bool,
 		country: PropTypes.object,
 		indicators: PropTypes.array,
 		loadCountry: PropTypes.func,
 		loadIndicators: PropTypes.func
+	};
+
+	static defaultProps = {
+		setTitle: true
 	};
 
 	static preload = match => [
@@ -38,7 +44,7 @@ export class Country extends React.Component {
 	}
 
 	renderCountry() {
-		const {country} = this.props;
+		const {country, setTitle} = this.props;
 
 		if (!country) {
 			return null;
@@ -46,6 +52,7 @@ export class Country extends React.Component {
 
 		return (
 			<div className='country'>
+				{setTitle && <Helmet><title>{country.name}</title></Helmet>}
 				<h1>{country.name}</h1>
 				<p>Region: {country.region.value}</p>
 				<p>Income level: {country.incomeLevel.value}</p>
@@ -54,7 +61,8 @@ export class Country extends React.Component {
 				<ul className='indicators__list'>
 					{this.props.indicators.map(indicator => (
 						<li key={indicator.id} className='indicators__list__item'>
-							<Link to={`/countries/${country.iso2Code}/indicator/${indicator.id}`}>{indicator.name}</Link>
+							<Link
+								to={`/countries/${country.iso2Code}/indicator/${indicator.id}`}>{indicator.name}</Link>
 						</li>
 					))}
 				</ul>
