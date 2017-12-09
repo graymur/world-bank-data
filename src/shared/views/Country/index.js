@@ -13,11 +13,12 @@ import * as selectors from 'shared/logic/country/selectors';
 import {selectIndicators} from 'shared/logic/indicators/selectors';
 import {loadIndicators} from 'shared/logic/indicators/actions';
 import {loadIndicators as loadIndicatorsSaga} from 'shared/logic/indicators/sagas/loadIndicators';
+import Loader from 'shared/components/Loader';
+import classnames from 'classnames';
 import './country.scss';
 
 export class Country extends React.Component {
 	static propTypes = {
-		backLink: PropTypes.string,
 		setTitle: PropTypes.bool,
 		loading: PropTypes.bool,
 		country: PropTypes.object,
@@ -38,10 +39,6 @@ export class Country extends React.Component {
 	componentDidMount() {
 		loadCountryIfNeeded(this.props, this.props.loadCountry);
 		loadIndicatorsIfNeeded(this.props, this.props.loadIndicators);
-	}
-
-	renderLoading() {
-		return 'Loading';
 	}
 
 	renderCountry() {
@@ -72,12 +69,12 @@ export class Country extends React.Component {
 	}
 
 	render() {
-		const {loading, backLink} = this.props;
+		const {loading} = this.props;
+		const classNames = classnames('country', {'loading': loading});
 
 		return (
-			<div className='country'>
-				<Link to={backLink || '/countries'}>Back</Link>
-				{loading ? this.renderLoading() : this.renderCountry()}
+			<div className={classNames}>
+				{loading ? <Loader/> : this.renderCountry()}
 			</div>
 		);
 	}

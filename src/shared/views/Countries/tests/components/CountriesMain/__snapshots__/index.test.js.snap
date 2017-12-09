@@ -9,30 +9,28 @@ exports[`Shows countries list 1`] = `
   >
     Countries List
   </h1>
-  <ul
-    className="countries__list"
+  <div
+    className="countries__container"
   >
-    <li
-      className="countries__list__item"
+    <nav
+      className="countries__list"
     >
       <a
+        className="countries__list__item"
         href="/countries/AA"
         onClick={[Function]}
       >
         Country AA
       </a>
-    </li>
-    <li
-      className="countries__list__item"
-    >
       <a
+        className="countries__list__item"
         href="/countries/BB"
         onClick={[Function]}
       >
         Country BB
       </a>
-    </li>
-  </ul>
+    </nav>
+  </div>
 </div>
 `;
 
@@ -46,9 +44,19 @@ exports[`Shows loading sign 1`] = `
     Countries List
   </h1>
   <div
-    className="loader"
+    className="countries__container loading"
   >
-    Loading...
+    <span
+      className="loader"
+      style={
+        Object {
+          "border": "10px solid #f3f3f3",
+          "borderTop": "10px solid #3498db",
+          "height": "50px",
+          "width": "50px",
+        }
+      }
+    />
   </div>
 </div>
 `;

@@ -1,5 +1,7 @@
 @import "~style/lib";
 
 .country {
-
+    &._loading {
+        min-height: 20rem;
+    }
 }

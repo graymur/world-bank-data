@@ -1,6 +1,16 @@
-@import "~style/lib";
-
 .loader {
-	font-size: 3rem;
-	text-align: center;
+	display: inline-block;
+	vertical-align: middle;
+	border-radius: 50%;
+	animation: spin 2s linear infinite;
 }
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
