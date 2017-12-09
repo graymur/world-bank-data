@@ -4,7 +4,8 @@ import {connect} from 'react-redux';
 import {createStructuredSelector} from 'reselect';
 import {Link} from 'react-router-dom';
 import Helmet from 'react-helmet';
-import Modal from 'react-modal';
+import getPageTitle from 'shared/utils/getPageTitle';
+import Modal from 'shared/components/Modal';
 import loadIndicatorByCountryDataIfNeeded from 'shared/logic/loadIfNeeded/indicatorByCountryData';
 import loadIndicatorIfNeeded from 'shared/logic/loadIfNeeded/indicator';
 
@@ -78,20 +79,25 @@ export class IndicatorByCountry extends React.Component {
 
 	renderData() {
 		const {data, country} = this.props;
+		let content = '';
 
 		if (typeof data === 'undefined') {
-			return <div className='indicator-chart _loading'><Loader/></div>;
-		}
+			content = <div className='indicator-chart _loading'><Loader/></div>;
+		} else {
+			const nonEmptyValues = (data || []).filter(x => x.value);
 
-		const nonEmptyValues = (data || []).filter(x => x.value);
-
-		return (
-			<Modal isOpen={Boolean(true)} ariaHideApp={false}>
+			content = (
 				<div className='indicator-chart'>
 					{country && <Link className='indicator-chart__back' to={`/countries/${country.iso2Code}`}>Close</Link>}
 					{this.renderIndicatorInfo()}
 					{nonEmptyValues.length ? this.renderChart(nonEmptyValues) : <h3 className='no-data'>No data for this country</h3> }
 				</div>
+			);
+		}
+
+		return (
+			<Modal isOpen={Boolean(true)} ariaHideApp={false}>
+				{content}
 			</Modal>
 		);
 	}
@@ -101,7 +107,7 @@ export class IndicatorByCountry extends React.Component {
 		return (
 			<div className='indicator-by-country'>
 				<Helmet>
-					<title>{country && country.name} - {indicator && indicator.name}</title>
+					<title>{getPageTitle(`${country && country.name} - ${indicator && indicator.name}`)}</title>
 				</Helmet>
 				<Country match={this.props.match} setTitle={Boolean(false)}/>
 				{this.renderData()}
