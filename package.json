@@ -16,9 +16,7 @@
     "dll:dev": "better-npm-run dll:dev",
     "dll:prod": "better-npm-run dll:prod",
     "dll": "npm run dll:dev && npm run dll:prod",
-    "reinstall": "npm run dll",
-    "postinstall": "npm run dll:dev",
-    "postuninstall": "npm run dll",
+    "postinstall": "npm run build",
     "webpack": "babel-node node_modules/webpack/bin/webpack.js"
   },
   "engines": {
@@ -135,6 +133,7 @@
     "react": "^16.1.1",
     "react-addons-css-transition-group": "^15.6.2",
     "react-dom": "^16.1.1",
+    "react-helmet": "^5.2.0",
     "react-hot-loader": "^3.1.3",
     "react-modal": "^3.1.7",
     "react-redux": "^5.0.5",

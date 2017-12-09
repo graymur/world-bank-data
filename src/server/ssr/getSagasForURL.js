@@ -11,5 +11,5 @@ export default (routes, url) => {
 		}
 
 		return sagas;
-	}, []);
+	}, []).filter(x => x).map(x => Array.isArray(x) ? x : [x]);
 };

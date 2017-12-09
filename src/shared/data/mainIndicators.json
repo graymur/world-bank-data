@@ -158,5 +158,9 @@
   {
     "id": "DT.DOD.DIMF.CD",
     "name": "Use of IMF credit (DOD, current US$)"
+  },
+  {
+    "id": "SM.POP.REFG",
+    "name": "Refugee population by country or territory of asylum"
   }
 ]

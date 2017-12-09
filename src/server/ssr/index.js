@@ -1,5 +1,6 @@
 import React from 'react';
 import {renderToString} from 'react-dom/server';
+import Helmet from 'react-helmet';
 import {Switch} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import {ConnectedRouter} from 'react-router-redux';
@@ -22,7 +23,7 @@ function funcName(fn) {
 	return fn.toString().match(/^function\s?([^\s(]*)/)[1];
 }
 
-export default async req => {
+export default async (req, template) => {
 	const url = req.originalUrl || req.url;
 	const history = createMemoryHistory({initialEntries: [url]});
 	const store = createStore({}, history);
@@ -35,7 +36,7 @@ export default async req => {
 
 	await sagaMiddleware.run(runSagas(sagas)).done;
 
-	const html = renderToString(
+	const renderedContent = renderToString(
 		<Provider store={store}>
 			<ConnectedRouter history={history} location={url}>
 				<Layout>
@@ -49,5 +50,11 @@ export default async req => {
 		</Provider>
 	);
 
-	return [html, store.getState()];
+	const helmet = Helmet.renderStatic();
+
+	template = template.replace('<div id="react-root"></div>', `<div id="react-root">${renderedContent}</div>`);
+	template = template.replace('window.__INITIAL_STATE__ = {}', `window.__INITIAL_STATE__ = ${JSON.stringify(store.getState())}`);
+	template = template.replace('<title></title>', helmet.title.toString());
+
+	return template;
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
+import Helmet from 'react-helmet';
 import Loader from 'shared/components/Loader';
 
 import './countries.scss';
@@ -28,6 +29,9 @@ export class Countries extends React.Component {
 
 		return (
 			<div className='countries'>
+				<Helmet>
+					<title>Countries</title>
+				</Helmet>
 				<h1 className='countries__title'>Countries List</h1>
 				{loading ? <Loader/> : this.renderCountries()}
 			</div>

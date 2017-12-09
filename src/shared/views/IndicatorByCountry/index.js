@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {createStructuredSelector} from 'reselect';
 import {Link} from 'react-router-dom';
+import Helmet from 'react-helmet';
 import Modal from 'react-modal';
 import loadIndicatorByCountryDataIfNeeded from 'shared/logic/loadIfNeeded/indicatorByCountryData';
 import loadIndicatorIfNeeded from 'shared/logic/loadIfNeeded/indicator';
@@ -96,9 +97,13 @@ export class IndicatorByCountry extends React.Component {
 	}
 
 	render() {
+		const {country, indicator} = this.props;
 		return (
 			<div className='indicator-by-country'>
-				<Country match={this.props.match}/>
+				<Helmet>
+					<title>{country && country.name} - {indicator && indicator.name}</title>
+				</Helmet>
+				<Country match={this.props.match} setTitle={Boolean(false)}/>
 				{this.renderData()}
 			</div>
 		);

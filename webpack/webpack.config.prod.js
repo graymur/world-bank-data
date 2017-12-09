@@ -1,4 +1,4 @@
-// import bundleAnalyzerPlugin from './util/bundleAnalyzerPlugin';
+import bundleAnalyzerPlugin from './util/bundleAnalyzerPlugin'; // eslint-disable-line
 import path from 'path';
 import config from '../config/config';
 import merge from 'merge-deep';

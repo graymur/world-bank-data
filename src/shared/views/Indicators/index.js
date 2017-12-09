@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {createStructuredSelector} from 'reselect';
 import {Link} from 'react-router-dom';
+import Helmet from 'react-helmet';
 import loadIndicatorsIfNeeded from 'shared/logic/loadIfNeeded/indicators';
 import {loadIndicators} from 'shared/logic/indicators/sagas/loadIndicators';
 import * as actions from 'shared/logic/indicators/actions';
@@ -43,6 +44,9 @@ export class Indicators extends React.Component {
 
 		return (
 			<div className='indicators'>
+				<Helmet>
+					<title>Indicators</title>
+				</Helmet>
 				<h1 className='indicators__title'>Indicators List</h1>
 				{loading ? this.renderLoading() : this.renderIndicators()}
 			</div>
