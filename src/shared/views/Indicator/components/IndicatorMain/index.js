@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
 import Helmet from 'react-helmet';
 import getPageTitle from 'shared/utils/getPageTitle';
 import Loader from 'shared/components/Loader';
 import IndicatorData from '../IndicatorData';
+import classnames from 'classnames';
 import './indicator.scss';
 
 export class Indicator extends React.Component {
@@ -53,10 +53,10 @@ export class Indicator extends React.Component {
 
 	render() {
 		const {loading} = this.props;
+		const classNames = classnames('indicator', {'loading': loading});
 
 		return (
-			<div className='indicator'>
-				<Link to='/indicators'>Back</Link>
+			<div className={classNames}>
 				{loading ? <Loader/> : this.renderIndicator()}
 			</div>
 		);

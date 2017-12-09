@@ -82,7 +82,7 @@ export class IndicatorByCountry extends React.Component {
 		let content = '';
 
 		if (typeof data === 'undefined') {
-			content = <div className='indicator-chart _loading'><Loader/></div>;
+			content = <div className='indicator-chart loading'><Loader/></div>;
 		} else {
 			const nonEmptyValues = (data || []).filter(x => x.value);
 

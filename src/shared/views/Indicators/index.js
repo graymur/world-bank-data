@@ -9,6 +9,7 @@ import loadIndicatorsIfNeeded from 'shared/logic/loadIfNeeded/indicators';
 import {loadIndicators} from 'shared/logic/indicators/sagas/loadIndicators';
 import * as actions from 'shared/logic/indicators/actions';
 import * as selectors from 'shared/logic/indicators/selectors';
+import classnames from 'classnames';
 import './indicators.scss';
 
 export class Indicators extends React.Component {
@@ -30,18 +31,17 @@ export class Indicators extends React.Component {
 
 	renderIndicators() {
 		return (
-			<ul className='indicators__list'>
+			<nav className='indicators__list'>
 			{this.props.indicators.map(indicator => (
-				<li key={indicator.id} className='indicators__list__item'>
-					<Link to={`/indicators/${indicator.id}`}>{indicator.name}</Link>
-				</li>
+				<Link key={indicator.id} className='indicators__list__item' to={`/indicators/${indicator.id}`}>{indicator.name}</Link>
 			))}
-			</ul>
+			</nav>
 		);
 	}
 
 	render() {
 		const {loading} = this.props;
+		const classNames = classnames('indicators__container', {'loading': loading});
 
 		return (
 			<div className='indicators'>
@@ -49,7 +49,9 @@ export class Indicators extends React.Component {
 					<title>{getPageTitle('Indicators')}</title>
 				</Helmet>
 				<h1 className='indicators__title'>Indicators List</h1>
-				{loading ? this.renderLoading() : this.renderIndicators()}
+				<div className={classNames}>
+					{loading ? this.renderLoading() : this.renderIndicators()}
+				</div>
 			</div>
 		);
 	}

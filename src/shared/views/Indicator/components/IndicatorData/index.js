@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Loader from 'shared/components/Loader';
 import {ResponsiveContainer, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Bar} from 'recharts';
+import classnames from 'classnames';
 import './indicatorData.scss';
 
 export class IndicatorData extends React.Component {
@@ -44,9 +45,10 @@ export class IndicatorData extends React.Component {
 
 	render() {
 		const {loading} = this.props;
+		const classNames = classnames('indicator__data', {'loading': loading});
 
 		return (
-			<div className='indicator__data'>
+			<div className={classNames}>
 				{loading ? <Loader/> : this.renderData()}
 			</div>
 		);
