@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {createStructuredSelector} from 'reselect';
 import {Link} from 'react-router-dom';
 import Helmet from 'react-helmet';
+import getPageTitle from 'shared/utils/getPageTitle';
 import loadCountryIfNeeded from 'shared/logic/loadIfNeeded/country';
 import loadIndicatorsIfNeeded from 'shared/logic/loadIfNeeded/indicators';
 import {loadCountry} from 'shared/logic/country/sagas/loadCountry';
@@ -52,7 +53,7 @@ export class Country extends React.Component {
 
 		return (
 			<div className='country'>
-				{setTitle && <Helmet><title>{country.name}</title></Helmet>}
+				{setTitle && <Helmet><title>{getPageTitle(country.name)}</title></Helmet>}
 				<h1>{country.name}</h1>
 				<p>Region: {country.region.value}</p>
 				<p>Income level: {country.incomeLevel.value}</p>

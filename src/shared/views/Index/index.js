@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import Helmet from 'react-helmet';
+import getPageTitle from 'shared/utils/getPageTitle';
 import './index.scss';
 
 export default class Index extends React.Component {
@@ -8,7 +9,7 @@ export default class Index extends React.Component {
 		return (
 			<div className=''>
 				<Helmet>
-					<title>World Bank data</title>
+					<title>{getPageTitle()}</title>
 				</Helmet>
 				<Link to='/countries'>Countries</Link><br/>
 			</div>

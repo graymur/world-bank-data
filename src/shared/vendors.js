@@ -15,5 +15,4 @@ require('redbox-react');
 require('history');
 require('react-addons-css-transition-group');
 require('recharts');
-require('react-modal');
 require('react-helmet');
