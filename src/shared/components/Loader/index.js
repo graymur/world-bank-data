@@ -12,7 +12,7 @@ export default class Loader extends React.PureComponent {
 		])
 	};
 
-	defaultProps = {
+	static defaultProps = {
 		className: []
 	};
 
