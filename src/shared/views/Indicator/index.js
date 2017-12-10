@@ -45,7 +45,7 @@ export class Indicator extends React.Component {
 
 	loadData(indicatorId, year) {
 		const {history, indicator, loadIndicatorData} = this.props;
-		history.push(`/indicators/${indicator.id}/${year}`);
+		history.push(`/indicators/${indicator.id}/${year}#chart`);
 		loadIndicatorData(indicatorId, year);
 	}
 

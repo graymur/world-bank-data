@@ -57,7 +57,7 @@ export class IndicatorByCountry extends React.Component {
 			<div className='indicator-chart__info'>
 				<h2>{indicator.name}</h2>
 				<p>{indicator.sourceNote}</p>
-				<p>Source: {indicator.sourceOrganization}</p>
+				{indicator.sourceOrganization && <p>Source: {indicator.sourceOrganization}</p>}
 			</div>
 		);
 	}
