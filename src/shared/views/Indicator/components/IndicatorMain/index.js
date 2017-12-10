@@ -56,7 +56,7 @@ export class Indicator extends React.Component {
 				{indicator.sourceOrganization && <p>Source: {indicator.sourceOrganization}</p>}
 				<div className='indicator__years'>
 					<select className='styled-select' onChange={this.handleYearChange} defaultValue={defaultSelectValue}>
-						<option value=''>Select year</option>
+						<option value='' hidden>Select year</option>
 						{years.map(year => (
 							<option key={year} data-year={year}>{year}</option>
 						))}

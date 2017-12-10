@@ -12,7 +12,7 @@ import IndicatorMain from './components/IndicatorMain';
 import {withRouter} from 'react-router-dom';
 import range from 'lodash/range';
 
-const years = range(1990, (new Date()).getFullYear());
+const years = range(1990, (new Date()).getFullYear()).reverse();
 
 export class Indicator extends React.Component {
 	static propTypes = {
