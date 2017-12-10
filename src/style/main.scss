@@ -6,12 +6,13 @@
 }
 
 HTML {
-    @include mobile() {
-        font-size: 50%;
-    }
+
+    font-size: 62.5%;
+    //@include mobile() {
+    //    font-size: 50%;
+    //}
 
     @include tablet() {
-        font-size: 62.5%;
     }
 
     @include desktop() {
@@ -32,7 +33,7 @@ BODY {
 
 .styled-select {
     font-family: $baseFontFamily;
-    font-size: 1.4rem;
+    font-size: 1.8rem;
     height: 5rem;
     color: #4E4E4E;
     border: 1px solid #dcdcdc;
@@ -52,6 +53,7 @@ BODY {
     width: 100%;
     min-height: 100%;
     display: flex;
+    //border: 1px solid red;
 }
 
 .loading {

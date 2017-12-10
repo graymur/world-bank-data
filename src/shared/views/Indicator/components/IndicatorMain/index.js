@@ -18,11 +18,22 @@ export class Indicator extends React.Component {
 		currentYear: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
 	};
 
+	constructor(props) {
+		super(props);
+		this.handleYearChange = this.handleYearChange.bind(this);
+	}
+
 	handleYearClick(year) {
 		return (event) => {
 			event.preventDefault();
 			this.props.loadIndicatorData(this.props.indicator.id, year);
 		};
+	};
+
+	handleYearChange(event) {
+		if (event.target.value) {
+			this.props.loadIndicatorData(this.props.indicator.id, Number(event.target.value));
+		}
 	};
 
 	renderIndicator() {
@@ -31,6 +42,8 @@ export class Indicator extends React.Component {
 		if (!indicator) {
 			return null;
 		}
+
+		const defaultSelectValue = isNaN(Number(currentYear)) ? '' : Number(currentYear);
 
 		return (
 			<div className='indicator'>
@@ -41,14 +54,17 @@ export class Indicator extends React.Component {
 				<h1>{indicator.name}</h1>
 				<p>{indicator.sourceNote}</p>
 				{indicator.sourceOrganization && <p>Source: {indicator.sourceOrganization}</p>}
-				<nav className='indicator__years'>
-					{years.map(year => (
-						<a key={year} data-year={year} className={'indicator__years__item' + (year === Number(currentYear) ? ' _active' : '')} href='' onClick={this.handleYearClick(year)}>{year}</a>
-					))}
-				</nav>
+				<div className='indicator__years'>
+					<select className='styled-select' onChange={this.handleYearChange} defaultValue={defaultSelectValue}>
+						<option value='' hidden>Select year</option>
+						{years.map(year => (
+							<option key={year} data-year={year}>{year}</option>
+						))}
+					</select>
+				</div>
 				<IndicatorData loading={dataLoading} data={data}/>
 			</div>
-		);
+	);
 	}
 
 	render() {
@@ -56,11 +72,11 @@ export class Indicator extends React.Component {
 		const classNames = classnames('indicator', {'loading': loading});
 
 		return (
-			<div className={classNames}>
-				{loading ? <Loader/> : this.renderIndicator()}
-			</div>
+		<div className={classNames}>
+		{loading ? <Loader/> : this.renderIndicator()}
+		</div>
 		);
 	}
-}
+	}
 
-export default Indicator;
+	export default Indicator;

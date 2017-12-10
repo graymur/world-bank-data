@@ -1,3 +1,5 @@
+@import "~style/lib";
+
 .wb-modal {
     position: fixed;
     width: 100%;
@@ -9,15 +11,25 @@
 
     &__content {
         position: absolute;
-        top: 4rem;
-        left: 4rem;
-        right: 4rem;
-        bottom: 4rem;
         border: 1px solid rgb(204, 204, 204);
         background: rgb(255, 255, 255);
         overflow: auto;
         border-radius: 4px;
         outline: none;
         padding: 2rem;
+
+        @include mobile() {
+            top: 2rem;
+            left: 2rem;
+            right: 2rem;
+            bottom: 2rem;
+        }
+
+        @include min-screen($tablet) {
+            top: 4rem;
+            left: 4rem;
+            right: 4rem;
+            bottom: 4rem;
+        }
     }
 }

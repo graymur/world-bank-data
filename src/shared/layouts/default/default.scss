@@ -4,6 +4,7 @@
 
 .main {
     flex: 1 0 auto;
+    max-width: 100%;
     font-size: 1.4rem;
     line-height: 1.5;
 
@@ -13,6 +14,7 @@
 
     .container {
         position: relative;
+        overflow: hidden;
     }
 
     .page-switch-enter {

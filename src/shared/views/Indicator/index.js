@@ -12,7 +12,7 @@ import IndicatorMain from './components/IndicatorMain';
 import {withRouter} from 'react-router-dom';
 import range from 'lodash/range';
 
-const years = range(1990, (new Date()).getFullYear());
+const years = range(1990, (new Date()).getFullYear()).reverse();
 
 export class Indicator extends React.Component {
 	static propTypes = {
@@ -45,7 +45,7 @@ export class Indicator extends React.Component {
 
 	loadData(indicatorId, year) {
 		const {history, indicator, loadIndicatorData} = this.props;
-		history.push(`/indicators/${indicator.id}/${year}`);
+		history.push(`/indicators/${indicator.id}/${year}#chart`);
 		loadIndicatorData(indicatorId, year);
 	}
 
