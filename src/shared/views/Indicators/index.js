@@ -11,6 +11,8 @@ import * as actions from 'shared/logic/indicators/actions';
 import * as selectors from 'shared/logic/indicators/selectors';
 import classnames from 'classnames';
 import './indicators.scss';
+import getMaxIndicatorYear from 'shared/utils/getMaxIndicatorYear';
+import Loader from 'shared/components/Loader';
 
 export class Indicators extends React.Component {
 	static propTypes = {
@@ -25,15 +27,11 @@ export class Indicators extends React.Component {
 		loadIndicatorsIfNeeded(this.props, this.props.loadIndicators);
 	}
 
-	renderLoading() {
-		return 'Loading';
-	}
-
 	renderIndicators() {
 		return (
 			<nav className='indicators__list'>
 			{this.props.indicators.map(indicator => (
-				<Link key={indicator.id} className='indicators__list__item' to={`/indicators/${indicator.id}`}>{indicator.name}</Link>
+				<Link key={indicator.id} className='indicators__list__item' to={`/indicators/${indicator.id}/${getMaxIndicatorYear()}`}>{indicator.name}</Link>
 			))}
 			</nav>
 		);
@@ -50,7 +48,7 @@ export class Indicators extends React.Component {
 				</Helmet>
 				<h1 className='indicators__title'>Indicators List</h1>
 				<div className={classNames}>
-					{loading ? this.renderLoading() : this.renderIndicators()}
+					{loading ? <Loader/> : this.renderIndicators()}
 				</div>
 			</div>
 		);
