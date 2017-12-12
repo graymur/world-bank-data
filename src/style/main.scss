@@ -6,18 +6,9 @@
 }
 
 HTML {
-
     font-size: 62.5%;
-    //@include mobile() {
-    //    font-size: 50%;
-    //}
-
-    @include tablet() {
-    }
-
-    @include desktop() {
-        font-size: 62.5%;
-    }
+    // TODO: find better solution for jumping scrollbar
+    overflow-y: scroll;
 }
 
 HTML, BODY {
