@@ -40,5 +40,10 @@ export default {
 			.sort((a, b) => a.country.value > b.country.value ? -1 : 1)
 			.sort((a, b) => a.value > b.value ? -1 : 1)
 			.map(x => ({name: x.country.value, value: x.value}));
-	}, (indicatorId, year) => `${indicatorId}-${year}`)
+	}, (indicatorId, year) => `${indicatorId}-${year}`),
+	searchIndicators: memoize(async (pattern) => {
+		const response = await fetch('https://api.worldbank.org/v2/indicators?per_page=10&format=json');
+		const result = await response.json();
+		return result[1].sort((a, b) => a.name > b.name ? 1 : -1);
+	})
 };
