@@ -11,8 +11,9 @@ import * as selectors from 'shared/logic/indicator/selectors';
 import IndicatorMain from './components/IndicatorMain';
 import {withRouter} from 'react-router-dom';
 import range from 'lodash/range';
+import getMaxIndicatorYear from 'shared/utils/getMaxIndicatorYear';
 
-const years = range(1990, (new Date()).getFullYear()).reverse();
+const years = range(1990, getMaxIndicatorYear() + 1).reverse();
 
 export class Indicator extends React.Component {
 	static propTypes = {
