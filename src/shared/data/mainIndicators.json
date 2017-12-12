@@ -28,10 +28,6 @@
     "name": "Deposit interest rate (%)"
   },
   {
-    "id": "IC.BUS.EASE.XQ",
-    "name": "Ease of doing business index (1=most business-friendly regulations)"
-  },
-  {
     "id": "EG.USE.ELEC.KH.PC",
     "name": "Electric power consumption (kWh per capita)"
   },
