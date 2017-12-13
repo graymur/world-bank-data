@@ -6,7 +6,11 @@ export const INDICATORS_REDUCER_KEY = 'Indicators';
 export const initialState = {
 	indicators: [],
 	loading: false,
-	error: undefined
+	error: undefined,
+	foundIndicators: undefined,
+	searching: false,
+	searchError: undefined,
+	searchString: ''
 };
 
 export default handleActions({
@@ -21,5 +25,21 @@ export default handleActions({
 	[actions.setIndicators]: (state, {payload: indicators}) => ({
 		...state,
 		indicators
+	}),
+	[actions.setSearching]: (state, {payload: searching}) => ({
+		...state,
+		searching
+	}),
+	[actions.setSearchError]: (state, {payload: searchError}) => ({
+		...state,
+		searchError
+	}),
+	[actions.setFoundIndicators]: (state, {payload: foundIndicators}) => ({
+		...state,
+		foundIndicators
+	}),
+	[actions.setSearchString]: (state, {payload: searchString}) => ({
+		...state,
+		searchString
 	})
 }, initialState);

@@ -64,7 +64,7 @@ export class Indicator extends React.Component {
 				</div>
 				<IndicatorData loading={dataLoading} data={data}/>
 			</div>
-	);
+		);
 	}
 
 	render() {
@@ -72,11 +72,11 @@ export class Indicator extends React.Component {
 		const classNames = classnames('indicator', {'loading': loading});
 
 		return (
-		<div className={classNames}>
-		{loading ? <Loader/> : this.renderIndicator()}
-		</div>
+			<div className={classNames}>
+				{loading ? <Loader/> : this.renderIndicator()}
+			</div>
 		);
 	}
-	}
+}
 
-	export default Indicator;
+export default Indicator;
