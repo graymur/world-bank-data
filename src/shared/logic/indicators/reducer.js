@@ -1,6 +1,5 @@
 import * as actions from './actions';
 import {handleActions} from 'redux-actions';
-import uniqBy from 'lodash/uniqBy';
 
 export const INDICATORS_REDUCER_KEY = 'Indicators';
 
@@ -8,10 +7,10 @@ export const initialState = {
 	indicators: [],
 	loading: false,
 	error: undefined,
-	userIndicators: [],
 	foundIndicators: undefined,
 	searching: false,
-	searchError: undefined
+	searchError: undefined,
+	searchString: ''
 };
 
 export default handleActions({
@@ -39,8 +38,8 @@ export default handleActions({
 		...state,
 		foundIndicators
 	}),
-	[actions.addUserIndicator]: (state, {payload: id}) => ({
+	[actions.setSearchString]: (state, {payload: searchString}) => ({
 		...state,
-		userIndicators: uniqBy([...state.userIndicators, state.foundIndicators.find(x => x.id === id)], x => x.id)
+		searchString
 	})
 }, initialState);

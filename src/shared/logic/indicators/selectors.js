@@ -13,11 +13,6 @@ export const selectIndicators = createSelector(
 	main => main.indicators
 );
 
-export const selectUserIndicators = createSelector(
-	selectState,
-	main => main.userIndicators
-);
-
 export const selectFoundIndicators = createSelector(
 	selectState,
 	main => main.foundIndicators
@@ -26,4 +21,9 @@ export const selectFoundIndicators = createSelector(
 export const selectSearching = createSelector(
 	selectState,
 	main => main.searching
+);
+
+export const selectSearchString = createSelector(
+	selectState,
+	main => main.searchString
 );

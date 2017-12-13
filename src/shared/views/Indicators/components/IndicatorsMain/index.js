@@ -21,8 +21,8 @@ export default class IndicatorsMain extends React.Component {
 	};
 
 	render() {
-		const {loading, indicators, userIndicators} = this.props;
-		const hasUser = userIndicators && userIndicators.length;
+		const {loading, indicators, foundIndicators} = this.props;
+		const hasFoundIndicators = foundIndicators && foundIndicators.length > 0;
 		const classNames = classnames('indicators__container', {'loading': loading});
 
 		return (
@@ -34,15 +34,7 @@ export default class IndicatorsMain extends React.Component {
 				<p>World Bank collects data on more then 16 thousands indicators. Here are some of them major one. You
 					find others using serch field.</p>
 				<IndicatorsSearch {...this.props}/>
-				{!hasUser ? null
-					: <div className='indicators__user'>
-						<h3 className='indicators__title'>Your indicators</h3>
-						<div className='indicators__container'>
-							<IndicatorsList indicators={userIndicators}/>
-						</div>
-					</div>
-				}
-				{hasUser ? <h3 className='indicators__title'>Main indicators</h3> : <br/>}
+				{hasFoundIndicators && <h3 className='indicators__title'>Main indicators</h3>}
 				<div className={classNames}>
 					{loading ? <Loader/> : <IndicatorsList indicators={indicators}/>}
 				</div>

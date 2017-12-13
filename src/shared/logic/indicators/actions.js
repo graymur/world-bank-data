@@ -10,4 +10,4 @@ export const setSearching = createAction('Indicators.setSearching', (value = tru
 export const setSearchError = createAction('Indicators.setSearchError', error => error);
 export const setFoundIndicators = createAction('Indicators.setFoundIndicators', indicators => indicators);
 
-export const addUserIndicator = createAction('Indicators.addUserIndicator', id => id);
+export const setSearchString = createAction('Indicators.setSearchString', searchString => searchString);

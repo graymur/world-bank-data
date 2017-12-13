@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import getMaxIndicatorYear from 'shared/utils/getMaxIndicatorYear';
+import {pure} from 'recompose';
 
 const IndicatorsList = ({indicators}) => {
 	return (
@@ -18,4 +19,4 @@ IndicatorsList.propTypes = {
 	indicators: PropTypes.array
 };
 
-export default IndicatorsList;
+export default pure(IndicatorsList);
