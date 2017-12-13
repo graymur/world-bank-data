@@ -16,17 +16,23 @@ export class Indicators extends React.Component {
 		userIndicators: PropTypes.array,
 		foundIndicators: PropTypes.array,
 		searching: PropTypes.bool,
-		searchIndicators: PropTypes.func
+		searchIndicators: PropTypes.func,
+		setFoundIndicators: PropTypes.func
 	};
 
 	static preload = () => [[loadIndicators]];
+
+	constructor(props) {
+		super(props);
+		this.clearSearchResults = this.props.setFoundIndicators.bind(null, undefined);
+	}
 
 	componentDidMount() {
 		loadIndicatorsIfNeeded(this.props, this.props.loadIndicators);
 	}
 
 	render() {
-		return <IndicatorsMain {...this.props}/>;
+		return <IndicatorsMain {...this.props} clearSearchResults={this.clearSearchResults}/>;
 	}
 }
 
