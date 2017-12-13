@@ -7,12 +7,14 @@ import ejs from 'ejs';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpack from 'webpack';
+import api from './api/1/index';
 import webpackConfig from '../../webpack/webpack.config.dev';
 import './ssr/stubAssetsRequires';
 
 const app = express();
 
 app.use('/node_modules', express.static(path.join(__dirname, '/../../node_modules')));
+app.use('/api/1/', api);
 
 const compiler = webpack(webpackConfig);
 
@@ -56,5 +58,5 @@ app.use(async (req, res) => {
 
 app.listen(config.port, () => {
 	console.log(`Listening at ${config.host}:${config.port}`);
-	opener(`http://${config.host}:${config.port}`);
+	// opener(`http://${config.host}:${config.port}`);
 });

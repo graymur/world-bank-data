@@ -25,13 +25,7 @@ const productionConfig = merge(
 			uglifyPlugin,
 			// bundleAnalyzerPlugin,
 			new webpack.optimize.ModuleConcatenationPlugin()
-		],
-		resolve: {
-			alias: {
-				// include only client dataSource to browser bundle
-				'shared/dataSource': 'client/dataSource'
-			}
-		}
+		]
 	}
 );
 
