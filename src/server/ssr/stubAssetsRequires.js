@@ -1,4 +1,4 @@
-import config from '../../../config/config';
+import config from 'config';
 
 const filenameToRelativeURL = (module, filename) => {
 	module.exports = filename

@@ -1,6 +1,6 @@
 import path from 'path';
 import webpack from 'webpack';
-import config from '../config/config';
+import config from '../src/config';
 import cssMqpacker from 'css-mqpacker';
 import autoprefixer from 'autoprefixer';
 

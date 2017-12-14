@@ -1,4 +1,4 @@
-import config from '../../config/config';
+import config from '../../src/config';
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 

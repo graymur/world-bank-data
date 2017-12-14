@@ -1,6 +1,6 @@
 import bundleAnalyzerPlugin from './util/bundleAnalyzerPlugin'; // eslint-disable-line
 import path from 'path';
-import config from '../config/config';
+import config from '../src/config';
 import merge from 'merge-deep';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';

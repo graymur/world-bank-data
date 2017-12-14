@@ -1,6 +1,6 @@
 import path from 'path';
 import webpack from 'webpack';
-import config from '../config/config';
+import config from '../src/config';
 import uglifyPlugin from './util/uglifyPlugin';
 import defaultLoaders from './util/defaultLoaders';
 

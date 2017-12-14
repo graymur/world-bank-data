@@ -1,4 +1,4 @@
-import config from '../../config/config';
+import config from 'config';
 import opener from 'opener';
 import express from 'express';
 import path from 'path';
