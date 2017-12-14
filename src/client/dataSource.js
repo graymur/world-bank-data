@@ -20,5 +20,5 @@ export default {
 		async (indicatorId, year) => request(`/indicators/${indicatorId}/year/${year}`),
 		(indicatorId, year) => `${indicatorId}-${year}`
 	),
-	searchIndicators: memoize(async (pattern) => request(`/search-indicators?pattern=${encodeURIComponent(pattern)}`))
+	searchIndicators: memoize(async (pattern) => request(`/indicators/search?pattern=${encodeURIComponent(pattern)}`))
 };

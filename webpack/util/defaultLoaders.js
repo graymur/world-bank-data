@@ -1,4 +1,4 @@
-import config from '../../config/config';
+import config from '../../src/config';
 
 export default [{
 	test: /\.jsx?$/,

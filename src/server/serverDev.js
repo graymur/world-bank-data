@@ -1,4 +1,4 @@
-import config from '../../config/config';
+import config from 'config';
 import opener from 'opener';
 import express from 'express';
 import path from 'path';
@@ -58,5 +58,5 @@ app.use(async (req, res) => {
 
 app.listen(config.port, () => {
 	console.log(`Listening at ${config.host}:${config.port}`);
-	opener(`http://${config.host}:${config.port}`);
+	// opener(`http://${config.host}:${config.port}`);
 });

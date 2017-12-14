@@ -1,6 +1,8 @@
 import withCache from 'server/api/1/util/withCache';
 import aggregatedRegionsISOCodes from 'shared/data/aggregatedRegionsISOCodes.json';
 import _ from 'lodash';
+import fetch from 'node-fetch';
+import {IndicatorModel} from 'server/api/1/models/Indicator';
 
 const urlBase = 'https://api.worldbank.org/v2';
 const defaultTTL = {days: 30};
@@ -44,7 +46,15 @@ export default {
 			.map(x => ({name: x.country.value, value: x.value}));
 	},
 	searchIndicators: async (pattern, limit = 10) => {
-		const result = await withCache(`${urlBase}/indicators?per_page=${limit}&format=json`, defaultTTL);
-		return result[1].sort((a, b) => a.name > b.name ? 1 : -1);
+		const result = await IndicatorModel.find({$text: {$search: pattern}});
+
+		return result
+			.map(x => x.data)
+			.sort((a, b) => a.name > b.name ? 1 : -1);
+	},
+	fetchIndicatorsFromWB: async (limit) => {
+		const response = await fetch(`${urlBase}/indicators?per_page=${limit}&format=json`);
+		const result = await response.json();
+		return result[1];
 	}
 };
