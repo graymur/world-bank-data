@@ -6,6 +6,7 @@ export function * searchIndicators({payload: pattern}) {
 	try {
 		yield put(actions.setSearching());
 		yield put(actions.setFoundIndicators(undefined));
+		yield put(actions.setSearchString(pattern));
 
 		if (pattern.length >= 3) {
 			const result = yield call(dataSource.searchIndicators, pattern);

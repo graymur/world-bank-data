@@ -25,6 +25,10 @@ export default [{
 	component: Indicators,
 	menuTitle: 'Indicators'
 }, {
+	path: '/indicators?search=:search',
+	exact: true,
+	component: Indicators
+}, {
 	path: '/indicators/:indicatorId',
 	exact: true,
 	component: Indicator
