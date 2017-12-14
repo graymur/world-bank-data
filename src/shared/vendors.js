@@ -16,3 +16,4 @@ require('history');
 require('react-addons-css-transition-group');
 require('recharts');
 require('react-helmet');
+require('query-string');

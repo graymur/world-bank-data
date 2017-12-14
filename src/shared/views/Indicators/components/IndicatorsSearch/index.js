@@ -9,7 +9,7 @@ export default class IndicatorsSearch extends React.Component {
 		searching: PropTypes.bool,
 		searchString: PropTypes.string,
 		foundIndicators: PropTypes.array,
-		searchIndicators: PropTypes.func,
+		initiateSearch: PropTypes.func,
 		clearSearchResults: PropTypes.func,
 		setSearchString: PropTypes.func
 	};
@@ -18,17 +18,14 @@ export default class IndicatorsSearch extends React.Component {
 		super(props);
 		this.hadleSearchInputChange = this.hadleSearchInputChange.bind(this);
 		this.hadleSearchButtonClick = this.hadleSearchButtonClick.bind(this);
-
-		// this.state = {searchValue: ''};
 	}
 
 	hadleSearchInputChange(event) {
 		this.props.setSearchString(event.target.value);
-		// this.setState({searchValue: event.target.value});
 	}
 
 	hadleSearchButtonClick() {
-		this.props.searchIndicators(this.props.searchString);
+		this.props.initiateSearch(this.props.searchString);
 	}
 
 	renderFoundList() {
