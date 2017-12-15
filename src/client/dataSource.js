@@ -8,7 +8,7 @@ const request = async endpoint => {
 };
 
 export default {
-	fetchCountries: memoize(async () => request('countries')),
+	fetchCountries: memoize(async () => request('/countries')),
 	fetchCountry: memoize(async (iso2Code) => request(`/countries/${iso2Code}`)),
 	fetchIndicators: memoize(async () => request('/indicators')),
 	fetchIndicator: memoize(async (indicatorId) => request(`/indicators/${indicatorId}`)),
