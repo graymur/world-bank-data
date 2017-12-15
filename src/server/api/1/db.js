@@ -1,7 +1,7 @@
 import config from 'config';
 import mongoose from 'mongoose';
 
-// mongoose.Promise = require('bluebird');
+mongoose.Promise = Promise;
 mongoose.connect(config.mongoUrl, {useMongoClient: true});
 const db = mongoose.connection;
 
