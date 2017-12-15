@@ -3,7 +3,7 @@ import memoize from 'lodash/memoize';
 const urlBase = '/api/1';
 
 const request = async endpoint => {
-	const response = await fetch(`${urlBase}/${endpoint}`);
+	const response = await fetch(`${urlBase}${endpoint}`);
 	return response.json();
 };
 
