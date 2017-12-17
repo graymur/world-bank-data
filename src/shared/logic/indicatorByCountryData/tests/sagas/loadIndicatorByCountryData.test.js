@@ -15,11 +15,7 @@ test('loadIndicator saga success', () => {
 	expect(callDataSource.CALL.args[0]).toBe('AA');
 	expect(callDataSource.CALL.args[1]).toBe('BB');
 
-	const putErrorFalse = gen.next({1:1}).value;
-	expect(putErrorFalse.PUT.action.type).toBe('IBCD.setIBCDLoadingError');
-	expect(putErrorFalse.PUT.action.payload).toBe(false);
-
-	const putSetIndicator = gen.next().value;
+	const putSetIndicator = gen.next({1:1}).value;
 	expect(putSetIndicator.PUT.action.type).toBe('IBCD.setIBCD');
 	expect(putSetIndicator.PUT.action.payload).toEqual({1:1});
 
@@ -41,7 +37,7 @@ test('loadIndicator saga error', () => {
 	expect(callDataSource.CALL.args[1]).toBe('BB');
 
 	const putErrorTrue = gen.next({error: true}).value;
-	expect(putErrorTrue.PUT.action.type).toBe('IBCD.setIBCDLoadingError');
+	expect(putErrorTrue.PUT.action.type).toBe('Shared.setError');
 	expect(putErrorTrue.PUT.action.error).toBe(true);
 
 	const putLoadingFalse = gen.next().value;

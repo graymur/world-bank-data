@@ -24,10 +24,6 @@ export default handleActions({
 		...state,
 		loading
 	}),
-	[actions.setIndicatorLoadingError]: (state, {payload: error}) => ({
-		...state,
-		error
-	}),
 	[actions.setIndicator]: (state, {payload: indicator}) => ({
 		...state,
 		indicator
@@ -44,10 +40,6 @@ export default handleActions({
 	[actions.setIndicatorDataLoading]: (state, {payload: dataLoading}) => ({
 		...state,
 		dataLoading
-	}),
-	[actions.setIndicatorDataLoadingError]: (state, {payload: dataError}) => ({
-		...state,
-		dataError
 	}),
 	[actions.setIndicatorData]: (state, {payload: data}) => ({
 		...state,

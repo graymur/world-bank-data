@@ -13,11 +13,7 @@ test('loadIndicators saga success', () => {
 	const callDataSource = gen.next().value;
 	expect(callDataSource.CALL.fn).toBe(dataSource.fetchIndicators);
 
-	const putErrorFalse = gen.next([1, 2]).value;
-	expect(putErrorFalse.PUT.action.type).toBe('Indicators.setIndicatorsLoadingError');
-	expect(putErrorFalse.PUT.action.payload).toBe(false);
-
-	const putSetIndicators = gen.next().value;
+	const putSetIndicators = gen.next([1, 2]).value;
 	expect(putSetIndicators.PUT.action.type).toBe('Indicators.setIndicators');
 	expect(putSetIndicators.PUT.action.payload).toEqual([1, 2]);
 
@@ -37,7 +33,7 @@ test('loadIndicators saga error', () => {
 	expect(callDataSource.CALL.fn).toBe(dataSource.fetchIndicators);
 
 	const putErrorTrue = gen.next({error: true}).value;
-	expect(putErrorTrue.PUT.action.type).toBe('Indicators.setIndicatorsLoadingError');
+	expect(putErrorTrue.PUT.action.type).toBe('Shared.setError');
 	expect(putErrorTrue.PUT.action.error).toBe(true);
 
 	const putLoadingFalse = gen.next().value;

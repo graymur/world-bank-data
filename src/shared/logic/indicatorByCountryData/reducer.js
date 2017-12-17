@@ -18,10 +18,6 @@ export default handleActions({
 		...state,
 		loading
 	}),
-	[actions.setIndicatorByCountryDataLoadingError]: (state, {payload: error}) => ({
-		...state,
-		error
-	}),
 	[actions.setIndicatorByCountryData]: (state, {payload: data}) => ({
 		...state,
 		data

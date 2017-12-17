@@ -18,10 +18,6 @@ export default handleActions({
 		...state,
 		loading
 	}),
-	[actions.setIndicatorsLoadingError]: (state, {payload: error}) => ({
-		...state,
-		error
-	}),
 	[actions.setIndicators]: (state, {payload: indicators}) => ({
 		...state,
 		indicators
@@ -29,10 +25,6 @@ export default handleActions({
 	[actions.setSearching]: (state, {payload: searching}) => ({
 		...state,
 		searching
-	}),
-	[actions.setSearchError]: (state, {payload: searchError}) => ({
-		...state,
-		searchError
 	}),
 	[actions.setFoundIndicators]: (state, {payload: foundIndicators}) => ({
 		...state,

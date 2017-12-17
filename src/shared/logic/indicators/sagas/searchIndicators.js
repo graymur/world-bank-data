@@ -1,5 +1,6 @@
 import {call, put, takeLatest} from 'redux-saga/effects';
 import * as actions from 'shared/logic/indicators/actions';
+import {setError} from 'shared/logic/shared/actions';
 import dataSource from 'shared/dataSource';
 
 export function * searchIndicators({payload: pattern}) {
@@ -15,11 +16,10 @@ export function * searchIndicators({payload: pattern}) {
 				throw new Error(result.error);
 			}
 
-			yield put(actions.setSearchError(false));
 			yield put(actions.setFoundIndicators(result));
 		}
 	} catch (e) {
-		yield put(actions.setSearchError(e));
+		yield put(setError(e));
 	} finally {
 		yield put(actions.setSearching(false));
 	}

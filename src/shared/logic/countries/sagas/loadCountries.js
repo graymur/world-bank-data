@@ -1,5 +1,6 @@
 import {call, put, takeLatest} from 'redux-saga/effects';
 import * as actions from '../actions.js';
+import {setError} from 'shared/logic/shared/actions';
 import dataSource from 'shared/dataSource';
 
 export function * loadCountries() {
@@ -12,10 +13,9 @@ export function * loadCountries() {
 			throw new Error(result.error);
 		}
 
-		yield put(actions.setCountriesLoadingError(false));
 		yield put(actions.setCountries(result));
 	} catch (e) {
-		yield put(actions.setCountriesLoadingError(e));
+		yield put(setError(e));
 	} finally {
 		yield put(actions.setCountriesLoading(false));
 	}

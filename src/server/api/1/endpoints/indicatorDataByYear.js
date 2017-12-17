@@ -1,5 +1,9 @@
 import dataSource from 'server/dataSource';
 
 export default async (req, res) => {
-	return res.json(await dataSource.fetchIndicatorDataByYear(req.params.indicatorId, req.params.year));
+	try {
+		return res.json(await dataSource.fetchIndicatorDataByYear(req.params.indicatorId, req.params.year));
+	} catch (e) {
+		return res.status(500).send({error: e.message});
+	}
 };
