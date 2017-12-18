@@ -17,11 +17,6 @@ test('setIndicatorByCountryDataLoading', () => {
 		.toEqual({type: 'IBCD.setIBCDLoading', payload: true});
 });
 
-test('setIndicatorByCountryDataLoadingError', () => {
-	expect(actions.setIndicatorByCountryDataLoadingError('Error'))
-		.toEqual({type: 'IBCD.setIBCDLoadingError', payload: 'Error'});
-});
-
 test('setIndicatorByCountryData', () => {
 	expect(actions.setIndicatorByCountryData({1: 1})).toEqual({type: 'IBCD.setIBCD', payload: {1: 1}});
 });

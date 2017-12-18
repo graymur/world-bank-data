@@ -18,10 +18,6 @@ export default handleActions({
 		...state,
 		loading
 	}),
-	[actions.setCountryLoadingError]: (state, {payload: error}) => ({
-		...state,
-		error
-	}),
 	[actions.setCountry]: (state, {payload: country}) => ({
 		...state,
 		country

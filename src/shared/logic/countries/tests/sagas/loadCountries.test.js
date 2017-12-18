@@ -13,11 +13,7 @@ test('loadCountries saga success', () => {
 	const callDataSource = gen.next().value;
 	expect(callDataSource.CALL.fn).toBe(dataSource.fetchCountries);
 
-	const putErrorFalse = gen.next([1, 2]).value;
-	expect(putErrorFalse.PUT.action.type).toBe('Countries.setCountriesLoadingError');
-	expect(putErrorFalse.PUT.action.payload).toBe(false);
-
-	const putSetCountries = gen.next().value;
+	const putSetCountries = gen.next([1, 2]).value;
 	expect(putSetCountries.PUT.action.type).toBe('Countries.setCountries');
 	expect(putSetCountries.PUT.action.payload).toEqual([1, 2]);
 
@@ -37,7 +33,7 @@ test('loadCountries saga error', () => {
 	expect(callDataSource.CALL.fn).toBe(dataSource.fetchCountries);
 
 	const putErrorTrue = gen.next({error: true}).value;
-	expect(putErrorTrue.PUT.action.type).toBe('Countries.setCountriesLoadingError');
+	expect(putErrorTrue.PUT.action.type).toBe('Shared.setError');
 	expect(putErrorTrue.PUT.action.error).toBe(true);
 
 	const putLoadingFalse = gen.next().value;

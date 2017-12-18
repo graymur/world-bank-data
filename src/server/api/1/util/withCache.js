@@ -9,6 +9,11 @@ export default async (url, ttl = {days: 1}) => {
 		return cached.result;
 	} else {
 		const response = await fetch(url);
+
+		if (response.status !== 200) {
+			throw new Error(`Response failed: ${response.status} ${response.statusText}`);
+		}
+
 		const result = await response.json();
 
 		await RequestCacheModel.remove({url});

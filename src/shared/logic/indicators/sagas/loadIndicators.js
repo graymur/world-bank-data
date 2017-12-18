@@ -1,5 +1,6 @@
 import {call, put, takeLatest} from 'redux-saga/effects';
 import * as actions from 'shared/logic/indicators/actions';
+import {setError} from 'shared/logic/shared/actions';
 import dataSource from 'shared/dataSource';
 
 export function * loadIndicators() {
@@ -12,10 +13,10 @@ export function * loadIndicators() {
 			throw new Error(result.error);
 		}
 
-		yield put(actions.setIndicatorsLoadingError(false));
 		yield put(actions.setIndicators(result));
 	} catch (e) {
-		yield put(actions.setIndicatorsLoadingError(e));
+		console.log(e.message);
+		yield put(setError(e));
 	} finally {
 		yield put(actions.setIndicatorsLoading(false));
 	}

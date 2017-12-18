@@ -16,14 +16,6 @@ test('setCountryLoading', () => {
 	expect(state.loading).toBe(true);
 });
 
-
-test('setCountryLoadingError', () => {
-	const state = reducer(initialState, actions.setCountryLoadingError('Some error'));
-	expect(state.country).toEqual(initialState.country);
-	expect(state.error).toEqual('Some error');
-	expect(state.loading).toBe(initialState.loading);
-});
-
 test('setCountry', () => {
 	const state = reducer(initialState, actions.setCountry({1:1}));
 	expect(state.country).toEqual({1:1});

@@ -27,7 +27,16 @@ export default {
 	},
 	fetchIndicator: async (id) => {
 		const result = await withCache(`${urlBase}/indicators/${id}?format=json`, defaultTTL);
-		return result[1][0];
+
+		/**
+		 * World bank's API wont' return anything for an indicator it returns in indicators list request
+		 * (example: "per_lm_pa_p1_rur") - show appropriate error message
+		 */
+		try {
+			return result[1][0];
+		} catch (e) {
+			throw new Error('There is something wrong with this indicator');
+		}
 	},
 	fetchIndicatorByCountryData: async (iso2Code, indicatorId) => {
 		const result = await withCache(`${urlBase}/countries/${iso2Code}/indicators/${indicatorId}?format=json`, defaultTTL);

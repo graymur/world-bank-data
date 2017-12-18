@@ -16,10 +16,6 @@ test('setIndicatorLoading', () => {
 	expect(actions.setIndicatorLoading(true)).toEqual({type: 'Indicator.setIndicatorLoading', payload: true});
 });
 
-test('setIndicatorLoadingError', () => {
-	expect(actions.setIndicatorLoadingError('Error')).toEqual({type: 'Indicator.setIndicatorLoadingError', payload: 'Error'});
-});
-
 test('setIndicator', () => {
 	expect(actions.setIndicator({1: 1})).toEqual({type: 'Indicator.setIndicator', payload: {1: 1}});
 });
