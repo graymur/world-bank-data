@@ -1,5 +1,5 @@
 import config from 'config';
-import opener from 'opener';
+// import opener from 'opener'; // eslint-disable-line
 import express from 'express';
 import path from 'path';
 import fs from 'fs';
@@ -46,7 +46,9 @@ app.use(async (req, res) => {
 		});
 
 		if (process.env.SSR) {
-			html = await require('./ssr').default(req, html);
+			const {content, status} = await require('./ssr').default(req, html);
+			html = content;
+			res.status(status);
 		}
 
 		res.send(html);

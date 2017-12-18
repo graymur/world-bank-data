@@ -21,7 +21,7 @@ const dllConfig = {
 		new webpack.DllPlugin({
 			path: path.join(config.dllDir, `[name]-${process.env.NODE_ENV}-manifest.json`),
 			name: '[name]',
-			context: config.sharedDir
+			context: config.sourceDir
 		}),
 		new webpack.DefinePlugin({
 			'process.env': {

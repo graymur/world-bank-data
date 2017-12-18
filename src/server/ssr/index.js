@@ -9,6 +9,7 @@ import routes from 'shared/routes';
 import createStore, {sagaMiddleware} from 'shared/redux/createStore';
 import renderRoute from 'shared/utils/renderRoute';
 import getSagasForURL from './getSagasForURL';
+import getStatusForURL from './getStatusForURL';
 import runSagas from './runSagas';
 import Layout from 'shared/layouts/default';
 
@@ -28,6 +29,7 @@ export default async (req, template) => {
 	const history = createMemoryHistory({initialEntries: [url]});
 	const store = createStore({}, history);
 
+	const status = getStatusForURL(routes, url);
 	const sagas = getSagasForURL(routes, url);
 
 	if (sagas.length) {
@@ -51,10 +53,11 @@ export default async (req, template) => {
 	);
 
 	const helmet = Helmet.renderStatic();
+	let content = template;
 
-	template = template.replace('<div id="react-root"></div>', `<div id="react-root">${renderedContent}</div>`);
-	template = template.replace('window.__INITIAL_STATE__ = {}', `window.__INITIAL_STATE__ = ${JSON.stringify(store.getState())}`);
-	template = template.replace('<title></title>', helmet.title.toString());
+	content = content.replace('<div id="react-root"></div>', `<div id="react-root">${renderedContent}</div>`);
+	content = content.replace('window.__INITIAL_STATE__ = {}', `window.__INITIAL_STATE__ = ${JSON.stringify(store.getState())}`);
+	content = content.replace('<title></title>', helmet.title.toString());
 
-	return template;
+	return {content, status};
 };
