@@ -1,5 +1,5 @@
 import config from 'config';
-import opener from 'opener';
+// import opener from 'opener'; // eslint-disable-line
 import express from 'express';
 import path from 'path';
 import fs from 'fs';
