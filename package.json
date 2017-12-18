@@ -12,7 +12,7 @@
     "dev": "better-npm-run dev",
     "dev:ssr": "better-npm-run dev:ssr",
     "devmon": "nodemon --ignore ./src/shared --ignore ./src/client --exec better-npm-run dev:ssr",
-    "build": "npm run dll:prod && better-npm-run build",
+    "build": "npm run dll && better-npm-run build",
     "dll:dev": "better-npm-run dll:dev",
     "dll:prod": "better-npm-run dll:prod",
     "dll": "npm run dll:dev && npm run dll:prod",

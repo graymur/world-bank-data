@@ -18,7 +18,9 @@ app.use('*', async (req, res) => {
 	let html = htmlTemplate;
 
 	if (process.env.SSR && req.originalUrl !== '/favicon.ico') {
-		html = await require('./ssr').default(req, html);
+		const {content, status} = await require('./ssr').default(req, html);
+		html = content;
+		res.status(status);
 	}
 
 	res.send(html);

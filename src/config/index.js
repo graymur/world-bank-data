@@ -10,7 +10,7 @@ export default {
 	sharedDir: path.resolve(path.join(basePath, 'shared')),
 	sourceDir: basePath,
 	buildDir: path.resolve(path.join(basePath, '/../build')),
-	dllDir: path.join(path.resolve(path.join(__dirname, '/../node_modules')), '_dll'),
+	dllDir: path.resolve(path.join(__dirname, '/../../node_modules/_dll')),
 	dllFileName: 'vendors.js',
 	port: process.env.PORT || 3000,
 	host: 'localhost',

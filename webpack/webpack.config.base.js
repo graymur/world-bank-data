@@ -18,7 +18,7 @@ export default {
 	},
 	plugins: [
 		new webpack.DllReferencePlugin({
-			context: config.sharedDir,
+			context: config.sourceDir,
 			manifest: require(path.join(config.dllDir,
 				`vendors-${process.env.NODE_ENV === 'development' ? 'development' : 'production'}-manifest.json`))
 		}),

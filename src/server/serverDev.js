@@ -46,7 +46,9 @@ app.use(async (req, res) => {
 		});
 
 		if (process.env.SSR) {
-			html = await require('./ssr').default(req, html);
+			const {content, status} = await require('./ssr').default(req, html);
+			html = content;
+			res.status(status);
 		}
 
 		res.send(html);
