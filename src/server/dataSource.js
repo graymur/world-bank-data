@@ -17,7 +17,12 @@ export default {
 	},
 	fetchCountry: async (id) => {
 		const result = await withCache(`${urlBase}/countries/${id}?format=json`, defaultTTL);
-		return result[1][0];
+
+		try {
+			return result[1][0];
+		} catch (e) {
+			throw new Error('Country not found');
+		}
 	},
 	fetchIndicators: async () => {
 		const indicators = require('shared/data/mainIndicators.json')
