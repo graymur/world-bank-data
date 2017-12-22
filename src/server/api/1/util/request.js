@@ -7,7 +7,9 @@ export default async (url, params) => {
 	const response = await fetch(url, params);
 
 	if (response.status !== 200) {
-		throw new Error(`Response failed: ${response.status} ${response.statusText}`);
+		const e = new Error(`Response failed: ${response.status} ${response.statusText}`);
+		e.status = response.status;
+		throw e;
 	}
 
 	const result = await response.json();
