@@ -1,8 +1,8 @@
-import {RequestCacheModel} from '../models/RequestCache';
+// import {RequestCacheModel} from '../models/RequestCache';
 import {DateTime, Duration} from 'luxon';
 import request from './request';
 
-export default async (url, ttl = {days: 1}) => {
+export default RequestCacheModel => async (url, ttl = {days: 1}) => {
 	const cached = await RequestCacheModel.findOne({url, expiresAt: {$gt: new Date()}});
 
 	if (cached) {
