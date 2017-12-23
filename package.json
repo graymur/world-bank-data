@@ -4,7 +4,7 @@
   "description": "world-bank-data",
   "main": "./src/server/serverProd.js",
   "scripts": {
-    "lint": "eslint src/client/**/*.js src/shared/**/*.js webpack/**/*.js --ignore-pattern *.test.js",
+    "lint": "eslint src/**/*.js webpack/**/*.js --ignore-pattern *.test.js",
     "test": "better-npm-run test",
     "test:watch": "npm run test -- --watch",
     "start": "better-npm-run start",
