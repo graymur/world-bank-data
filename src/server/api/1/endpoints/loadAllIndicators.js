@@ -1,7 +1,9 @@
 import config from 'config';
+import dataSource from 'server/dataSource';
+import {IndicatorModel} from 'server/api/1/models/Indicator';
 import Promise from 'bluebird';
 
-export default (dataSource, IndicatorModel) => async (req, res) => {
+export default async (req, res) => {
 	if (req.query.token !== config.securityToken) {
 		return res.status(401).send('Wrong Token');
 	}
