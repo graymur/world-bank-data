@@ -16,17 +16,17 @@ jest.mock('server/dataSource', () => {
 
 import dataSource from 'server/dataSource';
 
-jest.mock('../../models/Indicator', () => {
+jest.mock('server/api/1/models/Indicator', () => {
 	const IndicatorModel = jest.fn();
 
 	IndicatorModel.prototype.save = jest.fn();
-	IndicatorModel.prototype.save.mockReturnValue(Promise.resolve(true));
+	IndicatorModel.prototype.save.mockReturnValue(Promise.resolve(1));
 	IndicatorModel.remove = jest.fn();
 
 	return {IndicatorModel};
 });
 
-import {IndicatorModel} from '../../models/Indicator';
+import {IndicatorModel} from 'server/api/1/models/Indicator';
 
 test('Returns results of dataSource.fetchIndicator call', async () => {
 	const response = httpMocks.createResponse();
@@ -37,6 +37,8 @@ test('Returns results of dataSource.fetchIndicator call', async () => {
 		}
 	}, response);
 
+	expect(response.statusCode).toBe(200);
+	expect(response._getData()).toBe('{"inserted":3}');
 
 	expect(dataSource.fetchIndicatorsFromWB.mock.calls.length).toBe(1);
 
