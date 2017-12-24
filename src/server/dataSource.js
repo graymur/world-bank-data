@@ -3,21 +3,29 @@ import aggregatedRegionsISOCodes from 'shared/data/aggregatedRegionsISOCodes.jso
 import _ from 'lodash';
 import fetch from 'node-fetch';
 import {IndicatorModel} from 'server/api/1/models/Indicator';
+import {RequestCacheModel} from 'server/api/1/models/RequestCache';
+
+const wCache = withCache(RequestCacheModel);
 
 const urlBase = 'https://api.worldbank.org/v2';
 const defaultTTL = {days: 30};
 
 export default {
 	fetchCountries: async (limit = 1000) => {
-		const result = await withCache(`${urlBase}/countries?per_page=${limit}&format=json`, defaultTTL);
+		const result = await wCache(`${urlBase}/countries?per_page=${limit}&format=json`, defaultTTL);
 		return result[1]
 			.filter(x => x.region.iso2code !== 'NA')
 			.map(x => _.pick(x, ['iso2Code', 'name']))
 			.sort((a, b) => a.name > b.name ? 1 : -1);
 	},
 	fetchCountry: async (id) => {
-		const result = await withCache(`${urlBase}/countries/${id}?format=json`, defaultTTL);
-		return result[1][0];
+		const result = await wCache(`${urlBase}/countries/${id}?format=json`, defaultTTL);
+
+		try {
+			return result[1][0];
+		} catch (e) {
+			throw new Error('Country not found');
+		}
 	},
 	fetchIndicators: async () => {
 		const indicators = require('shared/data/mainIndicators.json')
@@ -26,7 +34,7 @@ export default {
 		return Promise.resolve(indicators);
 	},
 	fetchIndicator: async (id) => {
-		const result = await withCache(`${urlBase}/indicators/${id}?format=json`, defaultTTL);
+		const result = await wCache(`${urlBase}/indicators/${id}?format=json`, defaultTTL);
 
 		/**
 		 * World bank's API wont' return anything for an indicator it returns in indicators list request
@@ -39,11 +47,11 @@ export default {
 		}
 	},
 	fetchIndicatorByCountryData: async (iso2Code, indicatorId) => {
-		const result = await withCache(`${urlBase}/countries/${iso2Code}/indicators/${indicatorId}?format=json`, defaultTTL);
+		const result = await wCache(`${urlBase}/countries/${iso2Code}/indicators/${indicatorId}?format=json`, defaultTTL);
 		return (result[1] || []).map(x => ({date: x.date, value: x.value}));
 	},
 	fetchIndicatorDataByYear: async (indicatorId, year) => {
-		const result = await withCache(
+		const result = await wCache(
 			`${urlBase}/countries/all/indicators/${indicatorId}?date=${year}:${year}&per_page=1000&format=json`,
 			defaultTTL
 		);

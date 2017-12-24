@@ -1,9 +1,8 @@
 import dataSource from 'server/dataSource';
+import wrapWithErrorHandling from '../util/wrapWithErrorHandling';
 
-export default async (req, res) => {
-	try {
-		return res.json(await dataSource.fetchIndicator(req.params.indicatorId));
-	} catch (e) {
-		return res.status(500).send({error: e.message});
-	}
-};
+const err404Message = 'Indicator not found';
+
+export default wrapWithErrorHandling(async (req, res) => {
+	return res.json(await dataSource.fetchIndicator(req.params.indicatorId));
+}, {err404Message});

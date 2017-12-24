@@ -1,8 +1,7 @@
+import './db'; // eslint-disable-line
 import express from 'express';
 
 const router = express.Router();
-
-import './db'; // eslint-disable-line
 
 router.get('/countries', require('./endpoints/countries').default);
 router.get('/countries/:iso2Code', require('./endpoints/country').default);

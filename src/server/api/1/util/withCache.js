@@ -1,20 +1,14 @@
-import {RequestCacheModel} from '../models/RequestCache';
-import fetch from 'node-fetch';
+// import {RequestCacheModel} from '../models/RequestCache';
 import {DateTime, Duration} from 'luxon';
+import request from './request';
 
-export default async (url, ttl = {days: 1}) => {
+export default RequestCacheModel => async (url, ttl = {days: 1}) => {
 	const cached = await RequestCacheModel.findOne({url, expiresAt: {$gt: new Date()}});
 
 	if (cached) {
 		return cached.result;
 	} else {
-		const response = await fetch(url);
-
-		if (response.status !== 200) {
-			throw new Error(`Response failed: ${response.status} ${response.statusText}`);
-		}
-
-		const result = await response.json();
+		const result = await request(url);
 
 		await RequestCacheModel.remove({url});
 

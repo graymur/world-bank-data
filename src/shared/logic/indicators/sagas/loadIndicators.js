@@ -15,7 +15,6 @@ export function * loadIndicators() {
 
 		yield put(actions.setIndicators(result));
 	} catch (e) {
-		console.log(e.message);
 		yield put(setError(e));
 	} finally {
 		yield put(actions.setIndicatorsLoading(false));
