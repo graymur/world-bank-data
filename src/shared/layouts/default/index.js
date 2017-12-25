@@ -9,7 +9,7 @@ import Header from './components/Header';
 import ErrorComponent from './components/ErrorComponent';
 import './default.scss';
 
-class Layout extends React.Component {
+export class Layout extends React.Component {
 	static propTypes = {
 		setError: PropTypes.func,
 		children: PropTypes.node,

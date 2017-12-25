@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders children in wrapper 1`] = `
+<div
+  className="wb-modal"
+>
+  <div
+    className="wb-modal__content"
+  >
+    <h1>
+      content
+    </h1>
+  </div>
+</div>
+`;
