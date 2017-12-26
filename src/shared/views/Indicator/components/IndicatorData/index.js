@@ -11,17 +11,6 @@ export class IndicatorData extends React.Component {
 		data: PropTypes.array
 	};
 
-	constructor(props) {
-		super(props);
-		this.scrolled = false;
-	}
-
-	componentWillReceiveProps(newProps) {
-		if (newProps.data !== this.props.data) {
-			this.scrolled = false;
-		}
-	}
-
 	renderData() {
 		const {data} = this.props;
 
@@ -38,15 +27,6 @@ export class IndicatorData extends React.Component {
 		}
 
 		const height = data.length * 3;
-
-		// if (typeof window !== 'undefined' && !this.scrolled) {
-		// 	setTimeout(() => {
-		// 		const elem = document.getElementById('chart');
-		// 		window.scrollTo(0, elem.offsetTop);
-		// 	}, 100);
-		//
-		// 	this.scrolled = true;
-		// }
 
 		return (
 			<div id='chart' className='indicator__data__chart' style={{height: `${height}rem`}}>
