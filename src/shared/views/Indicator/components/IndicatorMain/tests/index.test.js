@@ -24,18 +24,14 @@ const props = {
 test('Renders preloader', () => {
 	const thisProps = Object.assign({}, props);
 	thisProps.loading = true;
-	const component = renderer.create(
-		<IndicatorMain {...thisProps}/>
-	);
+	const component = renderer.create(<IndicatorMain {...thisProps}/>);
 
 	let tree = component.toJSON();
 	expect(tree).toMatchSnapshot();
 });
 
 test('Renders indicator info', () => {
-	const component = renderer.create(
-		<IndicatorMain {...props}/>
-	);
+	const component = renderer.create(<IndicatorMain {...props}/>);
 
 	let tree = component.toJSON();
 	expect(tree).toMatchSnapshot();
