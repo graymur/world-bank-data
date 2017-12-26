@@ -1,11 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Calls loadIndicator prop if indicator is not set 1`] = `
-<div
-  className="indicator"
-/>
-`;
-
 exports[`Renders indicator info 1`] = `
 <div
   className="indicator"
@@ -28,7 +22,8 @@ exports[`Renders indicator info 1`] = `
     >
       <select
         className="styled-select"
-        defaultValue=""
+        defaultValue={2000}
+        id="year"
         onChange={[Function]}
       >
         <option
@@ -53,5 +48,23 @@ exports[`Renders indicator info 1`] = `
       className="indicator__data"
     />
   </div>
+</div>
+`;
+
+exports[`Renders preloader 1`] = `
+<div
+  className="indicator loading"
+>
+  <span
+    className="loader"
+    style={
+      Object {
+        "border": "10px solid #f3f3f3",
+        "borderTop": "10px solid #3498db",
+        "height": "50px",
+        "width": "50px",
+      }
+    }
+  />
 </div>
 `;

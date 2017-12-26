@@ -7,7 +7,7 @@ import IndicatorData from '../IndicatorData';
 import classnames from 'classnames';
 import './indicator.scss';
 
-export class Indicator extends React.Component {
+export default class IndicatorMain extends React.Component {
 	static propTypes = {
 		loading: PropTypes.bool,
 		dataLoading: PropTypes.bool,
@@ -23,12 +23,12 @@ export class Indicator extends React.Component {
 		this.handleYearChange = this.handleYearChange.bind(this);
 	}
 
-	handleYearClick(year) {
-		return (event) => {
-			event.preventDefault();
-			this.props.loadIndicatorData(this.props.indicator.id, year);
-		};
-	};
+	// handleYearClick(year) {
+	// 	return (event) => {
+	// 		event.preventDefault();
+	// 		this.props.loadIndicatorData(this.props.indicator.id, year);
+	// 	};
+	// };
 
 	handleYearChange(event) {
 		if (event.target.value) {
@@ -55,7 +55,7 @@ export class Indicator extends React.Component {
 				<p>{indicator.sourceNote}</p>
 				{indicator.sourceOrganization && <p>Source: {indicator.sourceOrganization}</p>}
 				<div className='indicator__years'>
-					<select className='styled-select' onChange={this.handleYearChange} defaultValue={defaultSelectValue}>
+					<select id='year' className='styled-select' onChange={this.handleYearChange} defaultValue={defaultSelectValue}>
 						<option value='' hidden>Select year</option>
 						{years.map(year => (
 							<option key={year} data-year={year}>{year}</option>
@@ -78,5 +78,3 @@ export class Indicator extends React.Component {
 		);
 	}
 }
-
-export default Indicator;
