@@ -10,15 +10,21 @@ export const initialState = {
 	currentYear: undefined,
 	data: undefined,
 	dataLoading: false,
-	dataError: undefined
+	dataError: undefined,
+	suggestData: {}
 };
 
 export default handleActions({
+	'@@router/LOCATION_CHANGE': (state) => ({
+		...state,
+		suggestData: {}
+	}),
 	[actions.loadIndicator]: state => ({
 		...state,
 		indicator: undefined,
 		data: undefined,
-		currentYear: undefined
+		currentYear: undefined,
+		suggestData: {}
 	}),
 	[actions.setIndicatorLoading]: (state, {payload: loading}) => ({
 		...state,
@@ -44,5 +50,9 @@ export default handleActions({
 	[actions.setIndicatorData]: (state, {payload: data}) => ({
 		...state,
 		data
+	}),
+	[actions.setSuggestIndicatorData]: (state, {payload: {year, data}}) => ({
+		...state,
+		suggestData: Object.assign({}, state.suggestData, data.length && {[year]: data})
 	})
 }, initialState);

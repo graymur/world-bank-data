@@ -27,3 +27,8 @@ export const selectIndicatorData = createSelector(
 	selectState,
 	main => main.data
 );
+
+export const suggestData = createSelector(
+	selectState,
+	main => main.suggestData
+);

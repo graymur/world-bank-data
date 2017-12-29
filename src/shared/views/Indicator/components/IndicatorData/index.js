@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import Loader from 'shared/components/Loader';
 import {ResponsiveContainer, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Bar} from 'recharts';
 import classnames from 'classnames';
-import './indicatorData.scss';
+import './indicator-data.scss';
 
-export class IndicatorData extends React.Component {
+export class IndicatorData extends React.PureComponent {
 	static propTypes = {
 		loading: PropTypes.bool,
 		data: PropTypes.array
