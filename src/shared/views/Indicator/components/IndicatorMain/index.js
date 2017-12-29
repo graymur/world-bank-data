@@ -4,6 +4,7 @@ import Helmet from 'react-helmet';
 import getPageTitle from 'shared/utils/getPageTitle';
 import Loader from 'shared/components/Loader';
 import IndicatorData from '../IndicatorData';
+import SuggestData from '../SuggestData';
 import classnames from 'classnames';
 import './indicator.scss';
 
@@ -14,6 +15,7 @@ export default class IndicatorMain extends React.Component {
 		years: PropTypes.array,
 		indicator: PropTypes.object,
 		data: PropTypes.array,
+		suggestData: PropTypes.object,
 		loadIndicatorData: PropTypes.func,
 		currentYear: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
 	};
@@ -42,7 +44,7 @@ export default class IndicatorMain extends React.Component {
 		const defaultSelectValue = isNaN(Number(currentYear)) ? '' : Number(currentYear);
 		return (
 			<div className='indicator__years'>
-				<select id='year' className='styled-select' onChange={this.handleYearChange} defaultValue={defaultSelectValue}>
+				<select key={currentYear} id='year' className='styled-select' onChange={this.handleYearChange} defaultValue={defaultSelectValue}>
 					<option value='' hidden>Select year</option>
 					{years.map(year => (
 						<option key={year} data-year={year}>{year}</option>
@@ -53,7 +55,7 @@ export default class IndicatorMain extends React.Component {
 	}
 
 	renderIndicator() {
-		const {indicator, currentYear, data, dataLoading} = this.props;
+		const {indicator, currentYear, data, dataLoading, suggestData} = this.props;
 
 		if (!indicator) {
 			return null;
@@ -69,6 +71,7 @@ export default class IndicatorMain extends React.Component {
 				{indicator.sourceOrganization && <p>Source: {indicator.sourceOrganization}</p>}
 				{this.rendersYears()}
 				<IndicatorData loading={dataLoading} data={data}/>
+				<SuggestData indicatorId={indicator.id} suggestData={suggestData}/>
 			</div>
 		);
 	}

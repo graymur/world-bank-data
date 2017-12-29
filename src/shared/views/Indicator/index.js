@@ -24,6 +24,7 @@ export class Indicator extends React.Component {
 		data: PropTypes.array,
 		loadIndicator: PropTypes.func,
 		loadIndicatorData: PropTypes.func,
+		suggestData: PropTypes.object,
 		history: PropTypes.shape({
 			push: PropTypes.func.isRequired,
 			location: PropTypes.object
@@ -65,7 +66,8 @@ const mapStateToProps = createStructuredSelector({
 	indicator: selectors.selectIndicator,
 	currentYear: selectors.selectCurrentYear,
 	data: selectors.selectIndicatorData,
-	dataLoading: selectors.selectIndicatorDataLoading
+	dataLoading: selectors.selectIndicatorDataLoading,
+	suggestData: selectors.suggestData
 });
 
 export default connect(mapStateToProps, actions)(withRouter(Indicator));

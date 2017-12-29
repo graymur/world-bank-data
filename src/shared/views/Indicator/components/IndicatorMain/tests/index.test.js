@@ -9,16 +9,17 @@ configure({adapter: new Adapter()});
 
 const props = {
 	match: {
-		params: {indicatorId: 1}
+		params: {indicatorId: '1'}
 	},
 	indicator: {
-		id: 1,
+		id: '1',
 		name: 'Indicator name',
 		sourceNote: 'Source note',
 		sourceOrganization: 'Source organization',
 	},
 	currentYear: 2000,
-	years: [2000, 2001]
+	years: [2000, 2001],
+	suggestData: {}
 };
 
 test('Renders preloader', () => {
@@ -44,6 +45,6 @@ test('Handles year change', () => {
 	component.find('#year').simulate('change', {target: {value: 2000}});
 
 	expect(loadIndicatorData.mock.calls.length).toBe(1);
-	expect(loadIndicatorData.mock.calls[0][0]).toBe(1);
+	expect(loadIndicatorData.mock.calls[0][0]).toBe('1');
 	expect(loadIndicatorData.mock.calls[0][1]).toBe(2000);
 });

@@ -10,39 +10,67 @@ export const initialState = {
 	currentYear: undefined,
 	data: undefined,
 	dataLoading: false,
-	dataError: undefined
+	dataError: undefined,
+	suggestData: {}
 };
 
+const loadIndicator = state => ({
+	...state,
+	indicator: undefined,
+	data: undefined,
+	currentYear: undefined,
+	suggestData: {}
+});
+
+const setIndicatorLoading = (state, {payload: loading}) => ({
+	...state,
+	loading
+});
+
+const setIndicator = (state, {payload: indicator}) => ({
+	...state,
+	indicator
+});
+
+const loadIndicatorData = (state, {payload: {year: currentYear}}) => ({
+	...state,
+	data: undefined,
+	currentYear
+});
+
+const setCurrentYear = (state, {payload: currentYear}) => ({
+	...state,
+	currentYear
+});
+
+const setIndicatorDataLoading = (state, {payload: dataLoading}) => ({
+	...state,
+	dataLoading
+});
+
+const setIndicatorData = (state, {payload: data}) => ({
+	...state,
+	data
+});
+
+const setSuggestIndicatorData = (state, {payload: {year, data}}) => ({
+	...state,
+	suggestData: Object.assign({}, state.suggestData, data.length && {[year]: data})
+});
+
+const locationChange = (state) => ({
+	...state,
+	suggestData: {}
+});
+
 export default handleActions({
-	[actions.loadIndicator]: state => ({
-		...state,
-		indicator: undefined,
-		data: undefined,
-		currentYear: undefined
-	}),
-	[actions.setIndicatorLoading]: (state, {payload: loading}) => ({
-		...state,
-		loading
-	}),
-	[actions.setIndicator]: (state, {payload: indicator}) => ({
-		...state,
-		indicator
-	}),
-	[actions.loadIndicatorData]: (state, {payload: {year: currentYear}}) => ({
-		...state,
-		data: undefined,
-		currentYear
-	}),
-	[actions.setCurrentYear]: (state, {payload: currentYear}) => ({
-		...state,
-		currentYear
-	}),
-	[actions.setIndicatorDataLoading]: (state, {payload: dataLoading}) => ({
-		...state,
-		dataLoading
-	}),
-	[actions.setIndicatorData]: (state, {payload: data}) => ({
-		...state,
-		data
-	})
+	'@@router/LOCATION_CHANGE': locationChange,
+	[actions.loadIndicator]: loadIndicator,
+	[actions.setIndicatorLoading]: setIndicatorLoading,
+	[actions.setIndicator]: setIndicator,
+	[actions.loadIndicatorData]: loadIndicatorData,
+	[actions.setCurrentYear]: setCurrentYear,
+	[actions.setIndicatorDataLoading]: setIndicatorDataLoading,
+	[actions.setIndicatorData]: setIndicatorData,
+	[actions.setSuggestIndicatorData]: setSuggestIndicatorData
 }, initialState);

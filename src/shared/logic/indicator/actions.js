@@ -8,3 +8,6 @@ export const setCurrentYear = createAction('Indicator.setCurrentYear', currentYe
 export const loadIndicatorData = createAction('Indicator.loadIndicatorData', (indicatorId, year) => indicatorId.params ? indicatorId.params : {indicatorId, year});
 export const setIndicatorDataLoading = createAction('Indicator.setIndicatorDataLoading', (value = true) => value);
 export const setIndicatorData = createAction('Indicator.setIndicatorData', data => data);
+
+export const suggestIndicatorData = createAction('Indicator.suggestIndicatorData', (indicatorId, year) => ({indicatorId, year}));
+export const setSuggestIndicatorData = createAction('Indicator.setSuggestIndicatorData', (year, data) => ({year, data}));

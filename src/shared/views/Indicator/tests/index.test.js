@@ -15,7 +15,8 @@ const props = {
 		sourceNote: 'Source note',
 		sourceOrganization: 'Source organization',
 	},
-	years: [2000, 2001]
+	years: [2000, 2001],
+	suggestData: {}
 };
 
 test('Renders indicator info', () => {
