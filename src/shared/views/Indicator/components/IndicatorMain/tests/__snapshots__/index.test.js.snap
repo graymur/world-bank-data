@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders indicator info 1`] = `
+<div
+  className="indicator"
+>
+  <div
+    className="indicator"
+  >
+    <h1>
+      Indicator name
+    </h1>
+    <p>
+      Source note
+    </p>
+    <p>
+      Source: 
+      Source organization
+    </p>
+    <div
+      className="indicator__years"
+    >
+      <select
+        className="styled-select"
+        defaultValue={2000}
+        id="year"
+        onChange={[Function]}
+      >
+        <option
+          hidden={true}
+          value=""
+        >
+          Select year
+        </option>
+        <option
+          data-year={2000}
+        >
+          2000
+        </option>
+        <option
+          data-year={2001}
+        >
+          2001
+        </option>
+      </select>
+    </div>
+    <div
+      className="indicator__data"
+    />
+  </div>
+</div>
+`;
+
+exports[`Renders preloader 1`] = `
+<div
+  className="indicator loading"
+>
+  <span
+    className="loader"
+    style={
+      Object {
+        "border": "10px solid #f3f3f3",
+        "borderTop": "10px solid #3498db",
+        "height": "50px",
+        "width": "50px",
+      }
+    }
+  />
+</div>
+`;
