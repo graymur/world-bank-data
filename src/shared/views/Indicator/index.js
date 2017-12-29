@@ -17,6 +17,7 @@ const years = range(1990, getMaxIndicatorYear() + 1).reverse();
 
 export class Indicator extends React.Component {
 	static propTypes = {
+		years: PropTypes.array,
 		loading: PropTypes.bool,
 		indicator: PropTypes.object,
 		currentYear: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
@@ -28,6 +29,10 @@ export class Indicator extends React.Component {
 			push: PropTypes.func.isRequired,
 			location: PropTypes.object
 		})
+	};
+
+	static defaultProps = {
+		years
 	};
 
 	static preload = match => [
@@ -52,7 +57,7 @@ export class Indicator extends React.Component {
 	}
 
 	render() {
-		return <IndicatorMain {...this.props} loadIndicatorData={this.loadData} years={years}/>;
+		return <IndicatorMain {...this.props} loadIndicatorData={this.loadData}/>;
 	}
 }
 

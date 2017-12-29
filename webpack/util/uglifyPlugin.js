@@ -13,3 +13,17 @@ export default new webpack.optimize.UglifyJsPlugin({
 		}
 	}
 });
+
+// import {webpack} from 'google-closure-compiler-js';
+// const path = require('path');
+//
+// const plugin = webpack({
+// 	options: {
+// 		languageIn: 'ECMASCRIPT6',
+// 		languageOut: 'ECMASCRIPT5',
+// 		compilationLevel: 'ADVANCED',
+// 		warningLevel: 'VERBOSE'
+// 	}
+// });
+//
+// export default plugin;

@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import getPageTitle from 'shared/utils/getPageTitle';
 import './index.scss';
 
-const Index = (props) => (
+const Index = props => (
 	<div className='main-page'>
 		<Helmet>
 			<title>{getPageTitle()}</title>

@@ -8,7 +8,7 @@ import SuggestData from '../SuggestData';
 import classnames from 'classnames';
 import './indicator.scss';
 
-export class Indicator extends React.Component {
+export default class IndicatorMain extends React.Component {
 	static propTypes = {
 		loading: PropTypes.bool,
 		dataLoading: PropTypes.bool,
@@ -25,12 +25,12 @@ export class Indicator extends React.Component {
 		this.handleYearChange = this.handleYearChange.bind(this);
 	}
 
-	handleYearClick(year) {
-		return (event) => {
-			event.preventDefault();
-			this.props.loadIndicatorData(this.props.indicator.id, year);
-		};
-	};
+	// handleYearClick(year) {
+	// 	return (event) => {
+	// 		event.preventDefault();
+	// 		this.props.loadIndicatorData(this.props.indicator.id, year);
+	// 	};
+	// };
 
 	handleYearChange(event) {
 		if (event.target.value) {
@@ -38,32 +38,38 @@ export class Indicator extends React.Component {
 		}
 	};
 
+	rendersYears() {
+		const {years, currentYear} = this.props;
+
+		const defaultSelectValue = isNaN(Number(currentYear)) ? '' : Number(currentYear);
+		return (
+			<div className='indicator__years'>
+				<select key={currentYear} id='year' className='styled-select' onChange={this.handleYearChange} defaultValue={defaultSelectValue}>
+					<option value='' hidden>Select year</option>
+					{years.map(year => (
+						<option key={year} data-year={year}>{year}</option>
+					))}
+				</select>
+			</div>
+		);
+	}
+
 	renderIndicator() {
-		const {indicator, years, currentYear, data, dataLoading, suggestData} = this.props;
+		const {indicator, currentYear, data, dataLoading, suggestData} = this.props;
 
 		if (!indicator) {
 			return null;
 		}
-
-		const defaultSelectValue = isNaN(Number(currentYear)) ? '' : Number(currentYear);
 
 		return (
 			<div className='indicator'>
 				<Helmet>
 					<title>{getPageTitle(`${indicator.name} ${currentYear ? `- ${currentYear}` : ''}`)}</title>
 				</Helmet>
-
 				<h1>{indicator.name}</h1>
 				<p>{indicator.sourceNote}</p>
 				{indicator.sourceOrganization && <p>Source: {indicator.sourceOrganization}</p>}
-				<div className='indicator__years'>
-					<select key={currentYear} className='styled-select' onChange={this.handleYearChange} defaultValue={defaultSelectValue}>
-						<option value='' hidden>Select year</option>
-						{years.map(year => (
-							<option key={year} data-year={year}>{year}</option>
-						))}
-					</select>
-				</div>
+				{this.rendersYears()}
 				<IndicatorData loading={dataLoading} data={data}/>
 				<SuggestData indicatorId={indicator.id} suggestData={suggestData}/>
 			</div>
@@ -81,5 +87,3 @@ export class Indicator extends React.Component {
 		);
 	}
 }
-
-export default Indicator;
