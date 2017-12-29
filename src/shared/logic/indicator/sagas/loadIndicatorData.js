@@ -4,6 +4,12 @@ import {setError} from 'shared/logic/shared/actions';
 import dataSource from 'shared/dataSource';
 import getMaxIndicatorYear from 'shared/utils/getMaxIndicatorYear';
 
+const getYearForSuggestions = year => {
+	const maxYear = getMaxIndicatorYear();
+	return [year - 3, year - 2, year - 1, year + 1, year + 2, year + 3]
+		.filter(x => x <= maxYear);
+};
+
 export function * loadIndicatorData({payload: {indicatorId, year}}) {
 	try {
 		year = Number(year);
@@ -19,9 +25,7 @@ export function * loadIndicatorData({payload: {indicatorId, year}}) {
 		yield put(actions.setIndicatorData(result));
 
 		if (!result.length) {
-			const maxYear = getMaxIndicatorYear();
-			const years = [year - 3, year - 2, year - 1, year + 1, year + 2, year + 3]
-				.filter(x => x <= maxYear);
+			const years = getYearForSuggestions(year);
 
 			for (year of years) {
 				yield put(actions.suggestIndicatorData(indicatorId, year));
