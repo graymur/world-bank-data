@@ -20,6 +20,9 @@ test('loadIndicators saga success', () => {
 	const putLoadingFalse = gen.next().value;
 	expect(putLoadingFalse.PUT.action.type).toBe('Indicators.setIndicatorsLoading');
 	expect(putLoadingFalse.PUT.action.payload).toBe(false);
+
+	gen.next();
+	expect(gen.next().done).toBe(true);
 });
 
 test('loadIndicators saga error', () => {
@@ -39,4 +42,7 @@ test('loadIndicators saga error', () => {
 	const putLoadingFalse = gen.next().value;
 	expect(putLoadingFalse.PUT.action.type).toBe('Indicators.setIndicatorsLoading');
 	expect(putLoadingFalse.PUT.action.payload).toBe(false);
+
+	gen.next();
+	expect(gen.next().done).toBe(true);
 });

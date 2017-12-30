@@ -31,9 +31,7 @@ export class Indicator extends React.Component {
 		})
 	};
 
-	static defaultProps = {
-		years
-	};
+	static defaultProps = {years};
 
 	static preload = match => [
 		[loadIndicator, actions.loadIndicator(match)],
@@ -61,13 +59,6 @@ export class Indicator extends React.Component {
 	}
 }
 
-const mapStateToProps = createStructuredSelector({
-	loading: selectors.selectLoading,
-	indicator: selectors.selectIndicator,
-	currentYear: selectors.selectCurrentYear,
-	data: selectors.selectIndicatorData,
-	dataLoading: selectors.selectIndicatorDataLoading,
-	suggestData: selectors.suggestData
-});
+const mapStateToProps = createStructuredSelector(selectors);
 
 export default connect(mapStateToProps, actions)(withRouter(Indicator));

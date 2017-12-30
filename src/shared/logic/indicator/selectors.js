@@ -3,27 +3,27 @@ import {INDICATOR_REDUCER_KEY} from './reducer';
 
 export const selectState = state => state[INDICATOR_REDUCER_KEY];
 
-export const selectLoading = createSelector(
+export const loading = createSelector(
 	selectState,
 	main => main.loading
 );
 
-export const selectIndicator = createSelector(
+export const indicator = createSelector(
 	selectState,
 	main => main.indicator
 );
 
-export const selectCurrentYear = createSelector(
+export const currentYear = createSelector(
 	selectState,
 	main => main.currentYear
 );
 
-export const selectIndicatorDataLoading = createSelector(
+export const indicatorDataLoading = createSelector(
 	selectState,
 	main => main.dataLoading
 );
 
-export const selectIndicatorData = createSelector(
+export const data = createSelector(
 	selectState,
 	main => main.data
 );

@@ -10,7 +10,7 @@ import {selectIndicatorByCountryData as selectData} from 'shared/logic/indicator
 import {loadIndicatorByCountryData as loadDataAction} from 'shared/logic/indicatorByCountryData/actions';
 
 import {loadIndicator as loadIndicatorSaga} from 'shared/logic/indicator/sagas/loadIndicator';
-import {selectIndicator} from 'shared/logic/indicator/selectors';
+import {indicator as selectIndicator} from 'shared/logic/indicator/selectors';
 import {loadIndicator as loadIndicatorAction} from 'shared/logic/indicator/actions';
 
 import {selectCountry} from 'shared/logic/country/selectors';

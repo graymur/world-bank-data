@@ -27,7 +27,7 @@ export function * loadIndicatorData({payload: {indicatorId, year}}) {
 		if (!result.length) {
 			const years = getYearForSuggestions(year);
 
-			for (year of years) {
+			for (const year of years) {
 				yield put(actions.suggestIndicatorData(indicatorId, year));
 			}
 		}
