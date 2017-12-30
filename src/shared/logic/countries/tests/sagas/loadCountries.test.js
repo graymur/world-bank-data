@@ -20,6 +20,9 @@ test('loadCountries saga success', () => {
 	const putLoadingFalse = gen.next().value;
 	expect(putLoadingFalse.PUT.action.type).toBe('Countries.setCountriesLoading');
 	expect(putLoadingFalse.PUT.action.payload).toBe(false);
+
+	gen.next();
+	expect(gen.next().done).toBe(true);
 });
 
 test('loadCountries saga error', () => {
@@ -39,4 +42,7 @@ test('loadCountries saga error', () => {
 	const putLoadingFalse = gen.next().value;
 	expect(putLoadingFalse.PUT.action.type).toBe('Countries.setCountriesLoading');
 	expect(putLoadingFalse.PUT.action.payload).toBe(false);
+
+	gen.next();
+	expect(gen.next().done).toBe(true);
 });
