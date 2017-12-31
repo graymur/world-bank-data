@@ -1,8 +1,6 @@
 require('regenerator-runtime/runtime');
 require('classnames');
 require('prop-types');
-// require('react');
-// require('react-dom');
 require('react-redux');
 require('react-router-dom');
 require('react-router-redux');

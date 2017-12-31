@@ -19,40 +19,4 @@
             display: block;
         }
     }
-
-    &__search {
-        margin-top: 2rem;
-
-        &__input {
-            font-size: 1.6rem;
-            padding: 0.5rem;
-            outline: none;
-            border-radius: 2px;
-            border: 1px solid #ccc;
-        }
-
-        &__submit {
-            margin-right: 2rem;
-        }
-
-        &__result {
-            margin-top: 2rem;
-
-            &__item {
-                margin: 0 0.5rem 0.5rem 0;
-            }
-
-            &.loading {
-                min-height: 10rem;
-            }
-
-            &._found {
-                margin-bottom: 3rem;
-            }
-        }
-    }
-
-    &__search + &__container {
-        margin-top: 2rem;
-    }
 }

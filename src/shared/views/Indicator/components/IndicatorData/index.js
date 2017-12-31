@@ -26,17 +26,19 @@ export class IndicatorData extends React.PureComponent {
 			);
 		}
 
-		const height = data.length * 3;
+		const formattedData = data.map(x => ({...x, value: round(x.value)}));
+
+		const height = data.length * 3 + 5;
 
 		return (
 			<div id='chart' className='indicator__data__chart' style={{height: `${height}rem`}}>
 				<ResponsiveContainer>
-					<BarChart layout='vertical' data={data}>
+					<BarChart layout='vertical' data={formattedData}>
 						<CartesianGrid strokeDasharray='3 3'/>
 						<XAxis type='number' dataKey='value'/>
 						<YAxis type='category' dataKey='name' width={150}/>
 						<Tooltip/>
-						<Bar dataKey='value' fill='#8884d8' />
+						<Bar dataKey='value' fill='#8884d8'/>
 					</BarChart>
 				</ResponsiveContainer>
 			</div>
@@ -56,3 +58,7 @@ export class IndicatorData extends React.PureComponent {
 }
 
 export default IndicatorData;
+
+function round(num, decimalPlaces = 2) {
+	return +(Math.round(num + `e+${decimalPlaces}`) + `e-${decimalPlaces}`);
+}

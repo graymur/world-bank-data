@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import Loader from 'shared/components/Loader';
 import IndicatorsList from '../IndicatorsList';
+import './indicators-search.scss';
 
 export default class IndicatorsSearch extends React.Component {
 	static propTypes = {
@@ -82,7 +83,7 @@ export default class IndicatorsSearch extends React.Component {
 		return (
 			<div className='indicators__search form-group'>
 				<div className='row'>
-					<div className='col-sm-4'>
+					<div className='col-sm-4 indicators__search__input-wr'>
 						<input value={searchString} placeholder='Search indicators' name='indicator'
 							className='indicators__search__input form-control'
 							onChange={this.hadleSearchInputChange}/>
