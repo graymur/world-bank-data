@@ -9,7 +9,7 @@ const root = document.getElementById('react-root');
 const renderWithHot = Component => {
 	const fn = process.env.SSR ? hydrate : render;
 	fn(
-		<AppContainer>
+		<AppContainer warnings={Boolean(false)}>
 			<Component />
 		</AppContainer>,
 		root

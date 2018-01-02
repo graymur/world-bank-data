@@ -6,6 +6,7 @@ import classnames from 'classnames';
 import Loader from 'shared/components/Loader';
 import IndicatorsList from '../IndicatorsList';
 import IndicatorsSearch from '../IndicatorsSearch';
+import {Link} from 'react-router-dom';
 import './indicators.scss';
 
 export default class IndicatorsMain extends React.Component {
@@ -31,8 +32,8 @@ export default class IndicatorsMain extends React.Component {
 					<title>{getPageTitle('Indicators')}</title>
 				</Helmet>
 				<h1 className='indicators__title'>Indicators List</h1>
-				<p>World Bank collects data on more then 16 thousands indicators. Here are some of them major one. You
-					find others using serch field.</p>
+				<p>World Bank collects data on more then 16 thousands indicators. Here are some of the major ones. You
+					can find others using serch field. For example: "<Link to='/indicators?search=spendings'>spendings</Link>".</p>
 				<IndicatorsSearch {...this.props}/>
 				{hasFoundIndicators && <h3 className='indicators__title'>Main indicators</h3>}
 				<div className={classNames}>
