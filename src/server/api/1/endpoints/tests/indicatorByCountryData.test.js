@@ -1,13 +1,7 @@
 /* eslint-disable */
 import indicatorByCountryData from '../indicatorByCountryData';
 const httpMocks = require('node-mocks-http');
-
-jest.mock('server/dataSource', () => {
-	const fetchIndicatorByCountryData = jest.fn();
-	fetchIndicatorByCountryData.mockReturnValue('RESULT');
-	return {fetchIndicatorByCountryData};
-});
-
+jest.mock('server/dataSource');
 import dataSource from 'server/dataSource';
 
 test('Returns results of dataSource.fetchIndicatorByCountryData call', async () => {

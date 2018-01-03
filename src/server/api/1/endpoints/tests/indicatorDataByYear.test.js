@@ -1,13 +1,7 @@
 /* eslint-disable */
 import indicatorDataByYear from '../indicatorDataByYear';
 const httpMocks = require('node-mocks-http');
-
-jest.mock('server/dataSource', () => {
-	const fetchIndicatorDataByYear = jest.fn();
-	fetchIndicatorDataByYear.mockReturnValue('RESULT');
-	return {fetchIndicatorDataByYear};
-});
-
+jest.mock('server/dataSource');
 import dataSource from 'server/dataSource';
 
 test('Returns results of dataSource.fetchIndicator call', async () => {

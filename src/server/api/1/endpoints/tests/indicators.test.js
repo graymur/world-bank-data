@@ -1,13 +1,7 @@
 /* eslint-disable */
 import indicators from '../indicators';
 const httpMocks = require('node-mocks-http');
-
-jest.mock('server/dataSource', () => {
-	const fetchIndicators = jest.fn();
-	fetchIndicators.mockReturnValue('RESULT');
-	return {fetchIndicators};
-});
-
+jest.mock('server/dataSource');
 import dataSource from 'server/dataSource';
 
 test('Returns results of dataSource.fetchIndicators call', async () => {

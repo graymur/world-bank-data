@@ -1,13 +1,7 @@
 /* eslint-disable */
 import country from '../country';
 const httpMocks = require('node-mocks-http');
-
-jest.mock('server/dataSource', () => {
-	const fetchCountry = jest.fn();
-	fetchCountry.mockReturnValue('RESULT');
-	return {fetchCountry};
-});
-
+jest.mock('server/dataSource');
 import dataSource from 'server/dataSource';
 
 test('Returns results of dataSource.fetchCountry call', async () => {

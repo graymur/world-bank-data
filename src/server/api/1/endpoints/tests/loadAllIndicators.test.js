@@ -1,19 +1,7 @@
 /* eslint-disable */
 import loadAllIndicators from '../loadAllIndicators';
 const httpMocks = require('node-mocks-http');
-
-jest.mock('server/dataSource', () => {
-	const fetchIndicatorsFromWB = jest.fn();
-
-	fetchIndicatorsFromWB.mockReturnValue([
-		{id: 1},
-		{id: 2},
-		{id: 3}
-	]);
-
-	return {fetchIndicatorsFromWB};
-});
-
+jest.mock('server/dataSource');
 import dataSource from 'server/dataSource';
 
 jest.mock('server/api/1/models/Indicator', () => {
