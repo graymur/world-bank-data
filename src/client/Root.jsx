@@ -1,5 +1,4 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'style/main.scss';
 
 import React from 'react';
 import {Switch, Route} from 'react-router-dom';

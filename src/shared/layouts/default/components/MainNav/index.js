@@ -1,6 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {NavLink} from 'react-router-dom';
+import Item from './Item';
 import routes from 'shared/routes';
 
 const MainNav = () => (
@@ -10,13 +9,3 @@ const MainNav = () => (
 );
 
 export default MainNav;
-
-export const Item = ({menuTitle, exact, path}) => (
-	<NavLink exact={exact} to={path} className='main-nav__item' activeClassName='_active'>{menuTitle}</NavLink>
-);
-
-Item.propTypes = {
-	menuTitle: PropTypes.string,
-	exact: PropTypes.bool,
-	path: PropTypes.string
-};

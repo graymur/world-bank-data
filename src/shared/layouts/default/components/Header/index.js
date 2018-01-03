@@ -1,5 +1,6 @@
 import React from 'react';
 import MainNav from '../MainNav';
+import './header.scss';
 
 const Header = () => (
 	<header className='header'>
