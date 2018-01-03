@@ -6,6 +6,7 @@ import {withRouter} from 'react-router-dom';
 import * as selectors from 'shared/logic/shared/selectors';
 import * as actions from 'shared/logic/shared/actions';
 import Header from './components/Header';
+import Footer from './components/Footer';
 import ErrorComponent from './components/ErrorComponent';
 import './default.scss';
 
@@ -26,9 +27,10 @@ export class Layout extends React.Component {
 		return (
 			<div className='main'>
 				<Header/>
-				<div className='container'>
+				<div className='content container'>
 					{error ? <ErrorComponent error={error}/> : children}
 				</div>
+				<Footer/>
 			</div>
 		);
 	}

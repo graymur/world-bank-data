@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders content in wrapper 1`] = `
+<footer
+  className="footer"
+>
+  <div
+    className="container"
+  >
+    2018
+     
+    <a
+      href="https://github.com/graymur/world-bank-data"
+      target="_blank"
+    >
+      graymur/world-bank-data
+    </a>
+  </div>
+</footer>
+`;

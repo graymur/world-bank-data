@@ -44,12 +44,28 @@ exports[`Renders content in wrapper 1`] = `
     </div>
   </header>
   <div
-    className="container"
+    className="content container"
   >
     <h1>
       content
     </h1>
   </div>
+  <footer
+    className="footer"
+  >
+    <div
+      className="container"
+    >
+      2018
+       
+      <a
+        href="https://github.com/graymur/world-bank-data"
+        target="_blank"
+      >
+        graymur/world-bank-data
+      </a>
+    </div>
+  </footer>
 </div>
 `;
 
@@ -97,7 +113,7 @@ exports[`Renders error component if error is passed in props 1`] = `
     </div>
   </header>
   <div
-    className="container"
+    className="content container"
   >
     <div
       className="app-error"
@@ -110,5 +126,21 @@ exports[`Renders error component if error is passed in props 1`] = `
       </p>
     </div>
   </div>
+  <footer
+    className="footer"
+  >
+    <div
+      className="container"
+    >
+      2018
+       
+      <a
+        href="https://github.com/graymur/world-bank-data"
+        target="_blank"
+      >
+        graymur/world-bank-data
+      </a>
+    </div>
+  </footer>
 </div>
 `;
