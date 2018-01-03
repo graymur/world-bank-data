@@ -1,0 +1,146 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders content in wrapper 1`] = `
+<div
+  className="main"
+>
+  <header
+    className="header"
+  >
+    <div
+      className="container"
+    >
+      <nav
+        className="main-nav"
+      >
+        <a
+          aria-current={false}
+          className="main-nav__item"
+          href="/"
+          onClick={[Function]}
+          style={undefined}
+        >
+          Main page
+        </a>
+        <a
+          aria-current={false}
+          className="main-nav__item"
+          href="/countries"
+          onClick={[Function]}
+          style={undefined}
+        >
+          Countries
+        </a>
+        <a
+          aria-current={false}
+          className="main-nav__item"
+          href="/indicators"
+          onClick={[Function]}
+          style={undefined}
+        >
+          Indicators
+        </a>
+      </nav>
+    </div>
+  </header>
+  <div
+    className="content container"
+  >
+    <h1>
+      content
+    </h1>
+  </div>
+  <footer
+    className="footer"
+  >
+    <div
+      className="container"
+    >
+      2018
+       
+      <a
+        href="https://github.com/graymur/world-bank-data"
+        target="_blank"
+      >
+        graymur/world-bank-data
+      </a>
+    </div>
+  </footer>
+</div>
+`;
+
+exports[`Renders error component if error is passed in props 1`] = `
+<div
+  className="main"
+>
+  <header
+    className="header"
+  >
+    <div
+      className="container"
+    >
+      <nav
+        className="main-nav"
+      >
+        <a
+          aria-current={false}
+          className="main-nav__item"
+          href="/"
+          onClick={[Function]}
+          style={undefined}
+        >
+          Main page
+        </a>
+        <a
+          aria-current={false}
+          className="main-nav__item"
+          href="/countries"
+          onClick={[Function]}
+          style={undefined}
+        >
+          Countries
+        </a>
+        <a
+          aria-current={false}
+          className="main-nav__item"
+          href="/indicators"
+          onClick={[Function]}
+          style={undefined}
+        >
+          Indicators
+        </a>
+      </nav>
+    </div>
+  </header>
+  <div
+    className="content container"
+  >
+    <div
+      className="app-error"
+    >
+      <h1>
+        Something went wrong:
+      </h1>
+      <p>
+        Error text
+      </p>
+    </div>
+  </div>
+  <footer
+    className="footer"
+  >
+    <div
+      className="container"
+    >
+      2018
+       
+      <a
+        href="https://github.com/graymur/world-bank-data"
+        target="_blank"
+      >
+        graymur/world-bank-data
+      </a>
+    </div>
+  </footer>
+</div>
+`;
