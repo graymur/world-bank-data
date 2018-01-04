@@ -13,7 +13,7 @@ test('Returns results of dataSource.fetchIndicatorByCountryData call', async () 
 	}}, response);
 
 	expect(response.statusCode).toBe(200);
-	expect(response._getData()).toBe('"RESULT"');
+	expect(response._getData()).toBe('"INDICATOR BY COUNTRY DATA"');
 	expect(dataSource.fetchIndicatorByCountryData.mock.calls.length).toBe(1);
 	expect(dataSource.fetchIndicatorByCountryData.mock.calls[0][0]).toBe('AA');
 	expect(dataSource.fetchIndicatorByCountryData.mock.calls[0][1]).toBe('1');

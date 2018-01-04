@@ -13,7 +13,7 @@ test('Returns results of dataSource.fetchIndicator call', async () => {
 	}}, response);
 
 	expect(response.statusCode).toBe(200);
-	expect(response._getData()).toBe('"RESULT"');
+	expect(response._getData()).toBe('"INDICATOR DATA BY YEAR"');
 	expect(dataSource.fetchIndicatorDataByYear.mock.calls.length).toBe(1);
 	expect(dataSource.fetchIndicatorDataByYear.mock.calls[0][0]).toBe('1');
 	expect(dataSource.fetchIndicatorDataByYear.mock.calls[0][1]).toBe(2000);

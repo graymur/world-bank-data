@@ -6,9 +6,9 @@ import dataSource from 'server/dataSource';
 
 test('Returns results of dataSource.fetchCountries call', async () => {
 	const response = httpMocks.createResponse();
-	const result = await countries({}, response);
+	await countries({}, response);
 
 	expect(response.statusCode).toBe(200);
-	expect(response._getData()).toBe('"RESULT"');
+	expect(response._getData()).toBe('"COUNTRIES"');
 	expect(dataSource.fetchCountries.mock.calls.length).toBe(1);
 });

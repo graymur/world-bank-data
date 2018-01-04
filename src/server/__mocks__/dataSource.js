@@ -1,30 +1,41 @@
 /* eslint-disable */
 
 const dataSource = () => {
-	const fetchCountry = jest.fn();
-	fetchCountry.mockReturnValue('RESULT');
+	const searchIndicatorsPayload = [
+		{id: 11},
+		{id: 22},
+		{id: 33}
+	];
 
-	const fetchCountries = jest.fn();
-	fetchCountries.mockReturnValue('RESULT');
-
-	const fetchIndicator = jest.fn();
-	fetchIndicator.mockReturnValue('RESULT');
-
-	const fetchIndicatorByCountryData = jest.fn();
-	fetchIndicatorByCountryData.mockReturnValue('RESULT');
-
-	const fetchIndicatorDataByYear = jest.fn();
-	fetchIndicatorDataByYear.mockReturnValue('RESULT');
-
-	const fetchIndicators = jest.fn();
-	fetchIndicators.mockReturnValue('RESULT');
-
-	const fetchIndicatorsFromWB = jest.fn();
-	fetchIndicatorsFromWB.mockReturnValue([
+	const fetchIndicatorsFromWBPayload = [
 		{id: 1},
 		{id: 2},
 		{id: 3}
-	]);
+	];
+
+	const fetchCountry = jest.fn();
+	fetchCountry.mockReturnValue('COUNTRY');
+
+	const fetchCountries = jest.fn();
+	fetchCountries.mockReturnValue('COUNTRIES');
+
+	const fetchIndicator = jest.fn();
+	fetchIndicator.mockReturnValue('INDICATOR');
+
+	const fetchIndicatorByCountryData = jest.fn();
+	fetchIndicatorByCountryData.mockReturnValue('INDICATOR BY COUNTRY DATA');
+
+	const fetchIndicatorDataByYear = jest.fn();
+	fetchIndicatorDataByYear.mockReturnValue('INDICATOR DATA BY YEAR');
+
+	const fetchIndicators = jest.fn();
+	fetchIndicators.mockReturnValue('INDICATORS');
+
+	const fetchIndicatorsFromWB = jest.fn();
+	fetchIndicatorsFromWB.mockReturnValue(fetchIndicatorsFromWBPayload);
+
+	const searchIndicators = jest.fn();
+	searchIndicators.mockReturnValue(searchIndicatorsPayload);
 
 	return {
 		fetchCountry,
@@ -33,7 +44,10 @@ const dataSource = () => {
 		fetchIndicatorByCountryData,
 		fetchIndicatorDataByYear,
 		fetchIndicators,
-		fetchIndicatorsFromWB
+		fetchIndicatorsFromWB,
+		searchIndicators,
+		searchIndicatorsPayload,
+		fetchIndicatorsFromWBPayload
 	};
 };
 
