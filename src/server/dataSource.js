@@ -62,7 +62,7 @@ export default {
 			.sort((a, b) => a.value > b.value ? -1 : 1)
 			.map(x => ({name: x.country.value, value: x.value}));
 	},
-	searchIndicators: async (pattern, limit = 10) => {
+	searchIndicators: async (pattern) => {
 		const result = await IndicatorModel.find({$text: {$search: pattern}});
 
 		return result

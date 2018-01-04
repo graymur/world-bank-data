@@ -1,13 +1,7 @@
 /* eslint-disable */
 import indicatorByCountryData from '../indicatorByCountryData';
 const httpMocks = require('node-mocks-http');
-
-jest.mock('server/dataSource', () => {
-	const fetchIndicatorByCountryData = jest.fn();
-	fetchIndicatorByCountryData.mockReturnValue('RESULT');
-	return {fetchIndicatorByCountryData};
-});
-
+jest.mock('server/dataSource');
 import dataSource from 'server/dataSource';
 
 test('Returns results of dataSource.fetchIndicatorByCountryData call', async () => {
@@ -19,7 +13,7 @@ test('Returns results of dataSource.fetchIndicatorByCountryData call', async () 
 	}}, response);
 
 	expect(response.statusCode).toBe(200);
-	expect(response._getData()).toBe('"RESULT"');
+	expect(response._getData()).toBe('"INDICATOR BY COUNTRY DATA"');
 	expect(dataSource.fetchIndicatorByCountryData.mock.calls.length).toBe(1);
 	expect(dataSource.fetchIndicatorByCountryData.mock.calls[0][0]).toBe('AA');
 	expect(dataSource.fetchIndicatorByCountryData.mock.calls[0][1]).toBe('1');
