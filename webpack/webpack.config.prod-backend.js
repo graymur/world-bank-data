@@ -18,6 +18,14 @@ fs.readdirSync('node_modules')
 const developmentConfig = merge(
 	{
 		cache: true,
+		target: 'node',
+		entry: {app: path.join(config.serverDir, 'serverProd.js')},
+		output: {
+			path: config.buildDir,
+			filename: 'server.js',
+			publicPath: '/'
+		},
+		externals: nodeModules,
 		plugins: [
 			new ExtractTextPlugin('styles.css'),
 			new webpack.DefinePlugin({
@@ -27,13 +35,11 @@ const developmentConfig = merge(
 					WEBPACK: JSON.stringify(true),
 					MONGO_URL: JSON.stringify(process.env.MONGO_URL),
 					SECURITY_TOKEN: JSON.stringify(process.env.SECURITY_TOKEN),
-					BASE_PATH: JSON.stringify(path.join(path.dirname(__dirname), 'src')),
+					BASE_PATH: JSON.stringify(path.join(path.dirname(__dirname), 'src'))
 				}
 			})
 		],
-		module: {
-			loaders: defaultLoaders
-		},
+		module: {loaders: defaultLoaders},
 		resolve: {
 			modules: ['src', 'node_modules'],
 			extensions: ['.js', '.jsx'],
@@ -44,18 +50,6 @@ const developmentConfig = merge(
 				'shared/dataSource': 'server/dataSource'
 			}
 		}
-	},
-	{
-		target: 'node',
-		entry: {
-			app: path.join(config.serverDir, 'serverProd.js')
-		},
-		output: {
-			path: config.buildDir,
-			filename: 'server.js',
-			publicPath: '/'
-		},
-		externals: nodeModules
 	}
 );
 
