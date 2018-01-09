@@ -75,7 +75,8 @@
       "env": {
         "NODE_ENV": "production",
         "NODE_PATH": "./src",
-        "SSR": true
+        "SSR": true,
+        "PORT": 3000
       }
     },
     "dll:prod": {

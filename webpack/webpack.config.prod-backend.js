@@ -46,6 +46,7 @@ const developmentConfig = merge(
 					WEBPACK: JSON.stringify(true),
 					MONGO_URL: JSON.stringify(process.env.MONGO_URL),
 					SECURITY_TOKEN: JSON.stringify(process.env.SECURITY_TOKEN),
+					PORT: JSON.stringify(process.env.PORT),
 					BASE_PATH: JSON.stringify(path.join(path.dirname(__dirname), 'src'))
 				}
 			})
