@@ -15,10 +15,21 @@ fs.readdirSync('node_modules')
 		nodeModules[mod] = 'commonjs ' + mod;
 	});
 
+const webpackNode = {
+	// do not include poly fills...
+	console: false,
+	process: false,
+	global: false,
+	buffer: false,
+	__filename: false,
+	__dirname: false
+};
+
 const developmentConfig = merge(
 	{
 		cache: true,
 		target: 'node',
+		node: webpackNode,
 		entry: {app: path.join(config.serverDir, 'serverProd.js')},
 		output: {
 			path: config.buildDir,

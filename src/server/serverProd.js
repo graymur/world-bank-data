@@ -4,15 +4,17 @@ import express from 'express';
 import fs from 'fs';
 import path from 'path';
 import compression from 'compression';
-// import './ssr/stubAssetsRequires';
 import api from './api/1/index';
+
+const dir = path.dirname(__dirname);
+const publicDir = path.join(dir, 'build', 'public');
 
 const app = express();
 app.use(compression());
-app.use(express.static(config.buildPublicDir));
+app.use(express.static(publicDir));
 app.use('/api/1/', api);
 
-const htmlTemplate = fs.readFileSync(path.join(config.buildPublicDir, 'index.template.html')).toString();
+const htmlTemplate = fs.readFileSync(path.join(publicDir, 'index.template.html')).toString();
 
 app.use('*', async (req, res) => {
 	let html = htmlTemplate;
