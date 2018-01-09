@@ -32,6 +32,8 @@ app.use('*', async (req, res) => {
 	res.send(html);
 });
 
-app.listen(config.port, () => {
-	console.log(`Listening at ${config.host}:${config.port}`);
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => {
+	console.log(`Listening at ${config.host}:${port}`);
 });
