@@ -39,17 +39,6 @@ const developmentConfig = merge(
 		externals: nodeModules,
 		plugins: [
 			new ExtractTextPlugin('styles.css'),
-			new webpack.DefinePlugin({
-				'process.env': {
-					NODE_ENV: JSON.stringify(process.env.NODE_ENV),
-					SSR: JSON.stringify(process.env.SSR),
-					WEBPACK: JSON.stringify(true),
-					MONGO_URL: JSON.stringify(process.env.MONGO_URL),
-					SECURITY_TOKEN: JSON.stringify(process.env.SECURITY_TOKEN),
-					PORT: JSON.stringify(process.env.PORT),
-					BASE_PATH: JSON.stringify(path.join(path.dirname(__dirname), 'src'))
-				}
-			})
 		],
 		module: {loaders: defaultLoaders},
 		resolve: {

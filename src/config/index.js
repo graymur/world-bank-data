@@ -14,8 +14,6 @@ export default {
 	buildPublicDir: path.join(buildDir, 'public'),
 	dllDir: path.resolve(path.join(__dirname, '/../../node_modules/_dll')),
 	dllFileName: 'vendors.js',
-	port: process.env.PORT || 80,
-	host: 'localhost',
 	mongoUrl: process.env.MONGO_URL,
 	securityToken: process.env.SECURITY_TOKEN
 };

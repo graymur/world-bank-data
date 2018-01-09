@@ -32,8 +32,10 @@ app.use('*', async (req, res) => {
 	res.send(html);
 });
 
+console.log(JSON.stringify(process.env, null, 4));
+
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
-	console.log(`Listening at ${config.host}:${port}`);
+	console.log(`Listening at ${config.host || 'localhost'}:${port}`);
 });
