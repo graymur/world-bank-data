@@ -71,7 +71,7 @@
       }
     },
     "build:backend": {
-      "command": "npm run webpack -- --optimize-minimize --color --progress --config=webpack/webpack.config.prod-backend.js",
+      "command": "npm run webpack -- --color --progress --config=webpack/webpack.config.prod-backend.js",
       "env": {
         "NODE_ENV": "production",
         "NODE_PATH": "./src",
