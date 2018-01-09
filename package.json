@@ -13,7 +13,9 @@
     "dev": "better-npm-run dev",
     "dev:ssr": "better-npm-run dev:ssr",
     "devmon": "nodemon --ignore ./src/shared --ignore ./src/client --exec better-npm-run dev",
-    "build": "npm run dll && better-npm-run build",
+    "build": "npm run dll && npm run build:backend && npm run build:frontend",
+    "build:frontend": "better-npm-run build:frontend",
+    "build:backend": "better-npm-run build:backend",
     "dll:dev": "better-npm-run dll:dev",
     "dll:prod": "better-npm-run dll:prod",
     "dll": "npm run dll:dev && npm run dll:prod",
@@ -25,7 +27,7 @@
   },
   "betterScripts": {
     "start": {
-      "command": "babel-node ./src/server/serverProd.js",
+      "command": "node ./build/server.js",
       "env": {
         "NODE_ENV": "production",
         "NODE_PATH": "./src",
@@ -61,11 +63,19 @@
         "NODE_PATH": "./src"
       }
     },
-    "build": {
-      "command": "npm run webpack -- --optimize-minimize --color --progress --config=webpack/webpack.config.prod.js",
+    "build:frontend": {
+      "command": "npm run webpack -- --optimize-minimize --color --progress --config=webpack/webpack.config.prod-frontend.js",
       "env": {
         "NODE_ENV": "production",
         "NODE_PATH": "./src"
+      }
+    },
+    "build:backend": {
+      "command": "npm run webpack -- --optimize-minimize --color --progress --config=webpack/webpack.config.prod-backend.js",
+      "env": {
+        "NODE_ENV": "production",
+        "NODE_PATH": "./src",
+        "SSR": true
       }
     },
     "dll:prod": {

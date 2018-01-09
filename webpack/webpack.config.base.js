@@ -1,8 +1,6 @@
 import path from 'path';
 import webpack from 'webpack';
 import config from '../src/config';
-import cssMqpacker from 'css-mqpacker';
-import autoprefixer from 'autoprefixer';
 
 import defaultLoaders from './util/defaultLoaders.js';
 
@@ -12,7 +10,7 @@ export default {
 		app: path.join(config.clientDir, 'index.js')
 	},
 	output: {
-		path: config.buildDir,
+		path: config.buildPublicDir,
 		filename: '[name].js',
 		publicPath: '/'
 	},
@@ -27,17 +25,6 @@ export default {
 				NODE_ENV: JSON.stringify(process.env.NODE_ENV),
 				SSR: JSON.stringify(process.env.SSR),
 				WEBPACK: JSON.stringify(true)
-			}
-		}),
-		new webpack.LoaderOptionsPlugin({
-			options: {
-				postcss: [
-					autoprefixer({
-						browsers: ['last 2 versions'],
-						remove: false
-					}),
-					cssMqpacker()
-				]
 			}
 		})
 	],
