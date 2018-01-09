@@ -31,8 +31,7 @@
       "env": {
         "NODE_ENV": "production",
         "NODE_PATH": "./src",
-        "SSR": true,
-        "PORT": 4444
+        "SSR": true
       }
     },
     "dev": {
