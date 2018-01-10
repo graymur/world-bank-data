@@ -41,7 +41,12 @@ const developmentConfig = merge(
 				/\/iconv-loader$/, 'node-noop'
 			)
 			// htmlPlugin
-		]
+		],
+		resolve: {
+			alias: {
+				'shared/dataSource': 'client/dataSource'
+			}
+		}
 	}
 );
 

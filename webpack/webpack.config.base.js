@@ -37,8 +37,7 @@ export default {
 		alias: {
 			style: path.join(config.sourceDir, 'style'),
 			img: path.join(config.sourceDir, 'img'),
-			fonts: path.join(config.sourceDir, 'fonts'),
-			'shared/dataSource': 'client/dataSource'
+			fonts: path.join(config.sourceDir, 'fonts')
 		}
 	}
 };

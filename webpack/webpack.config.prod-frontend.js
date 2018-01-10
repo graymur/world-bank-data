@@ -8,6 +8,7 @@ import htmlPlugin from './util/htmlPlugin';
 import uglifyPlugin from './util/uglifyPlugin';
 import baseWebpackConfig from './webpack.config.base';
 import webpack from 'webpack';
+import addExtractTextPluginToConfig from './util/addExtractTextPluginToConfig';
 
 const productionConfig = merge(
 	baseWebpackConfig,
@@ -25,20 +26,11 @@ const productionConfig = merge(
 			uglifyPlugin,
 			// bundleAnalyzerPlugin,
 			new webpack.optimize.ModuleConcatenationPlugin()
-		]
+		],
+		resolve: {alias: {'shared/dataSource': 'client/dataSource'}}
 	}
 );
 
-productionConfig.module.loaders.filter(loader =>
-	loader.loaders && loader.loaders.find(name => /css/.test(name.split('?')[0]))
-).forEach(loader => {
-	const [fallback, ...rest] = loader.loaders;
-	loader.loader = ExtractTextPlugin.extract({
-		fallback,
-		use: rest
-	});
-
-	delete loader.loaders;
-});
+addExtractTextPluginToConfig(productionConfig);
 
 export default productionConfig;
