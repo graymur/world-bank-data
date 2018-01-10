@@ -1,6 +1,5 @@
 import path from 'path';
 import config from '../src/config';
-import merge from 'merge-deep';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import fs from 'fs';
 import defaultLoaders from './util/defaultLoaders.js';
@@ -24,32 +23,30 @@ const webpackNode = {
 	__dirname: false
 };
 
-const developmentConfig = merge(
-	{
-		cache: true,
-		target: 'node',
-		node: webpackNode,
-		entry: {app: path.join(config.serverDir, 'serverProd.js')},
-		output: {
-			path: config.buildDir,
-			filename: 'server.js',
-			publicPath: '/'
-		},
-		externals: nodeModules,
-		plugins: [new ExtractTextPlugin('styles.css')],
-		module: {loaders: defaultLoaders},
-		resolve: {
-			modules: ['src', 'node_modules'],
-			extensions: ['.js', '.jsx'],
-			alias: {
-				style: path.join(config.sourceDir, 'style'),
-				img: path.join(config.sourceDir, 'img'),
-				fonts: path.join(config.sourceDir, 'fonts'),
-				'shared/dataSource': 'server/dataSource'
-			}
+const developmentConfig = {
+	cache: true,
+	target: 'node',
+	node: webpackNode,
+	entry: {app: path.join(config.serverDir, 'serverProd.js')},
+	output: {
+		path: config.buildDir,
+		filename: 'server.js',
+		publicPath: '/'
+	},
+	externals: nodeModules,
+	plugins: [new ExtractTextPlugin('styles.css')],
+	module: {loaders: defaultLoaders},
+	resolve: {
+		modules: ['src', 'node_modules'],
+		extensions: ['.js', '.jsx'],
+		alias: {
+			style: path.join(config.sourceDir, 'style'),
+			img: path.join(config.sourceDir, 'img'),
+			fonts: path.join(config.sourceDir, 'fonts'),
+			'shared/dataSource': 'server/dataSource'
 		}
 	}
-);
+};
 
 // remove "style-loader", since it depends on window and document objects and won't work on server
 developmentConfig.module.loaders = developmentConfig.module.loaders.map(loader => {
