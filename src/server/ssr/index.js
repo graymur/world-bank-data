@@ -12,6 +12,7 @@ import getSagasForURL from './getSagasForURL';
 import getStatusForURL from './getStatusForURL';
 import runSagas from './runSagas';
 import Layout from 'shared/layouts/default';
+const env = process.env.NODE_ENV;
 
 /**
  * TODO: figure out why "routing" part of state set
@@ -32,7 +33,7 @@ export default async (req, template) => {
 	const status = getStatusForURL(routes, url);
 	const sagas = getSagasForURL(routes, url);
 
-	if (sagas.length) {
+	if (sagas.length && env !== 'production') {
 		console.log('Sagas to run:', sagas.map(x => funcName(x[0])).join(', '));
 	}
 

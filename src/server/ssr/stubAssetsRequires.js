@@ -6,9 +6,6 @@ const filenameToRelativeURL = (module, filename) => {
 		.replace(/\\/g, '/');
 };
 
-/**
- * TODO: require.extentions is deprecated, replace it
- */
 require.extensions['.jpg'] = filenameToRelativeURL; // eslint-disable-line
 require.extensions['.png'] = filenameToRelativeURL; // eslint-disable-line
 require.extensions['.scss'] = () => {}; // eslint-disable-line

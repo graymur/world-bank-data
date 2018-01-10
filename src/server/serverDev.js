@@ -1,4 +1,3 @@
-import config from 'config';
 import opener from 'opener'; // eslint-disable-line
 import express from 'express';
 import path from 'path';
@@ -58,7 +57,10 @@ app.use(async (req, res) => {
 	}
 });
 
-app.listen(config.port, () => {
-	console.log(`Listening at ${config.host}:${config.port}`);
-	opener(`http://${config.host}:${config.port}`);
+const port = process.env.PORT || 3000;
+const host = process.env.HOST || 'localhost';
+
+app.listen(port, () => {
+	console.log(`Listening at ${host}:${port}`);
+	opener(`http://${host}:${port}`);
 });
