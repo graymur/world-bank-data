@@ -67,7 +67,7 @@ export default class IndicatorMain extends React.Component {
 					<title>{getPageTitle(`${indicator.name} ${currentYear ? `- ${currentYear}` : ''}`)}</title>
 				</Helmet>
 				<h1>{indicator.name}</h1>
-				<p>{indicator.sourceNote}</p>
+				<p>{indicator.sourceNote !== 'NULL' && indicator.sourceNote}</p>
 				{indicator.sourceOrganization && <p>Source: {indicator.sourceOrganization}</p>}
 				{this.rendersYears()}
 				<IndicatorData loading={dataLoading} data={data}/>

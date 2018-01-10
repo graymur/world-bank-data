@@ -18,7 +18,7 @@ export const currentYear = createSelector(
 	main => main.currentYear
 );
 
-export const indicatorDataLoading = createSelector(
+export const dataLoading = createSelector(
 	selectState,
 	main => main.dataLoading
 );

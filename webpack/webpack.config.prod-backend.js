@@ -1,5 +1,4 @@
 import path from 'path';
-import webpack from 'webpack';
 import config from '../src/config';
 import merge from 'merge-deep';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
@@ -16,7 +15,7 @@ fs.readdirSync('node_modules')
 	});
 
 const webpackNode = {
-	// do not include poly fills...
+	// do not include polyfills
 	console: false,
 	process: false,
 	global: false,
@@ -37,9 +36,7 @@ const developmentConfig = merge(
 			publicPath: '/'
 		},
 		externals: nodeModules,
-		plugins: [
-			new ExtractTextPlugin('styles.css'),
-		],
+		plugins: [new ExtractTextPlugin('styles.css')],
 		module: {loaders: defaultLoaders},
 		resolve: {
 			modules: ['src', 'node_modules'],
