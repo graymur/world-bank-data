@@ -1,49 +1,58 @@
 import {graphqlExpress, graphiqlExpress} from 'apollo-server-express';
 import {makeExecutableSchema} from 'graphql-tools';
 import dataSource from 'server/dataSource';
+import {mergeTypes, fileLoader} from 'merge-graphql-schemas';
+import path from 'path';
 import GraphQLJSON from 'graphql-type-json'; // eslint-disable-line
 
+const typesArray = fileLoader(path.join(__dirname, './graphql'));
 const typeDefs = `
-  scalar JSON
+scalar JSON
 
-  type Query {
-  	countries: [Country],
-  	country(iso2Code: String!): Country,
-  	indicators: [Indicator],
-  	indicator(id: String!): Indicator,
-  	indicatorDataByYear(indicatorId: String!, year: Int!): [IndicatorValue],
-  	indicatorDataByCountry(indicatorId: String!, iso2Code: String!): [IndicatorValue], 
-  }
-  
-  type Country {
-    id: String,
-    iso2Code: String,
-    name: String,
-    region: JSON,
-    adminregion: JSON,
-    incomeLevel: JSON,
-    lendingType: JSON,
-    capitalCity: String,
-    longitude: String,
-    latitude: String
-  }
-  
-  type Indicator {
-    id: String,
-    name: String,
-	topics: JSON,
-    sourceOrganization: String,
-    sourceNote: String,
-    source: JSON,
-    unit: String
-  }
-  
-  type IndicatorValue {
-	name: String,
-	date: String,
-	value: Float
-  }
+${mergeTypes(typesArray)}
 `;
+
+// const typeDefs = `
+//   scalar JSON
+//
+//   type Query {
+//   	countries: [Country],
+//   	country(iso2Code: String!): Country,
+//   	indicators: [Indicator],
+//   	indicator(id: String!): Indicator,
+//   	indicatorDataByYear(indicatorId: String!, year: Int!): [IndicatorValue],
+//   	indicatorDataByCountry(indicatorId: String!, iso2Code: String!): [IndicatorValue],
+//   }
+//
+//   type Country {
+//     id: String,
+//     iso2Code: String,
+//     name: String,
+//     region: JSON,
+//     adminregion: JSON,
+//     incomeLevel: JSON,
+//     lendingType: JSON,
+//     capitalCity: String,
+//     longitude: String,
+//     latitude: String
+//   }
+//
+//   type Indicator {
+//     id: String,
+//     name: String,
+// 	topics: JSON,
+//     sourceOrganization: String,
+//     sourceNote: String,
+//     source: JSON,
+//     unit: String
+//   }
+//
+//   type IndicatorValue {
+// 	name: String,
+// 	date: String,
+// 	value: Float
+//   }
+// `;
 
 const resolvers = {
 	Query: {

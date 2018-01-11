@@ -19,7 +19,7 @@
     "dll:dev": "better-npm-run dll:dev",
     "dll:prod": "better-npm-run dll:prod",
     "dll": "npm run dll:dev && npm run dll:prod",
-    "post_install": "npm run build",
+    "postinstall": "npm run build",
     "webpack": "babel-node node_modules/webpack/bin/webpack.js"
   },
   "engines": {
@@ -149,7 +149,8 @@
     "extract-text-webpack-plugin": "^3.0.0",
     "fetch": "^1.1.0",
     "file-loader": "^1.1.6",
-    "graphql": "^0.12.3",
+    "graphql": "0.11.7",
+    "graphql-tag": "^2.6.1",
     "graphql-tools": "^2.18.0",
     "graphql-type-json": "^0.1.4",
     "history": "^4.7.2",
@@ -159,6 +160,7 @@
     "lodash": "^4.17.4",
     "luxon": "^0.2.11",
     "merge-deep": "^3.0.0",
+    "merge-graphql-schemas": "^1.4.0",
     "mongoose": "^4.13.7",
     "node-mocks-http": "^1.6.6",
     "node-noop": "^1.0.0",

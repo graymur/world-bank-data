@@ -1,0 +1,17 @@
+type Query {
+    countries: [Country],
+    country(iso2Code: String!): Country
+}
+
+type Country {
+    id: String,
+    iso2Code: String,
+    name: String,
+    region: JSON,
+    adminregion: JSON,
+    incomeLevel: JSON,
+    lendingType: JSON,
+    capitalCity: String,
+    longitude: String,
+    latitude: String
+}

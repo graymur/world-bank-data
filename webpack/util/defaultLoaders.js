@@ -10,6 +10,10 @@ export default [{
 		cacheDirectory: true
 	}
 }, {
+	test: /\.(graphql|gql)$/,
+	exclude: /node_modules/,
+	loader: 'raw-loader'
+}, {
 	test: /\.scss$/,
 	loaders: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
 }, {
