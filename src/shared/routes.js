@@ -1,5 +1,5 @@
 import Index from 'shared/views/Index';
-import Countries from 'shared/views/Countries';
+import Countries from 'shared/views/CountriesGraphQL';
 import Country from 'shared/views/Country';
 import Indicators from 'shared/views/Indicators';
 import Indicator from 'shared/views/Indicator';

@@ -63,5 +63,5 @@ const host = process.env.HOST || 'localhost';
 
 app.listen(port, () => {
 	console.log(`Listening at ${host}:${port}`);
-	opener(`http://${host}:${port}`);
+	// opener(`http://${host}:${port}`);
 });

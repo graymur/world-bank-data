@@ -12,6 +12,14 @@ import getSagasForURL from './getSagasForURL';
 import getStatusForURL from './getStatusForURL';
 import runSagas from './runSagas';
 import Layout from 'shared/layouts/default';
+import fetch from 'node-fetch';
+
+import {ApolloProvider} from 'react-apollo';
+import {ApolloClient} from 'apollo-client';
+import {createHttpLink} from 'apollo-link-http';
+import Express from 'express';
+import {InMemoryCache} from 'apollo-cache-inmemory';
+
 const env = process.env.NODE_ENV;
 
 /**
@@ -39,19 +47,38 @@ export default async (req, template) => {
 
 	await sagaMiddleware.run(runSagas(sagas)).done;
 
+	const client = new ApolloClient({
+		ssrMode: true,
+		// Remember that this is the interface the SSR server will use to connect to the
+		// API server, so we need to ensure it isn't firewalled, etc
+		link: createHttpLink({
+			uri: 'http://localhost:3000/api/1/graphql',
+			fetch,
+			credentials: 'same-origin',
+			headers: {
+				cookie: req.header('Cookie')
+			}
+		}),
+		cache: new InMemoryCache()
+	});
+
 	const renderedContent = renderToString(
-		<Provider store={store}>
-			<ConnectedRouter history={history} location={url}>
-				<Layout>
-					<span>{/* Needed to substiture CSSTransitionGroup's span on server*/}
+		<ApolloProvider client={client}>
+			<Provider store={store}>
+				<ConnectedRouter history={history} location={url}>
+					<Layout>
+					<span>{/* Needed to substitute CSSTransitionGroup's span on server*/}
 						<Switch>
 							{routes.map(renderRoute)}
 						</Switch>
 					</span>
-				</Layout>
-			</ConnectedRouter>
-		</Provider>
+					</Layout>
+				</ConnectedRouter>
+			</Provider>
+		</ApolloProvider>
 	);
+
+	console.log('CLIENT DATA', client.extract());
 
 	const helmet = Helmet.renderStatic();
 	let content = template;
