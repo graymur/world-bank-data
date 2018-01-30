@@ -13,14 +13,13 @@ import getStatusForURL from './getStatusForURL';
 import runSagas from './runSagas';
 import Layout from 'shared/layouts/default';
 import fetch from 'node-fetch';
-
-import {ApolloProvider} from 'react-apollo';
+import {ApolloProvider, getDataFromTree} from 'react-apollo';
 import {ApolloClient} from 'apollo-client';
 import {createHttpLink} from 'apollo-link-http';
-import Express from 'express';
 import {InMemoryCache} from 'apollo-cache-inmemory';
 
 const env = process.env.NODE_ENV;
+const graphqlApiEndpoint = process.env.GRAPHQL_API_ENDPOINT || 'http://localhost:3000/api/1/graphql';
 
 /**
  * TODO: figure out why "routing" part of state set
@@ -49,10 +48,8 @@ export default async (req, template) => {
 
 	const client = new ApolloClient({
 		ssrMode: true,
-		// Remember that this is the interface the SSR server will use to connect to the
-		// API server, so we need to ensure it isn't firewalled, etc
 		link: createHttpLink({
-			uri: 'http://localhost:3000/api/1/graphql',
+			uri: graphqlApiEndpoint,
 			fetch,
 			credentials: 'same-origin',
 			headers: {
@@ -62,29 +59,32 @@ export default async (req, template) => {
 		cache: new InMemoryCache()
 	});
 
-	const renderedContent = renderToString(
+	const App = (
 		<ApolloProvider client={client}>
 			<Provider store={store}>
 				<ConnectedRouter history={history} location={url}>
 					<Layout>
-					<span>{/* Needed to substitute CSSTransitionGroup's span on server*/}
-						<Switch>
-							{routes.map(renderRoute)}
-						</Switch>
-					</span>
+						<span>{/* Needed to substitute CSSTransitionGroup's span on server*/}
+							<Switch>
+								{routes.map(renderRoute)}
+							</Switch>
+						</span>
 					</Layout>
 				</ConnectedRouter>
 			</Provider>
 		</ApolloProvider>
 	);
 
-	console.log('CLIENT DATA', client.extract());
+	await getDataFromTree(App);
+
+	const renderedContent = renderToString(App);
 
 	const helmet = Helmet.renderStatic();
 	let content = template;
 
 	content = content.replace('<div id="react-root"></div>', `<div id="react-root">${renderedContent}</div>`);
-	content = content.replace('window.__INITIAL_STATE__ = {}', `window.__INITIAL_STATE__ = ${JSON.stringify(store.getState())}`);
+	content = content.replace('window.__REDUX_STATE__ = {}', `window.__REDUX_STATE__ = ${JSON.stringify(store.getState())}`);
+	content = content.replace('window.__APOLLO__STATE__ = {}', `window.__APOLLO__STATE__ = ${JSON.stringify(client.extract()).replace(/</g, '\\u003c')}`);
 	content = content.replace('<title></title>', helmet.title.toString());
 
 	return {content, status};

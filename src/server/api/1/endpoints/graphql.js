@@ -55,6 +55,7 @@ ${mergeTypes(typesArray)}
 // `;
 
 const resolvers = {
+	JSON: GraphQLJSON,
 	Query: {
 		countries: () => dataSource.fetchCountries(),
 		country: (_, {iso2Code}) => dataSource.fetchCountry(iso2Code),

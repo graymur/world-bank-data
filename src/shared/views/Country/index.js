@@ -5,25 +5,35 @@ import {createStructuredSelector} from 'reselect';
 import {Link} from 'react-router-dom';
 import Helmet from 'react-helmet';
 import getPageTitle from 'shared/utils/getPageTitle';
-import loadCountryIfNeeded from 'shared/logic/loadIfNeeded/country';
 import loadIndicatorsIfNeeded from 'shared/logic/loadIfNeeded/indicators';
-import {loadCountry} from 'shared/logic/country/sagas/loadCountry';
-import * as actions from 'shared/logic/country/actions';
-import * as selectors from 'shared/logic/country/selectors';
 import {selectIndicators} from 'shared/logic/indicators/selectors';
 import {loadIndicators} from 'shared/logic/indicators/actions';
 import {loadIndicators as loadIndicatorsSaga} from 'shared/logic/indicators/sagas/loadIndicators';
 import Loader from 'shared/components/Loader';
 import classnames from 'classnames';
+
+import gql from 'graphql-tag';
+import { graphql } from 'react-apollo';
+
 import './country.scss';
+
+const countryQuery = gql`
+	query countryQuery($iso2Code: String!) {
+		country(iso2Code: $iso2Code) {
+			name
+			iso2Code
+			region
+			incomeLevel
+			capitalCity
+		}
+	}
+`;
 
 export class Country extends React.Component {
 	static propTypes = {
+		data: PropTypes.object,
 		setTitle: PropTypes.bool,
-		loading: PropTypes.bool,
-		country: PropTypes.object,
 		indicators: PropTypes.array,
-		loadCountry: PropTypes.func,
 		loadIndicators: PropTypes.func
 	};
 
@@ -32,17 +42,16 @@ export class Country extends React.Component {
 	};
 
 	static preload = match => [
-		[loadCountry, actions.loadCountry(match)],
 		[loadIndicatorsSaga]
 	];
 
 	componentDidMount() {
-		loadCountryIfNeeded(this.props, this.props.loadCountry);
 		loadIndicatorsIfNeeded(this.props, this.props.loadIndicators);
 	}
 
 	renderCountry() {
-		const {country, setTitle} = this.props;
+		const {setTitle} = this.props;
+		const {country} = this.props.data;
 
 		if (!country) {
 			return null;
@@ -68,7 +77,7 @@ export class Country extends React.Component {
 	}
 
 	render() {
-		const {loading} = this.props;
+		const {loading} = this.props.data;
 		const classNames = classnames('country', {'loading': loading});
 
 		return (
@@ -80,9 +89,11 @@ export class Country extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-	loading: selectors.selectLoading,
-	indicators: selectIndicators,
-	country: selectors.selectCountry
+	indicators: selectIndicators
 });
 
-export default connect(mapStateToProps, {...actions, loadIndicators})(Country);
+const ConnectedCountry = connect(mapStateToProps, {loadIndicators})(Country);
+
+export default graphql(countryQuery, {
+	options: ownProps => ({ variables: { iso2Code: ownProps.match.params.iso2Code } })
+})(ConnectedCountry);

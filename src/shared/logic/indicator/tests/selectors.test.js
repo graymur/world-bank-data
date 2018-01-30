@@ -28,7 +28,7 @@ test('currentYear', () => {
 });
 
 test('indicatorDataLoading', () => {
-	expect(selectors.indicatorDataLoading(state)).toEqual(true);
+	expect(selectors.dataLoading(state)).toEqual(true);
 });
 
 test('data', () => {

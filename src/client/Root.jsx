@@ -11,9 +11,17 @@ import renderRoute from 'shared/utils/renderRoute';
 import history from './history';
 import Layout from 'shared/layouts/default';
 import {ApolloProvider} from 'react-apollo';
-import client from 'shared/graphql/client';
 
-const store = createStore(window.__INITIAL_STATE__ || {}, history);
+import { ApolloClient } from 'apollo-client';
+import { HttpLink } from 'apollo-link-http';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+
+const client = new ApolloClient({
+	link: new HttpLink({ uri: '/api/1/graphql' }),
+	cache: (new InMemoryCache()).restore(window.__APOLLO__STATE__ || {})
+});
+
+const store = createStore(window.__REDUX_STATE__ || {}, history);
 
 const pageTransitionSpeed = 300;
 
