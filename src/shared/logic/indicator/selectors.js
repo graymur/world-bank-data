@@ -23,7 +23,7 @@ export const dataLoading = createSelector(
 	main => main.dataLoading
 );
 
-export const data = createSelector(
+export const indicatorData = createSelector(
 	selectState,
 	main => main.data
 );

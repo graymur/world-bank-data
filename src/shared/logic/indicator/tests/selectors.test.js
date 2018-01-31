@@ -31,8 +31,8 @@ test('indicatorDataLoading', () => {
 	expect(selectors.dataLoading(state)).toEqual(true);
 });
 
-test('data', () => {
-	expect(selectors.data(state)).toEqual([1, 2, 3]);
+test('indicatorData', () => {
+	expect(selectors.indicatorData(state)).toEqual([1, 2, 3]);
 });
 
 test('suggestData', () => {

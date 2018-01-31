@@ -12,48 +12,6 @@ scalar JSON
 ${mergeTypes(typesArray)}
 `;
 
-// const typeDefs = `
-//   scalar JSON
-//
-//   type Query {
-//   	countries: [Country],
-//   	country(iso2Code: String!): Country,
-//   	indicators: [Indicator],
-//   	indicator(id: String!): Indicator,
-//   	indicatorDataByYear(indicatorId: String!, year: Int!): [IndicatorValue],
-//   	indicatorDataByCountry(indicatorId: String!, iso2Code: String!): [IndicatorValue],
-//   }
-//
-//   type Country {
-//     id: String,
-//     iso2Code: String,
-//     name: String,
-//     region: JSON,
-//     adminregion: JSON,
-//     incomeLevel: JSON,
-//     lendingType: JSON,
-//     capitalCity: String,
-//     longitude: String,
-//     latitude: String
-//   }
-//
-//   type Indicator {
-//     id: String,
-//     name: String,
-// 	topics: JSON,
-//     sourceOrganization: String,
-//     sourceNote: String,
-//     source: JSON,
-//     unit: String
-//   }
-//
-//   type IndicatorValue {
-// 	name: String,
-// 	date: String,
-// 	value: Float
-//   }
-// `;
-
 const resolvers = {
 	JSON: GraphQLJSON,
 	Query: {

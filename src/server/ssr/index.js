@@ -66,8 +66,8 @@ export default async (req, template) => {
 	let content = template;
 
 	content = content.replace('<div id="react-root"></div>', `<div id="react-root">${renderedContent}</div>`);
-	content = content.replace('window.__REDUX_STATE__ = {}', `window.__REDUX_STATE__ = ${JSON.stringify(store.getState())}`);
-	content = content.replace('window.__APOLLO__STATE__ = {}', `window.__APOLLO__STATE__ = ${JSON.stringify(client.extract()).replace(/</g, '\\u003c')}`);
+	content = content.replace('window.__RSTATE__ = {}', `window.__RSTATE__ = ${JSON.stringify(store.getState())}`);
+	content = content.replace('window.__ASTATE__ = {}', `window.__ASTATE__ = ${JSON.stringify(client.extract()).replace(/</g, '\\u003c')}`);
 	content = content.replace('<title></title>', helmet.title.toString());
 
 	return {content, status};

@@ -1,5 +1,6 @@
 import * as actions from './actions';
 import {handleActions} from 'redux-actions';
+import getMaxIndicatorYear from 'shared/utils/getMaxIndicatorYear';
 
 export const INDICATOR_REDUCER_KEY = 'Indicator';
 
@@ -7,7 +8,7 @@ export const initialState = {
 	indicator: undefined,
 	loading: false,
 	error: undefined,
-	currentYear: undefined,
+	currentYear: getMaxIndicatorYear(),
 	data: undefined,
 	dataLoading: false,
 	dataError: undefined,
