@@ -12,14 +12,10 @@ import getSagasForURL from './getSagasForURL';
 import getStatusForURL from './getStatusForURL';
 import runSagas from './runSagas';
 import Layout from 'shared/layouts/default';
-import fetch from 'node-fetch';
 import {ApolloProvider, getDataFromTree} from 'react-apollo';
-import {ApolloClient} from 'apollo-client';
-import {createHttpLink} from 'apollo-link-http';
-import {InMemoryCache} from 'apollo-cache-inmemory';
+import getApolloClient from './apolloClient';
 
 const env = process.env.NODE_ENV;
-const graphqlApiEndpoint = process.env.GRAPHQL_API_ENDPOINT || 'http://localhost:3000/api/1/graphql';
 
 /**
  * TODO: figure out why "routing" part of state set
@@ -27,7 +23,6 @@ const graphqlApiEndpoint = process.env.GRAPHQL_API_ENDPOINT || 'http://localhost
  * "@@router/LOCATION_CHANGE" event is fired despite
  * SSR
  */
-
 function funcName(fn) {
 	return fn.toString().match(/^function\s?([^\s(]*)/)[1];
 }
@@ -45,19 +40,7 @@ export default async (req, template) => {
 	}
 
 	await sagaMiddleware.run(runSagas(sagas)).done;
-
-	const client = new ApolloClient({
-		ssrMode: true,
-		link: createHttpLink({
-			uri: graphqlApiEndpoint,
-			fetch,
-			credentials: 'same-origin',
-			headers: {
-				cookie: req.header('Cookie')
-			}
-		}),
-		cache: new InMemoryCache()
-	});
+	const client = getApolloClient(req);
 
 	const App = (
 		<ApolloProvider client={client}>
