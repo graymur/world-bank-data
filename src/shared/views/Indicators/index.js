@@ -7,25 +7,11 @@ import {searchIndicators} from 'shared/logic/indicators/sagas/searchIndicators';
 import * as actions from 'shared/logic/indicators/actions';
 import * as selectors from 'shared/logic/indicators/selectors';
 import IndicatorsMain from './components/IndicatorsMain';
-
-import gql from 'graphql-tag';
-import { graphql } from 'react-apollo';
-
-const indicatorsQuery = gql`
-	query indicatorsQuery{ 
-		indicators {
-			id,
-			name
-		}
-}`;
+import IndicatorsProvider from 'shared/providers/Indicators';
 
 export class Indicators extends React.Component {
 	static propTypes = {
-		data: PropTypes.object,
-		loading: PropTypes.bool,
-		indicators: PropTypes.array,
 		loadIndicators: PropTypes.func,
-		userIndicators: PropTypes.array,
 		foundIndicators: PropTypes.array,
 		searching: PropTypes.bool,
 		searchIndicators: PropTypes.func,
@@ -36,11 +22,9 @@ export class Indicators extends React.Component {
 		})
 	};
 
-	static preload = match => {
-		return [
-			match.params.search && [searchIndicators, actions.searchIndicators(match.params.search)]
-		];
-	};
+	static preload = match => ([
+		match.params.search && [searchIndicators, actions.searchIndicators(match.params.search)]
+	])
 
 	constructor(props) {
 		super(props);
@@ -64,18 +48,16 @@ export class Indicators extends React.Component {
 	}
 
 	render() {
-		return <IndicatorsMain {...this.props} {...this.props.data} clearSearchResults={this.clearSearchResults} initiateSearch={this.initiateSearch}/>;
+		return <IndicatorsProvider render={data =>
+			<IndicatorsMain {...this.props} {...data} clearSearchResults={this.clearSearchResults} initiateSearch={this.initiateSearch}/>
+		}/>;
 	}
 }
 
 const mapStateToProps = createStructuredSelector({
-	loading: selectors.selectLoading,
-	indicators: selectors.selectIndicators,
 	searching: selectors.selectSearching,
 	searchString: selectors.selectSearchString,
 	foundIndicators: selectors.selectFoundIndicators
 });
 
-const ConnectedIndicators = connect(mapStateToProps, actions)(Indicators);
-
-export default graphql(indicatorsQuery)(ConnectedIndicators);
+export default connect(mapStateToProps, actions)(Indicators);

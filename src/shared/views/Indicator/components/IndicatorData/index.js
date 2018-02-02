@@ -4,7 +4,7 @@ import Loader from 'shared/components/Loader';
 import {ResponsiveContainer, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Bar} from 'recharts';
 import classnames from 'classnames';
 import './indicator-data.scss';
-import SuggestDataGQL from '../SuggestDataGQL';
+import SuggestData from '../SuggestData';
 
 export class IndicatorData extends React.PureComponent {
 	static propTypes = {
@@ -25,7 +25,7 @@ export class IndicatorData extends React.PureComponent {
 			return (
 				<div id='chart' className='indicator__data__chart _empty'>
 					<h2>No data for this year.</h2>
-					<SuggestDataGQL currentYear={this.props.currentYear} indicator={this.props.indicator}/>
+					<SuggestData currentYear={this.props.currentYear} indicator={this.props.indicator}/>
 				</div>
 			);
 		}

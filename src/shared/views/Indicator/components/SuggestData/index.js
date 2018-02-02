@@ -5,7 +5,7 @@ import IndicatorDataByYearProvider from 'shared/providers/IndicatorDataByYear';
 import './suggest-data.scss';
 import {Link} from 'react-router-dom';
 
-export class SuggestDataGQL extends React.PureComponent {
+export class SuggestData extends React.PureComponent {
 	static propTypes = {
 		indicator: PropTypes.object.isRequired,
 		currentYear: PropTypes.any.isRequired
@@ -24,13 +24,15 @@ export class SuggestDataGQL extends React.PureComponent {
 			<div className='indicator__data__suggestions'>
 				Try these years instead:
 				{years.map(year => (
-					<IndicatorDataByYearProvider key={year} year={year} indicatorId={indicator.id} render={data =>
-						<Link to={`/indicators/${indicator.id}/${year}#chart`} key={year} className='indicator__data__suggestions__item'>{year}</Link>
-					}/>
+					<IndicatorDataByYearProvider key={year} year={year} indicatorId={indicator.id} render={({indicatorDataByYear}) => {
+						return indicatorDataByYear && indicatorDataByYear.length
+							? <Link to={`/indicators/${indicator.id}/${year}#chart`} key={year} className='indicator__data__suggestions__item'>{year}</Link>
+							: null;
+					}}/>
 				))}
 			</div>
 		);
 	}
 }
 
-export default SuggestDataGQL;
+export default SuggestData;

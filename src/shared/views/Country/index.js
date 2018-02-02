@@ -1,57 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {createStructuredSelector} from 'reselect';
 import {Link} from 'react-router-dom';
 import Helmet from 'react-helmet';
 import getPageTitle from 'shared/utils/getPageTitle';
-import loadIndicatorsIfNeeded from 'shared/logic/loadIfNeeded/indicators';
-import {selectIndicators} from 'shared/logic/indicators/selectors';
-import {loadIndicators} from 'shared/logic/indicators/actions';
-import {loadIndicators as loadIndicatorsSaga} from 'shared/logic/indicators/sagas/loadIndicators';
 import Loader from 'shared/components/Loader';
+import CountryProvider from 'shared/providers/Country';
+import IndicatorsProvider from 'shared/providers/Indicators';
 import classnames from 'classnames';
-
-import gql from 'graphql-tag';
-import { graphql } from 'react-apollo';
-
 import './country.scss';
-
-const countryQuery = gql`
-	query countryQuery($iso2Code: String!) {
-		country(iso2Code: $iso2Code) {
-			name
-			iso2Code
-			region
-			incomeLevel
-			capitalCity
-		}
-	}
-`;
 
 export class Country extends React.Component {
 	static propTypes = {
-		data: PropTypes.object,
-		setTitle: PropTypes.bool,
-		indicators: PropTypes.array,
-		loadIndicators: PropTypes.func
+		setTitle: PropTypes.bool
 	};
 
 	static defaultProps = {
 		setTitle: true
 	};
 
-	static preload = match => [
-		[loadIndicatorsSaga]
-	];
-
-	componentDidMount() {
-		loadIndicatorsIfNeeded(this.props, this.props.loadIndicators);
-	}
-
-	renderCountry() {
+	renderCountry(country) {
 		const {setTitle} = this.props;
-		const {country} = this.props.data;
 
 		if (!country) {
 			return null;
@@ -66,34 +34,31 @@ export class Country extends React.Component {
 				<p>Capital city: {country.capitalCity}</p>
 				<h1>Indicators</h1>
 				<nav className='indicators__list'>
-					{this.props.indicators.map(indicator => (
+					<IndicatorsProvider render={({indicators}) => (indicators || []).map(indicator => (
 						<Link
 							key={indicator.id} className='indicators__list__item'
 							to={`/countries/${country.iso2Code}/indicator/${indicator.id}`}>{indicator.name}</Link>
-					))}
+					))}/>
 				</nav>
 			</div>
 		);
 	}
 
-	render() {
-		const {loading} = this.props.data;
+	renderWr({loading, country}) {
 		const classNames = classnames('country', {'loading': loading});
 
 		return (
 			<div className={classNames}>
-				{loading ? <Loader/> : this.renderCountry()}
+				{loading ? <Loader/> : this.renderCountry(country)}
 			</div>
+		);
+	}
+
+	render() {
+		return (
+			<CountryProvider iso2Code={this.props.match.params.iso2Code} render={data => this.renderWr(data)}/>
 		);
 	}
 }
 
-const mapStateToProps = createStructuredSelector({
-	indicators: selectIndicators
-});
-
-const ConnectedCountry = connect(mapStateToProps, {loadIndicators})(Country);
-
-export default graphql(countryQuery, {
-	options: ownProps => ({ variables: { iso2Code: ownProps.match.params.iso2Code } })
-})(ConnectedCountry);
+export default Country;
