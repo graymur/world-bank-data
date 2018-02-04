@@ -11,7 +11,8 @@ import './country.scss';
 
 export class Country extends React.Component {
 	static propTypes = {
-		setTitle: PropTypes.bool
+		setTitle: PropTypes.bool,
+		match: PropTypes.object
 	};
 
 	static defaultProps = {
