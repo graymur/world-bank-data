@@ -6,16 +6,12 @@ import {Provider} from 'react-redux';
 import {ConnectedRouter} from 'react-router-redux';
 import {createMemoryHistory} from 'history';
 import routes from 'shared/routes';
-import createStore, {sagaMiddleware} from 'shared/redux/createStore';
+import createStore from 'shared/redux/createStore';
 import renderRoute from 'shared/utils/renderRoute';
-import getSagasForURL from './getSagasForURL';
 import getStatusForURL from './getStatusForURL';
-import runSagas from './runSagas';
 import Layout from 'shared/layouts/default';
 import {ApolloProvider, getDataFromTree} from 'react-apollo';
 import getApolloClient from './apolloClient';
-
-const env = process.env.NODE_ENV;
 
 /**
  * TODO: figure out why "routing" part of state set
@@ -23,23 +19,12 @@ const env = process.env.NODE_ENV;
  * "@@router/LOCATION_CHANGE" event is fired despite
  * SSR
  */
-function funcName(fn) {
-	return fn.toString().match(/^function\s?([^\s(]*)/)[1];
-}
-
 export default async (req, template) => {
 	const url = req.originalUrl || req.url;
 	const history = createMemoryHistory({initialEntries: [url]});
 	const store = createStore({}, history);
 
 	const status = getStatusForURL(routes, url);
-	const sagas = getSagasForURL(routes, url);
-
-	if (sagas.length && env !== 'production') {
-		console.log('Sagas to run:', sagas.map(x => funcName(x[0])).join(', '));
-	}
-
-	await sagaMiddleware.run(runSagas(sagas)).done;
 	const client = getApolloClient(req);
 
 	const App = (

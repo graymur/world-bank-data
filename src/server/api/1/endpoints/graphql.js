@@ -20,7 +20,8 @@ const resolvers = {
 		indicators: () => dataSource.fetchIndicators(),
 		indicator: (_, {id}) => dataSource.fetchIndicator(id),
 		indicatorDataByYear: (_, {indicatorId, year}) => dataSource.fetchIndicatorDataByYear(indicatorId, year),
-		indicatorDataByCountry: (_, {iso2Code, indicatorId}) => dataSource.fetchIndicatorByCountryData(iso2Code, indicatorId)
+		indicatorDataByCountry: (_, {iso2Code, indicatorId}) => dataSource.fetchIndicatorByCountryData(iso2Code, indicatorId),
+		foundIndicators: (_, {pattern}) => dataSource.searchIndicators(pattern)
 	}
 };
 

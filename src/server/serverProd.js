@@ -1,4 +1,3 @@
-import regeneratorRuntime from 'regenerator-runtime/runtime'; // eslint-disable-line
 import config from 'config';
 import express from 'express';
 import fs from 'fs';
