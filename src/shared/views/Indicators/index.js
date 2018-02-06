@@ -48,7 +48,7 @@ export class Indicators extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-	searchString: selectors.selectSearchString
+	searchString: selectors.searchString
 });
 
 export default connect(mapStateToProps, actions)(Indicators);

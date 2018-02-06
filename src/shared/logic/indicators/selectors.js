@@ -3,7 +3,7 @@ import {INDICATORS_REDUCER_KEY} from './reducer';
 
 export const selectState = state => state[INDICATORS_REDUCER_KEY];
 
-export const selectSearchString = createSelector(
+export const searchString = createSelector(
 	selectState,
 	main => main.searchString
 );
