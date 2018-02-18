@@ -1,3 +1,4 @@
+import 'regenerator-runtime/runtime';
 import config from 'config';
 import express from 'express';
 import fs from 'fs';
