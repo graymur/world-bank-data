@@ -3,6 +3,7 @@ import config from '../src/config';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import fs from 'fs';
 import merge from 'merge-deep';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 import baseWebpackConfig from './webpack.config.base';
 import addExtractTextPluginToConfig from './util/addExtractTextPluginToConfig';
 
@@ -32,7 +33,13 @@ const developmentConfig = merge(
 			filename: 'server.js'
 		},
 		externals: nodeModules,
-		plugins: [new ExtractTextPlugin('styles.css')],
+		plugins: [
+			new CopyWebpackPlugin([{
+				from: path.join(config.serverDir, '/api/1/endpoints/graphql'),
+				to: path.join(config.buildDir, 'graphql')
+			}]),
+			new ExtractTextPlugin('styles.css')
+		],
 		resolve: {alias: {'shared/dataSource': 'server/dataSource'}}
 	});
 

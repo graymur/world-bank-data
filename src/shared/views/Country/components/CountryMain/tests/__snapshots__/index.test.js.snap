@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders country and indicators list 1`] = `
+<div
+  className="country"
+>
+  <div
+    className="country"
+  >
+    <h1>
+      Country name
+    </h1>
+    <p>
+      Region: 
+      Region name
+    </p>
+    <p>
+      Income level: 
+      Income level
+    </p>
+    <p>
+      Capital city: 
+      City name
+    </p>
+    <h1>
+      Indicators
+    </h1>
+    <nav
+      className="indicators__list"
+    />
+  </div>
+</div>
+`;

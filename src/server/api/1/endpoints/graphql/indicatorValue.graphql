@@ -1,0 +1,10 @@
+type Query {
+    indicatorDataByYear(indicatorId: String!, year: Int!): [IndicatorValue],
+    indicatorDataByCountry(indicatorId: String!, iso2Code: String!): [IndicatorValue],
+}
+
+type IndicatorValue {
+    name: String,
+    date: String,
+    value: Float
+}

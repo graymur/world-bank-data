@@ -11,6 +11,5 @@ addons:
       - g++-4.8
 before_install:
 script:
-  - npm run dll
   - npm run build
 

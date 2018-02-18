@@ -45,8 +45,20 @@ exports[`Renders indicator info 1`] = `
       </select>
     </div>
     <div
-      className="indicator__data"
-    />
+      className="indicator__data loading"
+    >
+      <span
+        className="loader loader"
+        style={
+          Object {
+            "border": "10px solid #f3f3f3",
+            "borderTop": "10px solid #3498db",
+            "height": "50px",
+            "width": "50px",
+          }
+        }
+      />
+    </div>
   </div>
 </div>
 `;

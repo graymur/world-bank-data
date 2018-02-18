@@ -1,18 +1,18 @@
-import regeneratorRuntime from 'regenerator-runtime/runtime'; // eslint-disable-line
 import config from 'config';
 import express from 'express';
 import fs from 'fs';
 import path from 'path';
 import compression from 'compression';
 import api from './api/1/index';
+import bodyParser from 'body-parser';
 
-const dir = path.dirname(__dirname);
+const dir = process.env.BABEL ? path.dirname(path.dirname(__dirname)) : path.dirname(__dirname);
 const publicDir = path.join(dir, 'build', 'public');
 
 const app = express();
 app.use(compression());
 app.use(express.static(publicDir));
-app.use('/api/1/', api);
+app.use('/api/1/', bodyParser.json(), api);
 
 const htmlTemplate = fs.readFileSync(path.join(publicDir, 'index.template.html')).toString();
 

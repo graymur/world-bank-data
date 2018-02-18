@@ -1,0 +1,15 @@
+type Query {
+    indicators: [Indicator],
+    foundIndicators(pattern: String!): [Indicator],
+    indicator(id: String!): Indicator
+}
+
+type Indicator {
+    id: String,
+    name: String,
+    topics: JSON,
+    sourceOrganization: String,
+    sourceNote: String,
+    source: JSON,
+    unit: String
+}

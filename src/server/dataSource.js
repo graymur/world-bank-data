@@ -15,7 +15,6 @@ export default {
 		const result = await wCache(`${urlBase}/countries?per_page=${limit}&format=json`, defaultTTL);
 		return result[1]
 			.filter(x => x.region.iso2code !== 'NA')
-			.map(x => _.pick(x, ['iso2Code', 'name']))
 			.sort((a, b) => a.name > b.name ? 1 : -1);
 	},
 	fetchCountry: async (id) => {

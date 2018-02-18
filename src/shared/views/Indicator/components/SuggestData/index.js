@@ -1,18 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
+import getYearForSuggestions from 'shared/utils/getYearForSuggestions';
+import IndicatorDataByYearProvider from 'shared/providers/IndicatorDataByYear';
 import './suggest-data.scss';
+import {Link} from 'react-router-dom';
 
 export class SuggestData extends React.PureComponent {
 	static propTypes = {
-		indicatorId: PropTypes.string,
-		suggestData: PropTypes.object
+		indicator: PropTypes.object.isRequired,
+		currentYear: PropTypes.any.isRequired
 	};
 
 	render() {
-		const {suggestData, indicatorId} = this.props;
+		const {indicator, currentYear} = this.props;
 
-		const years = Object.keys(suggestData).sort();
+		const years = getYearForSuggestions(currentYear);
 
 		if (!years.length) {
 			return null;
@@ -22,7 +24,11 @@ export class SuggestData extends React.PureComponent {
 			<div className='indicator__data__suggestions'>
 				Try these years instead:
 				{years.map(year => (
-					<Link to={`/indicators/${indicatorId}/${year}#chart`} key={year} className='indicator__data__suggestions__item'>{year}</Link>
+					<IndicatorDataByYearProvider key={year} year={year} indicatorId={indicator.id} render={({indicatorDataByYear}) => {
+						return indicatorDataByYear && indicatorDataByYear.length
+							? <Link to={`/indicators/${indicator.id}/${year}#chart`} key={year} className='indicator__data__suggestions__item'>{year}</Link>
+							: null;
+					}}/>
 				))}
 			</div>
 		);

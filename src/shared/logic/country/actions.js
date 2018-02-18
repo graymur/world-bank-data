@@ -1,5 +1,0 @@
-import {createAction} from 'redux-actions';
-
-export const loadCountry = createAction('Country.loadCountry', match => match.params ? match.params.iso2Code : match);
-export const setCountryLoading = createAction('Country.setCountryLoading', (value = true) => value);
-export const setCountry = createAction('Country.setCountry', country => country);

@@ -1,57 +1,41 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {createStructuredSelector} from 'reselect';
-import loadIndicatorByCountryDataIfNeeded from 'shared/logic/loadIfNeeded/indicatorByCountryData';
-import loadIndicatorIfNeeded from 'shared/logic/loadIfNeeded/indicator';
-
-import {loadIndicatorByCountryData as loadDataSaga} from 'shared/logic/indicatorByCountryData/sagas/loadIndicatorByCountryData';
-import {selectIndicatorByCountryData as selectData} from 'shared/logic/indicatorByCountryData/selectors';
-import {loadIndicatorByCountryData as loadDataAction} from 'shared/logic/indicatorByCountryData/actions';
-
-import {loadIndicator as loadIndicatorSaga} from 'shared/logic/indicator/sagas/loadIndicator';
-import {indicator as selectIndicator} from 'shared/logic/indicator/selectors';
-import {loadIndicator as loadIndicatorAction} from 'shared/logic/indicator/actions';
-
-import {selectCountry} from 'shared/logic/country/selectors';
-
-import Country from 'shared/views/Country';
-
 import IndicatorByCountryMain from './components/IndicatorByCountryMain';
+import {countryQuery} from 'shared/providers/Country';
+import {indicatorQuery} from 'shared/providers/Indicator';
+import {indicatorDataByCountryQuery} from 'shared/providers/IndicatorDataByCountry';
+
+import { graphql, compose } from 'react-apollo';
 
 export class IndicatorByCountry extends React.Component {
 	static propTypes = {
 		match: PropTypes.object,
 		country: PropTypes.object,
 		indicator: PropTypes.object,
-		data: PropTypes.any,
-		loadDataAction: PropTypes.func,
-		loadIndicatorAction: PropTypes.func
+		data: PropTypes.object
 	};
 
-	static preload = match => [
-		[loadDataSaga, loadDataAction(match)],
-		[loadIndicatorSaga, loadIndicatorAction(match)],
-		...Country.preload(match)
-	];
-
-	componentDidMount() {
-		loadIndicatorByCountryDataIfNeeded(this.props, this.props.loadDataAction);
-		loadIndicatorIfNeeded(this.props, this.props.loadIndicatorAction);
-	}
-
 	render() {
-		return <IndicatorByCountryMain {...this.props}/>;
+		return <IndicatorByCountryMain
+			match={this.props.match}
+			country={this.props.country.country}
+			indicator={this.props.indicator.indicator}
+			data={this.props.data.indicatorDataByCountry}
+		/>;
 	}
 }
 
-const mapStateToProps = createStructuredSelector({
-	country: selectCountry,
-	indicator: selectIndicator,
-	data: selectData
-});
-
-export default connect(mapStateToProps, {
-	loadDataAction,
-	loadIndicatorAction
-})(IndicatorByCountry);
+export default compose(
+	graphql(indicatorDataByCountryQuery, {
+		name: 'data',
+		options: ownProps => ({ variables: { indicatorId: ownProps.match.params.indicatorId, iso2Code: ownProps.match.params.iso2Code } })
+	}),
+	graphql(countryQuery, {
+		name: 'country',
+		options: ownProps => ({ variables: { iso2Code: ownProps.match.params.iso2Code } })
+	}),
+	graphql(indicatorQuery, {
+		name: 'indicator',
+		options: ownProps => ({ variables: { id: ownProps.match.params.indicatorId } })
+	})
+)(IndicatorByCountry);

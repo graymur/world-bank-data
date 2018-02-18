@@ -4,9 +4,12 @@ import Loader from 'shared/components/Loader';
 import {ResponsiveContainer, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Bar} from 'recharts';
 import classnames from 'classnames';
 import './indicator-data.scss';
+import SuggestData from '../SuggestData';
 
 export class IndicatorData extends React.PureComponent {
 	static propTypes = {
+		indicator: PropTypes.object,
+		currentYear: PropTypes.any,
 		loading: PropTypes.bool,
 		data: PropTypes.array
 	};
@@ -22,6 +25,7 @@ export class IndicatorData extends React.PureComponent {
 			return (
 				<div id='chart' className='indicator__data__chart _empty'>
 					<h2>No data for this year.</h2>
+					<SuggestData currentYear={this.props.currentYear} indicator={this.props.indicator}/>
 				</div>
 			);
 		}

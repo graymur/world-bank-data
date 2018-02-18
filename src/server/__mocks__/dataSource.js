@@ -14,13 +14,13 @@ const dataSource = () => {
 	];
 
 	const fetchCountry = jest.fn();
-	fetchCountry.mockReturnValue('COUNTRY');
+	fetchCountry.mockReturnValue({iso2Code: 'AA', name: 'COUNTRY'});
 
 	const fetchCountries = jest.fn();
-	fetchCountries.mockReturnValue('COUNTRIES');
+	fetchCountries.mockReturnValue([{iso2Code: 'AA', name: 'COUNTRY'}]);
 
 	const fetchIndicator = jest.fn();
-	fetchIndicator.mockReturnValue('INDICATOR');
+	fetchIndicator.mockReturnValue({id: 1, name: 'INDICATOR'});
 
 	const fetchIndicatorByCountryData = jest.fn();
 	fetchIndicatorByCountryData.mockReturnValue('INDICATOR BY COUNTRY DATA');

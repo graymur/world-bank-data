@@ -4,19 +4,17 @@ import Helmet from 'react-helmet';
 import getPageTitle from 'shared/utils/getPageTitle';
 import Loader from 'shared/components/Loader';
 import IndicatorData from '../IndicatorData';
-import SuggestData from '../SuggestData';
+// import SuggestData from '../SuggestData';
 import classnames from 'classnames';
+import IndicatorDataByYearProvider from 'shared/providers/IndicatorDataByYear';
 import './indicator.scss';
 
 export default class IndicatorMain extends React.Component {
 	static propTypes = {
 		loading: PropTypes.bool,
-		dataLoading: PropTypes.bool,
 		years: PropTypes.array,
 		indicator: PropTypes.object,
-		data: PropTypes.array,
-		suggestData: PropTypes.object,
-		loadIndicatorData: PropTypes.func,
+		changeYear: PropTypes.func,
 		currentYear: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
 	};
 
@@ -25,16 +23,9 @@ export default class IndicatorMain extends React.Component {
 		this.handleYearChange = this.handleYearChange.bind(this);
 	}
 
-	// handleYearClick(year) {
-	// 	return (event) => {
-	// 		event.preventDefault();
-	// 		this.props.loadIndicatorData(this.props.indicator.id, year);
-	// 	};
-	// };
-
 	handleYearChange(event) {
 		if (event.target.value) {
-			this.props.loadIndicatorData(this.props.indicator.id, Number(event.target.value));
+			this.props.changeYear(Number(event.target.value));
 		}
 	};
 
@@ -55,7 +46,7 @@ export default class IndicatorMain extends React.Component {
 	}
 
 	renderIndicator() {
-		const {indicator, currentYear, data, dataLoading, suggestData} = this.props;
+		const {indicator, currentYear} = this.props;
 
 		if (!indicator) {
 			return null;
@@ -63,15 +54,17 @@ export default class IndicatorMain extends React.Component {
 
 		return (
 			<div className='indicator'>
-				<Helmet>
+				<Helmet>;
 					<title>{getPageTitle(`${indicator.name} ${currentYear ? `- ${currentYear}` : ''}`)}</title>
 				</Helmet>
 				<h1>{indicator.name}</h1>
 				<p>{indicator.sourceNote !== 'NULL' && indicator.sourceNote}</p>
 				{indicator.sourceOrganization && <p>Source: {indicator.sourceOrganization}</p>}
 				{this.rendersYears()}
-				<IndicatorData loading={dataLoading} data={data}/>
-				<SuggestData indicatorId={indicator.id} suggestData={suggestData}/>
+
+				<IndicatorDataByYearProvider year={currentYear} indicatorId={indicator.id} render={({loading, indicatorDataByYear}) =>
+					<IndicatorData currentYear={currentYear} indicator={indicator} loading={loading} data={indicatorDataByYear}/>
+				}/>
 			</div>
 		);
 	}

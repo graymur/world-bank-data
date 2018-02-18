@@ -3,7 +3,6 @@ import _ from 'lodash';
 import Error404 from './Error404';
 
 export default async (url, params) => {
-	console.log('URL', url);
 	const response = await fetch(url, params);
 
 	if (response.status !== 200) {

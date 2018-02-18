@@ -9,11 +9,12 @@ import webpack from 'webpack';
 import api from './api/1/index';
 import webpackConfig from '../../webpack/webpack.config.dev';
 import './ssr/stubAssetsRequires';
+import bodyParser from 'body-parser';
 
 const app = express();
 
 app.use('/node_modules', express.static(path.join(__dirname, '/../../node_modules')));
-app.use('/api/1/', api);
+app.use('/api/1/', bodyParser.json(), api);
 
 const compiler = webpack(webpackConfig);
 
@@ -62,5 +63,5 @@ const host = process.env.HOST || 'localhost';
 
 app.listen(port, () => {
 	console.log(`Listening at ${host}:${port}`);
-	opener(`http://${host}:${port}`);
+	// opener(`http://${host}:${port}`);
 });
