@@ -7,7 +7,7 @@ import getPageTitle from 'shared/utils/getPageTitle';
 import classnames from 'classnames';
 import './countries.scss';
 
-export class Countries extends React.Component {
+export default class CountriesMain extends React.Component {
 	static propTypes = {
 		loading: PropTypes.bool,
 		countries: PropTypes.array
@@ -40,5 +40,3 @@ export class Countries extends React.Component {
 		);
 	}
 }
-
-export default Countries;

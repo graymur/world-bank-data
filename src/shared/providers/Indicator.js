@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import createProviderClass from './createProviderClass';
 
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
@@ -15,18 +14,6 @@ export const indicatorQuery = gql`
     }
 `;
 
-export class IndicatorProvider extends React.Component {
-	static propTypes = {
-		data: PropTypes.object,
-		render: PropTypes.func
-	};
-
-	render() {
-		const {loading, indicator} = this.props.data;
-		return this.props.render({loading, indicator});
-	}
-}
-
 export default graphql(indicatorQuery, {
 	options: ownProps => ({ variables: { id: ownProps.indicatorId } })
-})(IndicatorProvider);
+})(createProviderClass('indicator'));

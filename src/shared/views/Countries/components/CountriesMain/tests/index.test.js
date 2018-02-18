@@ -2,7 +2,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import {StaticRouter} from 'react-router';
-import CountriesMain from 'shared/views/Countries/components/CountriesMain';
+import CountriesMain from 'shared/views/Countries/components/CountriesMain/index';
 
 const countries = [{
 	iso2Code: 'AA',

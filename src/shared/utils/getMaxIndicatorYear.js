@@ -1,3 +1,1 @@
-export default function () {
-	return (new Date()).getFullYear() - 1;
-}
+export default () => (new Date()).getFullYear() - 1;

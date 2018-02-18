@@ -13,15 +13,6 @@ import Layout from 'shared/layouts/default';
 import {ApolloProvider} from 'react-apollo';
 import client from './apolloClient';
 
-// import { ApolloClient } from 'apollo-client';
-// import { HttpLink } from 'apollo-link-http';
-// import { InMemoryCache } from 'apollo-cache-inmemory';
-//
-// const client = new ApolloClient({
-// 	link: new HttpLink({ uri: '/api/1/graphql' }),
-// 	cache: (new InMemoryCache()).restore(window.__ASTATE__ || {})
-// });
-
 const store = createStore(window.__RSTATE__ || {}, history);
 
 const pageTransitionSpeed = 300;

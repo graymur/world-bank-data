@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders nothing if rout does not match url 1`] = `null`;
+
+exports[`Renders route if it matches url 1`] = `
+<h1>
+  I'm an H1 tag
+</h1>
+`;

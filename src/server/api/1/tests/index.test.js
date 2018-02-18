@@ -11,51 +11,36 @@ jest.mock('server/api/1/models/Indicator');
 const app = express();
 app.use('/', router);
 
-test('Responds to /countries endpoint', async () => {
-	const response = await request(app).get('/countries');
+test('Fetches indicator', async () => {
+	const response = await request(app).post('/graphql').send({
+		'operationName': 'indicatorQuery',
+		'variables': {'id': 'NY.GDP.PCAP.CD'},
+		'query': `query indicatorQuery($id: String!) {
+		 	indicator(id: $id) {
+		 	    id,
+		 	    name
+		  	}
+	  	}`
+	});
+
 	expect(response.statusCode).toBe(200);
-	expect(response.body).toBe('COUNTRIES');
+	expect(response.body.data.indicator.id).toBe('1');
+	expect(response.body.data.indicator.name).toBe('INDICATOR');
 });
 
-test('Responds to /countries/:iso2Code endpoint', async () => {
-	const response = await request(app).get('/countries/AA');
-	expect(response.statusCode).toBe(200);
-	expect(response.body).toBe('COUNTRY');
-});
+test('Fetches country', async () => {
+	const response = await request(app).post('/graphql').send({
+		'operationName': 'countryQuery',
+		'variables': {'iso2Code': 'LR'},
+		'query': `query countryQuery($iso2Code: String!) {
+	 		country(iso2Code: $iso2Code) {
+		 		name
+				iso2Code
+		  	}
+	  	}`
+	});
 
-test('Responds to /indicators endpoint', async () => {
-	const response = await request(app).get('/indicators');
 	expect(response.statusCode).toBe(200);
-	expect(response.body).toBe('INDICATORS');
+	expect(response.body.data.country.iso2Code).toBe('AA');
+	expect(response.body.data.country.name).toBe('COUNTRY');
 });
-
-test('Responds to /indicators/search endpoint', async () => {
-	const response = await request(app).get('/indicators/search?pattern=xxx');
-	expect(response.statusCode).toBe(200);
-	expect(response.body).toEqual(dataSource.searchIndicatorsPayload);
-});
-
-test('Responds to /indicators/:indicatorId endpoint', async () => {
-	const response = await request(app).get('/indicators/1');
-	expect(response.statusCode).toBe(200);
-	expect(response.body).toBe('INDICATOR');
-});
-
-test('Responds to /indicators/:indicatorId/country/:iso2Code endpoint', async () => {
-	const response = await request(app).get('/indicators/1/country/AA');
-	expect(response.statusCode).toBe(200);
-	expect(response.body).toBe('INDICATOR BY COUNTRY DATA');
-});
-
-test('Responds to /indicators/:indicatorId/year/:year endpoint', async () => {
-	const response = await request(app).get('/indicators/1/year/1900');
-	expect(response.statusCode).toBe(200);
-	expect(response.body).toBe('INDICATOR DATA BY YEAR');
-});
-
-// test('Responds to /load-all-indicators', async () => {
-// 	const url = '/load-all-indicators?token=' + encodeURIComponent(process.env.SECURITY_TOKEN);
-// 	const response = await request(app).get(url);
-// 	expect(response.statusCode).toBe(200);
-// 	expect(response.body).toEqual({inserted: 3});
-// });

@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders preloader 1`] = `
+<div
+  className="indicator__data loading"
+>
+  <span
+    className="loader"
+    style={
+      Object {
+        "border": "10px solid #f3f3f3",
+        "borderTop": "10px solid #3498db",
+        "height": "50px",
+        "width": "50px",
+      }
+    }
+  />
+</div>
+`;
