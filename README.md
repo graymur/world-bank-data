@@ -1,4 +1,4 @@
-https://world-bank-data.herokuapp.com/
+https://world-bank-data.herokuapp.com/ (please give it a couple of seconds to wake up - it's a free heroku dyno that falls asleep when inactive)
 
 ### Current issues
 
