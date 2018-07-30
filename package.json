@@ -23,7 +23,7 @@
     "webpack": "babel-node node_modules/webpack/bin/webpack.js"
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": "8.10.0"
   },
   "betterScripts": {
     "start": {
